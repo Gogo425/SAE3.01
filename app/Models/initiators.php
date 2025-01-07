@@ -10,7 +10,9 @@ class initiators extends Model
     use HasFactory;
 
     protected $table = 'initiators';
-    protected $filliable = ['id_usertype', 'id'];
+    protected $fillable = ['id_usertype', 'id'];
+    
+    // public $timestamps = false;
 
     public function user(){
         return $this->belongsTo(persons::class);

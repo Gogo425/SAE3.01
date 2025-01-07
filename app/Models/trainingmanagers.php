@@ -9,7 +9,7 @@ class trainingmanagers extends Model
 {
     use HasFactory;
     protected $table = 'training_managers';
-    protected $filliable = ['id_usertype'];
+    protected $fillable = ['id_usertype'];
 
     public function user(){
         return $this->belongsTo(persons::class);

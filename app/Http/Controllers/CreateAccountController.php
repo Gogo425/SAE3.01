@@ -48,15 +48,15 @@ class CreateAccountController extends Controller
         // Gérer les rôles
         foreach ($request->roles as $role) {
             if ($role === 'Initiator') {
-                initiators::create(['id_usertype' => $person->id]);
+                initiators::create(['id_usertype' => persons::count(), 'id'=>initiators::count()+1]);
             }
 
             else if ($role === 'Trainingmanager') {
-                trainingmanagers::create(['id_usertype' => $person->id]);
+                trainingmanagers::create(['id_usertype' => persons::count()]);
             }
 
             else if ($role === 'Student') {
-                students::create(['id_usertype' => $person->id]);
+                students::create(['id_usertype' => persons::count() , 'id'=>initiators::count()+1 ,'id_learn' => 1]);
             }
         }
 
