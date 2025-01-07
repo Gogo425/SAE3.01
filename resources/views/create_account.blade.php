@@ -18,7 +18,7 @@
   </div>
   <div class="">
     <label for="mail_adress">Email: </label>
-    <input type="email" name="email" id="mail_adress" placeholder="Entrer l'email" required />
+    <input type="email" name="mail_adress" id="mail_adress" placeholder="Entrer l'email" required />
   </div>
   <div class="">
     <label for="password">Mot de passe </label>

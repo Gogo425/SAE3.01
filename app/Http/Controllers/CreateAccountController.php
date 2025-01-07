@@ -10,58 +10,36 @@ use App\Models\Persons;
 
 class CreateAccountController extends Controller
 {
-    public function choiceUser(Request $request){
-        echo "dedzed";
-        $request->validate([
-                  'name' => 'required|string|max:255',
-                  'surname' => 'required|string|max:255',
-                  'mail_adress' => 'required|email|unique:users,email',
-                  'password' => 'required|min:6|confirmed',
-                  'licence_number' => 'required|string',
-                  'medical_certificate_date' => 'required|date',
-                  'birth_date' => 'required|date',
-                  'adress' => 'required|string',
-                  'Initiator' => 'nullable|boolean',
-                  'Trainigmanager' => 'nullable|boolean',
-                  'Student' => 'nullable|boolean',
-              ]);
-      
-              $user = new Persons();
-              $user->id = 1;
-              $user->name = $request->name;
-              $user->surname = $request->surname;
-              $user->mail_adress = $request->mail_adress;
-              $user->password = bcrypt($request->password);  
-              $user->licence_number = $request->licence_number;
-              $user->medical_certificate_date = $request->medical_certificate_date;
-              $user->birth_date = $request->birth_date;
-              $user->adress = $request->adress;
-      
-      
-              $roles = $request->input('roles');
-                  
-              if (in_array('Initiator', $roles)) {
-                  $initiator = new Initiator();
-                  $initiator->user_id = $user->id;
-                  $initiator->save();
-              }
-      
-              if (in_array('Trainingmanager', $roles)) {
-                  $trainingmanager = new Trainingmanager();
-                  $trainingmanager->user_id = $user->id;
-                  $trainingmanager->save();
-              }
-      
-              if (in_array('Student', $roles)) {
-                  $student = new Student();
-                  $student->user_id = $user->id;
-                  $student->save();
-              }
-      
+    public function choiceUser(Request $request)
+    {
 
-      
-        $message = "Personne enregistrer dans la base de donnée";
-        return view('form_account', compact('message'));
-      
-      }
+        dd($request->all());
+        
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'surname' => 'required|string|max:255',
+            'mail_adress' => 'required|email|unique:persons,mail_adress',
+            'password' => 'required|min:6|confirmed',
+            'licence_number' => 'required|string',
+            'medical_certificate_date' => 'required|date',
+            'birth_date' => 'required|date',
+            'adress' => 'required|string',
+        ]);
+    
+        Persons::create([
+            'name' => $validatedData['name'],
+            'surname' => $validatedData['surname'],
+            'mail_adress' => $validatedData['mail_adress'],
+            'password' => bcrypt($validatedData['password']), 
+            'licence_number' => $validatedData['licence_number'],
+            'medical_certificate_date' => $validatedData['medical_certificate_date'],
+            'birth_date' => $validatedData['birth_date'],
+            'adress' => $validatedData['adress'],
+        ]);
+
+       
+
+        // Redirection avec message
+        return redirect()->route('form_account')->with('message', 'Personne enregistrée dans la base de données');
+    }
 }
