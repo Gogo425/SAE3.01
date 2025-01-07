@@ -3,19 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Student;
-use App\Models\Initiator;
-use App\Models\Trainingmanager;
-use App\Models\Persons;
+use App\Models\students;
+use App\Models\initiators;
+use App\Models\trainingmanagers;
+use App\Models\persons;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class CreateAccountController extends Controller
 {
     public function choiceUser(Request $request)
     {
+        Log::info('Début du traitement du formulaire.');
 
-        dd($request->all());
-        
-        $validatedData = $request->validate([
+        // Valider les données
+        $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'mail_adress' => 'required|email|unique:persons,mail_adress',
@@ -24,22 +26,43 @@ class CreateAccountController extends Controller
             'medical_certificate_date' => 'required|date',
             'birth_date' => 'required|date',
             'adress' => 'required|string',
-        ]);
-    
-        Persons::create([
-            'name' => $validatedData['name'],
-            'surname' => $validatedData['surname'],
-            'mail_adress' => $validatedData['mail_adress'],
-            'password' => bcrypt($validatedData['password']), 
-            'licence_number' => $validatedData['licence_number'],
-            'medical_certificate_date' => $validatedData['medical_certificate_date'],
-            'birth_date' => $validatedData['birth_date'],
-            'adress' => $validatedData['adress'],
+            // 'roles' => 'required|array',
         ]);
 
-       
+        Log::info('Validation passée avec succès.');
 
-        // Redirection avec message
-        return redirect()->route('form_account')->with('message', 'Personne enregistrée dans la base de données');
+        // Créer une nouvelle personne
+        $person = persons::create([
+            'id' => persons::count() + 1,
+            'name' => $request->name,
+            'surname' => $request->surname,
+            'mail_adress' => $request->mail_adress,
+            'password' => Hash::make($request->password),
+            'licence_number' => $request->licence_number,
+            'medical_certificate_date' => $request->medical_certificate_date,
+            'birth_date' => $request->birth_date,
+            'adress' => $request->adress,
+        ]);
+        Log::info('Personne créée avec succès : ' . $person->id);
+
+        // Gérer les rôles
+        foreach ($request->roles as $role) {
+            if ($role === 'Initiator') {
+                initiators::create(['id_usertype' => $person->id]);
+            }
+
+            else if ($role === 'Trainingmanager') {
+                trainingmanagers::create(['id_usertype' => $person->id]);
+            }
+
+            else if ($role === 'Student') {
+                students::create(['id_usertype' => $person->id]);
+            }
+        }
+
+        Log::info('Fin du traitement du formulaire.');
+
+        // Rediriger avec un message de succès
+        return redirect()->back()->with('success', 'Utilisateur enregistré avec succès !');
     }
 }

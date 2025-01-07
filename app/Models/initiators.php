@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Initiator extends Model
+class initiators extends Model
 {
     use HasFactory;
 
@@ -13,6 +13,6 @@ class Initiator extends Model
     protected $filliable = ['id_usertype', 'id'];
 
     public function user(){
-        return $this->belongsTo(Person::class);
+        return $this->belongsTo(persons::class);
     }
 }

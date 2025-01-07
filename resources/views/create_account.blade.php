@@ -25,8 +25,12 @@
     <input type="password" name="password" id="password" placeholder="Entrer le mot de passe" required />
   </div>
   <div class="">
+    <label for="password_confirmation">Confirmation Mot de passe </label>
+    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Confirmer le mot de passe" required />
+  </div>
+  <div class="">
     <label for="licence_number">Numéro de licence: </label>
-    <input type="text" name="licence" id="licence_number" placeholder="Entrer le numero de licence" required />
+    <input type="text" name="licence_number" id="licence_number" placeholder="Entrer le numero de licence" required />
   </div>
   <div class="">
     <label for="medical_certificate_date">Date du certificat médical: </label>
@@ -56,6 +60,8 @@
     <input type="submit" value="Inscrire" />
   </div>
 </form>
+
+
 
 @if (isset($message))
   <p>{{ $message }}</p>
