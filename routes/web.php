@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\createFormController;
+use App\Http\Controllers\CreateFormController as ControllersCreateFormController;
+use App\Http\Controllers\FormationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('/creationFormation')->name('creationFormation')->controller(ControllersCreateFormController::class)->group(function () {
+
+    Route::get('/','create')->name('create');
+
+});
+
+Route::post('/formations', [FormationController::class, 'store']);
