@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class initiators extends Model
+class Initiators extends Model
 {
     use HasFactory;
 
@@ -15,6 +15,6 @@ class initiators extends Model
     // public $timestamps = false;
 
     public function user(){
-        return $this->belongsTo(persons::class);
+        return $this->belongsTo(Persons::class);
     }
 }

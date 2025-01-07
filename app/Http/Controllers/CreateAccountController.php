@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\students;
-use App\Models\initiators;
-use App\Models\trainingmanagers;
-use App\Models\persons;
+use App\Models\Students;
+use App\Models\Initiators;
+use App\Models\Persons;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -32,8 +31,8 @@ class CreateAccountController extends Controller
         Log::info('Validation passée avec succès.');
 
         // Créer une nouvelle personne
-        $person = persons::create([
-            'id' => persons::count() + 1,
+        $person = Persons::create([
+            'id' => Persons::count() +1,
             'name' => $request->name,
             'surname' => $request->surname,
             'mail_adress' => $request->mail_adress,
@@ -43,22 +42,34 @@ class CreateAccountController extends Controller
             'birth_date' => $request->birth_date,
             'adress' => $request->adress,
         ]);
-        Log::info('Personne créée avec succès : ' . $person->id);
+        Log::info('Personne créée avec succès : ');
 
         // Gérer les rôles
-        foreach ($request->roles as $role) {
-            if ($role === 'Initiator') {
-                initiators::create(['id_usertype' => persons::count(), 'id'=>initiators::count()+1]);
+        $lvl = 0;
+        foreach($request->level as $lvle){
+            if($lvle === 'ni1'){
+                $lvl = 1;
             }
+            if($lvle === 'ni2'){
+                $lvl = 2;
+            }
+            if($lvle === 'ni3'){
+                $lvl = 3;
+            }
+        }
 
-            else if ($role === 'Trainingmanager') {
-                trainingmanagers::create(['id_usertype' => persons::count()]);
+
+        foreach($request->roles as $role){
+            if ($role === 'Initiator') {
+                Initiators::create(['id_usertype' => Persons::count(), 'id' => $lvl]);
             }
 
             else if ($role === 'Student') {
-                students::create(['id_usertype' => persons::count() , 'id'=>initiators::count()+1 ,'id_learn' => 1]);
+                Students::create(['id_usertype' => Persons::count() , 'id' => $lvl , 'id_learn' => $lvl+1]);
             }
         }
+           
+        
 
         Log::info('Fin du traitement du formulaire.');
 

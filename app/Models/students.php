@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class students extends Model
+class Students extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class students extends Model
     protected $fillable = ['id_usertype', 'id', 'id_learn'];
 
     public function user(){
-        return $this->belongsTo(persons::class);
+        return $this->belongsTo(Persons::class);
     }
 
 }
