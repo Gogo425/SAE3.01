@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth.login');
@@ -24,3 +24,4 @@ Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
 Route::get('/hash', function () {
     return Hash::make("test");
 });
+    
