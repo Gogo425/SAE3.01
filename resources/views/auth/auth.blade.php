@@ -1,0 +1,19 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Connexion</title>
+</head>
+<body>
+    <form>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+
+        <label for="password">Mot de passe</label>
+        <input type="password" id="password" name="password">
+
+        <input type="submit" value="Se Connecter">
+    </form>
+</body>
+</html>
