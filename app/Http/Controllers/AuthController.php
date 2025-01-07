@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use \App\Models\Persons;
 
 class AuthController extends Controller {
 
@@ -16,11 +17,20 @@ class AuthController extends Controller {
 
     public function doLogin(LoginRequest $request){
 
-        //$credentials = $request->validated();
 
-        dd(\App\Models\Persons::find(1));
 
-        //Auth::attempt($credentials);
+        $credentials = $request->validated();
+
+        
+
+        $persons = Persons::where('EMAIL', $credentials['EMAIL'])->first();
+
+        Auth::attempt($credentials);
+    
+        Auth::login($persons);
+
+        Auth::user();
+
     }
 
 }

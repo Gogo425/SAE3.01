@@ -10,15 +10,15 @@
 
         @csrf
 
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required value={{old('email')}} >
-        @error('email')
+        <label for="EMAIL">Email</label>
+        <input type="EMAIL" id="EMAIL" name="EMAIL" required value={{old('EMAIL')}} >
+        @error('EMAIL')
             {{$message}}
         @enderror
 
         <label for="password">Mot de passe</label>
         <input type="password" id="password" name="password" required>
-        @error('email')
+        @error('password')
             {{$message}}
         @enderror
 
