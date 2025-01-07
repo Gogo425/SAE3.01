@@ -19,7 +19,7 @@ class CreateAccountController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'mail_adress' => 'required|email|unique:persons,mail_adress',
+            'email' => 'required|email|unique:persons,email',
             'password' => 'required|min:6|confirmed',
             'licence_number' => 'required|string',
             'medical_certificate_date' => 'required|date',
@@ -32,10 +32,10 @@ class CreateAccountController extends Controller
 
         // Créer une nouvelle personne
         $person = Persons::create([
-            'id' => Persons::count() +1,
+            'id_per' => Persons::count() +1,
             'name' => $request->name,
             'surname' => $request->surname,
-            'mail_adress' => $request->mail_adress,
+            'email' => $request->email,
             'password' => Hash::make($request->password),
             'licence_number' => $request->licence_number,
             'medical_certificate_date' => $request->medical_certificate_date,
@@ -61,11 +61,11 @@ class CreateAccountController extends Controller
 
         foreach($request->roles as $role){
             if ($role === 'Initiator') {
-                Initiators::create(['id_usertype' => Persons::count(), 'id' => $lvl]);
+                Initiators::create(['id_per' => Persons::count(), 'id_level' => $lvl]);
             }
 
             else if ($role === 'Student') {
-                Students::create(['id_usertype' => Persons::count() , 'id' => $lvl , 'id_learn' => $lvl+1]);
+                Students::create(['id_per' => Persons::count() , 'id_level' => $lvl , 'id_formation' => $lvl+1]);
             }
         }
            
