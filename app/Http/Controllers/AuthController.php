@@ -29,7 +29,7 @@ class AuthController extends Controller {
     
         Auth::login($persons);
 
-        Auth::user();
+        Auth::user()->ID;
 
     }
 
