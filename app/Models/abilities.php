@@ -19,7 +19,7 @@ class abilities extends Model
     }
 
     function selectBySkill($skill){
-        $abilities = abilities::where('ID_LINKED',$skill)->orderBy('ID_LINKED', 'asc')->get();
+        $abilities = abilities::where('ID_LINKED',$skill)->orderBy('ID', 'asc')->get();
         return $abilities;
     }
 

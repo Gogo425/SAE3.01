@@ -42,25 +42,37 @@
     use App\Models\skills;
     use App\Models\abilities;
     use App\Models\sessions;
+
+    function getAndRemoveFirstElement(&$array) {
+        if (empty($array)) {
+            return null;
+        }
+        $firstElement = array_shift($array);
+        return $firstElement;
+    }
+
+
     $skillsArray = [];
     $skills = (new skills)->selectbyLevel(1);
     foreach($skills as $skill){
             array_push($skillsArray, $skill->ID);
         }
     
+
+
     $abilitiesArray = [];
-    $abilities = (new abilities)->selectAllTable();
-    foreach($abilities as $abiliti){
-        array_push($abilitiesArray, $abiliti->ID);
-        }
-   
+    foreach($skillsArray as $skill){
+        $abilities = (new abilities)->selectBySkill($skill);
+        foreach($abilities as $abiliti){
+            array_push($abilitiesArray, $abiliti->ID);
+            }
+    }
+    
     $dateSessionsArray = [];
     $sessions = (new sessions)->selectAllTable();
     foreach($sessions as $session){
         array_push($dateSessionsArray, $session->DATE_SESSION);
         }
-    
-    print_r($dateSessionsArray);
     ?>
     <table>
         <col>
@@ -84,13 +96,31 @@
                 }
             ?>
         </tr>
-        <tr>
-            <th scope="row">DATE</th>
-            <td>50,000</td>
-            <td>30,000</td>
-            <td>100,000</td>
-            <td>80,000</td>
-        </tr>
+        
+
+
+            
+            <?php
+                
+                //affichage de chaque ligne
+                while(!empty($dateSessionsArray)){
+                    echo '<tr>';
+                    echo '<th scope="row">'.getAndRemoveFirstElement($dateSessionsArray).'</th>';
+                    for($i = 0; $i < 5; $i++){
+                        echo '<td>50,000</td>';
+                    }
+                    //foreach($abilitiesArray as $abi){
+                    //    echo '<td>50,000</td>';
+                    //}
+                    echo '</tr>';
+                }
+                
+                
+            ?>
+            
+            
+            
+        
     </table>
 
 </body>
