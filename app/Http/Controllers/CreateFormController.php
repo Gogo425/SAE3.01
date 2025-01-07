@@ -24,7 +24,6 @@ class CreateFormController extends Controller
 
         $person = Persons::where('mail_adress', $request->email)->first();
 
-        //Formation::create($validated);
         $formation = new Formation();
         $formation->id_associate = $person->ID;
         $formation->id_usertype = $request->id_usertype;

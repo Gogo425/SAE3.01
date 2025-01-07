@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\createFormController;
 use App\Http\Controllers\CreateFormController as ControllersCreateFormController;
-use App\Http\Controllers\FormationController;
+use App\Http\Controllers\FormController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,4 +28,10 @@ Route::prefix('/creationFormation')->name('creationFormation')->controller(Contr
 
 });
 
-//Route::post('/formations', [FormationController::class, 'store']);
+Route::prefix('/formation')->name('formation')->controller(FormController::class)->group(function () {
+
+    Route::get('/','create')->name('create');
+
+    Route::get('/', 'showForm')->name('showForm');
+
+});
