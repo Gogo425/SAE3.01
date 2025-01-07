@@ -24,6 +24,8 @@ Route::prefix('/creationFormation')->name('creationFormation')->controller(Contr
 
     Route::get('/','create')->name('create');
 
+    Route::post('/', 'store')->name('store');
+
 });
 
-Route::post('/formations', [FormationController::class, 'store']);
+//Route::post('/formations', [FormationController::class, 'store']);

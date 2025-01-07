@@ -18,7 +18,7 @@
         <p style="color: green;">{{ session('success') }}</p>
     @endif
 
-    <form action="/formations" method="POST">
+    <form action="" method="POST">
         @csrf
         <label for="id_usertype">Niveau de Formation :</label>
         <select class="form-control" name="id_usertype">
