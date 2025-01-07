@@ -17,6 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/connexion', function () {
-    return view('auth.auth');
-});
+Route::get('/connexion', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth.login');
+Route::post('/connexion', [\App\Http\Controllers\AuthController::class, 'doLogin']);
+
