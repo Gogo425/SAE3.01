@@ -9,6 +9,7 @@ use App\Models\Abilities;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\QueryException;
 
 class EvaluationController extends Controller
 {
@@ -51,18 +52,29 @@ class EvaluationController extends Controller
         $eleve_id = $request->input('id_eleve');
         $statuses = $request->input('status');
         $observations = $request->input('observations');
-      
+       
+        try{
         // Get the statuses and observations for each ability
         foreach ($statuses as $ability_id => $status_id) {
             Evaluations::create([
                 'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
                 'id_abilities' => $ability_id, // ID of the ability
                 'id_per_student' => $eleve_id, // ID of the selected student
-                'id_per_initiator' => 1, // Hardcoded initiator ID (e.g., teacher's ID)
+                'id_per_initiator' => 2, // Hardcoded initiator ID (e.g., teacher's ID)
                 'id_status' => $status_id, // Status for the ability
                 'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null, // Optional observation
             ]);
         }
+    }catch (QueryException $e) {
+        // Check if it's a foreign key constraint violation
+        if ($e->getCode() === "23000") {
+            // Redirect with an alert message
+            return redirect()->back()->with('alert', 'Une ou plusieurs évaluations n\'ont pas pu être enregistrées à cause d\'une contrainte de clé étrangère.');
+        }
+
+        // Rethrow other database errors if needed
+        throw $e;
+    }
 
         return redirect()->back()->with('success', 'Évaluation enregistrée avec succès.');
     }

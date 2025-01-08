@@ -13,10 +13,16 @@
 
     <!-- Affiche les messages de succès -->
     @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('alert'))
+    <div class="alert alert-warning">
+        {{ session('alert') }}
+    </div>
+@endif
 
     <!-- Formulaire d'évaluation -->
     <form action="{{ route('evaluations.store') }}" method="POST">
@@ -109,6 +115,8 @@
         });
     });
 </script>
+
+
 
 </body>
 </html>
