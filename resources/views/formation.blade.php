@@ -25,6 +25,28 @@
             Date de début : {{$form->DATE_BEGINNING}}
             <br>
             Date de fin : {{$form->DATE_ENDING}}
+            <br>
+            Responsable de formation : {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->NAME }} , {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->SURNAME }}
+        </p>
+        <p>
+            Initiateurs :
+            <br>
+            @foreach ($inits->where('ID_FORMATION','=',$form->ID_FORMATION) as $init)
+                {{$init->NAME}}
+                {{$init->SURNAME}}
+                <br>
+                
+            @endforeach
+        </p>
+        <p>
+            Eleves :
+            <br>
+            @foreach ($studs->where('ID_FORMATION','=',$form->ID_FORMATION) as $stud)
+                {{$stud->NAME}}
+                {{$stud->SURNAME}}
+                <br>
+                
+            @endforeach
         </p>
         <p>
             <a href="" class="btn btn-primary">Modifier</a>
