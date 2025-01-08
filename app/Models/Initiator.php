@@ -5,15 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Initiator extends Model
 {
     use HasFactory;
 
-    protected $table = 'students';
-    protected $filliable = ['id_per', 'id_level', 'id_formation'];
+    protected $table = 'initiators';
+    protected $filliable = ['id_usertype', 'id'];
 
     public function user(){
         return $this->belongsTo(Person::class);
     }
-
 }
