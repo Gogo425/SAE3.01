@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Students;
 use App\Models\Initiators;
 use App\Models\Persons;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -43,6 +44,13 @@ class CreateAccountController extends Controller
             'adress' => $request->adress,
         ]);
         Log::info('Personne créée avec succès : ');
+
+        $user = User::create([
+            'id' => $person->id_per,
+            'name' => $person->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
         // Gérer les rôles
         $lvl = 1;
