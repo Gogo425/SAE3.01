@@ -10,6 +10,7 @@
         <p>{{Auth::check()}}</p>
         <p><a href=""><img src="../image/logo.png" alt="logo"></p>
         <a href="/profile">Profil</a>
+        <a href="/logout">Déconnexion</a>
         <button>Déconnexion</button>
         <button>Liste d'élèves et d'initiateurs</button>
         <button>Liste de formations</button>

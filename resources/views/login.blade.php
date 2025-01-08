@@ -7,7 +7,6 @@
 </head>
 <body>
     <p>{{Auth::check()}}</p>
-    <a href="/">Accueil</a>
     <form method="post" action="">
         @csrf
 

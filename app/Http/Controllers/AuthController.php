@@ -26,4 +26,11 @@ class AuthController extends Controller
         return view('login');
     }
 
+    public function doLogout(){
+
+        Auth::logout();
+
+        return view('login');
+    }
+
 }
