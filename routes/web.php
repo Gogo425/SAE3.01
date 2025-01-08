@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/profile', function () {
-    return view('auth.profile');
+    return view('profile.profile');
 });
 
 Route::get('/hash', function () {
