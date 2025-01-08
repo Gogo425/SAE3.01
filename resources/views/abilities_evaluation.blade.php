@@ -27,7 +27,7 @@
             <label for="eleve_id">Sélectionner un élève</label>
             <select name="eleve_id" id="eleve_id" class="form-control" required>
                 <option value="">-- Choisir un élève --</option>
-                @foreach($eleves as $eleve)
+                @foreach($student as $eleve)
                     <option value="{{ $eleve->id }}">{{ $eleve->nom }}</option>
                 @endforeach
             </select>
