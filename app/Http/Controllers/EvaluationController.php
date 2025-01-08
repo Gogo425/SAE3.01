@@ -46,19 +46,23 @@ class EvaluationController extends Controller
     // Stores a new evaluation in the database
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+        // Get the statuses and observations for each ability
+        $eleve_id = $request->input('id_eleve');
+        $statuses = $request->input('status');
+        $observations = $request->input('observations');
       
-
-        
-        Evaluations::create([
-            'id_sessions'=> $request->id_sessions,
-            'id_abilities' => $request->abilities_id,
-            'id_per_student' => $request->eleve_id,
-            'id_per_initiator' => auth()->id(), 
-            'id_status' => $request->statut,
-            'observations' => $request->observations
-        
-        ]);
+        // Get the statuses and observations for each ability
+        foreach ($statuses as $ability_id => $status_id) {
+            Evaluations::create([
+                'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
+                'id_abilities' => $ability_id, // ID of the ability
+                'id_per_student' => $eleve_id, // ID of the selected student
+                'id_per_initiator' => 1, // Hardcoded initiator ID (e.g., teacher's ID)
+                'id_status' => $status_id, // Status for the ability
+                'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null, // Optional observation
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Évaluation enregistrée avec succès.');
     }
