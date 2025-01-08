@@ -14,6 +14,8 @@
         $niveaux = DB::select('select * from levels');
 
     ?>
+
+
     <h1>Informations générales</h1>
     <p>Nom : <?php echo $infos->NAME; ?></p>
     <p>Prénom : <?php echo $infos->SURNAME; ?></p>
@@ -21,6 +23,11 @@
     <p>Date du certificat médical : <?php echo $infos->MEDICAL_CERTIFICATE_DATE; ?></p>
     <p>Numéro de licence : <?php echo $infos->LICENCE_NUMBER; ?></p>
     <p>Adresse : <?php echo $infos->ADRESS; ?></p>
+
+    <?PHP 
+        DB::select('select * from persons where id_per = :id', ['id' => $id])[0];
+
+    ?>
 
     <?php
         $student = DB::select('select * from students where id_per = :id', ['id' => $id]);
