@@ -11,10 +11,6 @@
         <button>Consulter ma formation</button>
         <button>Consulter l'emploi du temps</button>
 
-    </body>
-    <?php
-    dd(Auth::user());
-    ?>
 
 
 @endsection
