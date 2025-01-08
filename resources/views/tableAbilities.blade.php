@@ -13,8 +13,10 @@
     use App\Models\Evaluations;
     use App\Models\sessions;
     use App\Models\status;
+    use App\Models\persons;
 
-    $idUser = 1;
+    $idUser = 2;
+    $nameUser = (new persons)->getNameOf($idUser);
     $levelUser = 1;
     $idFormation = 1;
 
@@ -46,6 +48,9 @@
 
     ?>
     <table>
+        <?php
+            echo '<caption>'.$nameUser.'</caption>';
+        ?>
         <col>
         <colgroup span="2"></colgroup>
         <colgroup span="2"></colgroup>
