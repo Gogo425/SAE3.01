@@ -16,12 +16,15 @@
         @if(session('success'))
             <p style="color: green;">{{session('success')}}</p>
         @endif
+        @if(session('failure'))
+            <p style="color: red;">{{session('failure')}}</p>
+        @endif
         <form action="{{ route('seance.save') }}" method="POST" id="formulaire">
             @csrf
             <label>Date :</label>
             <input type="date" id="dateSession" name="dateSession" required/> <!-- vérifier que la date n'est pas avant date du jour-->
 
-            <select name="location" id="location">
+            <select name="location" id="location" required>
                     <option value="">--choisir un type de location--</option>
 
                     @foreach ($locations as $location)
@@ -30,7 +33,7 @@
 
                     @endforeach
             </select>
-            <p name="test" id="test">Test</p>
+
             <br>
             <div id="students">
                 @foreach($students as $index => $student)

@@ -39,7 +39,7 @@ class seanceController extends Controller
 
     public function save(Request $request) {
 
-        dd($request->all());
+        //dd($request->all());
         
         $nb = ($request->collect()->count()-2)/5;
 
@@ -55,17 +55,37 @@ class seanceController extends Controller
             'id_per_student' => 'integer'
         ]);
 
+        $nbInitiator = array();
+
+        for($i = 1; $i <= $nb; $i++){
+            $initiator = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->ID_PER;
+            $initiatorName = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->NAME;
+
+            if(!array_key_exists($initiator, $nbInitiator)) {
+                $nbInitiator[$initiator] = 1;
+            }
+            else if($nbInitiator[$initiator] < 2) {
+                $nbInitiator[$initiator] += 1;
+            }
+            else if($nbInitiator[$initiator] >= 2) {
+                return redirect()->back()->with('failure', "l'initiateur ".$initiatorName." a plus de 2 élèves");
+            }
+            
+        }
+
         $exists = DB::table('sessions')->where('date_session', $request->dateSession)->exists();
 
         $idLocation = DB::table('locations')->where('type', $request->location)->get()->collect()->get('0')->ID_LOCATION;
 
-        if(!$exists){
-            $session = new Sessions();
-            $session->id_location = $idLocation;
-            $session->id_formation = 1;//valeur fixe pour l'instant
-            $session->date_session = $request->dateSession;
-            $session->save();
+        if($exists){
+            return redirect()->back()->with('failure', "la séance existe déjà à cette date pour cette formation");
         }
+        
+        $session = new Sessions();
+        $session->id_location = $idLocation;
+        $session->id_formation = 1;//valeur fixe pour l'instant
+        $session->date_session = $request->dateSession;
+        $session->save();
 
         $idSession = DB::table('sessions')->where('date_session', $request->dateSession)->get()->collect()->get('0')->ID_SESSIONS;
         
@@ -73,8 +93,11 @@ class seanceController extends Controller
             $student = DB::table('persons')->where('name', $request->get('student'.$i))->get()->collect()->get('0')->ID_PER;
             $initiator = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->ID_PER;
 
-            if(null !== $request->get('abilities1'.$i)){
-                $abilitie1 = DB::table('abilities')->where('description',$request->get('abilities1'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+            $abilitie1 = DB::table('abilities')->where('description',$request->get('abilities1'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+            $abilitie2 = DB::table('abilities')->where('description',$request->get('abilities2'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+            $abilitie3 = DB::table('abilities')->where('description',$request->get('abilities3'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+
+            if(null !== $abilitie1){
                 $works = new Works();
                 $works->id_sessions = $idSession;
                 $works->id_per_student = $student;
@@ -83,8 +106,7 @@ class seanceController extends Controller
                 $works->save();
             }
 
-            if(null !== $request->get('abilities2'.$i)){
-                $abilitie2 = DB::table('abilities')->where('description',$request->get('abilities2'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+            if(null !== $abilitie2 &&  $abilitie1 != $abilitie2){
                 $works = new Works();
                 $works->id_sessions = $idSession;
                 $works->id_per_student = $student;
@@ -93,8 +115,7 @@ class seanceController extends Controller
                 $works->save();
             }
 
-            if(null !== $request->get('abilities3'.$i)){
-                $abilitie3 = DB::table('abilities')->where('description',$request->get('abilities3'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+            if(null !== $abilitie3 && $abilitie1 != $abilitie3 && $abilitie2 != $abilitie3){
                 $works = new Works();
                 $works->id_sessions = $idSession;
                 $works->id_per_student = $student;
