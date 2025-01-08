@@ -11,6 +11,7 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">  
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
     </head>
     <body >
     <h1>Liste de formations</h1>
@@ -51,11 +52,12 @@
         <p>
             <a href="" class="btn btn-primary">Modifier</a>
             <a href="" class="btn btn-primary">Supprimer</a>
+            <a href="" class="btn btn-primary">Gérer les séances</a>
         </p>
     </div>
     @endforeach
     <p>
-        <a href="creationFormation" class="button"> Ajouter une formation </a>
+        <a href="creationFormation" class="btn btn-primary"> Ajouter une formation </a>
     </p>
 
     </form>

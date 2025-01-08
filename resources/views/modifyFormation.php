@@ -20,6 +20,13 @@
 
         <form action="" method="POST">
         @csrf
+        <label for="nom">Nom de la formation :</label><br>
+        <input type="text" id="nom" name="nom" value="{{ old('nom') }}">
+            @error('email')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+            <br><br>
+
         <label for="id_level">Niveau de Formation :</label>
         <select class="form-control" name="id_level">
             <option value="1">1</option>
@@ -29,35 +36,13 @@
         @error('name')
             <p style="color: red;">{{ $message }}</p>
         @enderror
-
         <br><br>
-        
-        <label for="name">Choix du responsable de foramtion</label>
-        <select class="form-control" name="name">
-            @foreach ($initsLess as $initLess)
-            <option value="{{$initLess->NAME}}">{{$initLess->NAME}}</option>
-            @endforeach
-        </select>
+
+        <label for="email">Email du Responsable de formation :</label><br>
+        <input type="email" id="email" name="email" value="{{ old('email') }}">
         @error('email')
             <p style="color: red;">{{ $message }}</p>
         @enderror
-
-        <br><br>
-
-        <label for="choice_initiateur">Choix des initiateurs :</label>
-        @foreach ($inits as $init)
-            <input type="checkbox" value="{{$init->ID_PER}}" id="{{$init->ID_PER}}" name="{{$init->ID_PER}}">
-            <label for="le for">{{$init->NAME}}</label>
-        @endforeach
-
-        <br><br>
-
-        <label for="choice_students">Choix des Eleves :</label>
-        @foreach ($studs as $stud)
-            <input type="checkbox" value="{{$stud->ID_PER}}" id="{{$stud->ID_PER}}" name="{{$stud->ID_PER}}">
-            <label for="le for">{{$stud->NAME}}</label>
-        @endforeach
-
         <br><br>
 
         <div class="container">  
@@ -74,5 +59,3 @@
     </form>
     </body>
 </html>
-
-

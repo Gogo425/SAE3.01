@@ -31,12 +31,6 @@ Route::prefix('/creationFormation')->name('creationFormation')->controller(Contr
 Route::prefix('/formation')->name('formation')->controller(FormController::class)->group(function () {
 
     Route::get('/','create')->name('create');
-    /*
-    Route::get('/{id}', function (string $id){
-
-    })->where([
-        'id' => '[0-9]+',
-    ])->name('delete');*/
 
 });
 

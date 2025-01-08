@@ -15,7 +15,7 @@ class Persons extends Model implements Authenticatable
     public $timestamps = false;
 
     protected $table = 'PERSONS';
-    //protected $fillable = ['id', 'name', 'surname', 'password', 'email', 'licence_number','medical_certificate_date', 'birth_date', 'adress'];
+    protected $fillable = ['id', 'name', 'surname', 'password', 'email', 'licence_number','medical_certificate_date', 'birth_date', 'adress'];
 
     public function getAuthPassword() {
         return $this->PASSWORD;
