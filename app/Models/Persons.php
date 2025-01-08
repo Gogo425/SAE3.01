@@ -13,6 +13,8 @@ class Persons extends Model
 
 
     protected $table = 'persons';
-    protected $fillable = ['id', 'name', 'surname', 'password', 'mail_adress', 'licence_number','medical_certificate_date', 'birth_date', 'adress'];
+    protected $fillable = ['id_per', 'name', 'surname', 'password', 'email', 'licence_number','medical_certificate_date', 'birth_date', 'adress'];
+
+    public $timestamps = false;
 
 }

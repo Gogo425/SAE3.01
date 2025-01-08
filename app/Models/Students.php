@@ -10,7 +10,7 @@ class Student extends Model
     use HasFactory;
 
     protected $table = 'students';
-    protected $filliable = ['id_usertype', 'id', 'id_learn'];
+    protected $filliable = ['id_per', 'id_level', 'id_formation'];
 
     public function user(){
         return $this->belongsTo(Person::class);

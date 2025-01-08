@@ -10,7 +10,7 @@ class Works extends Model
     use HasFactory;
 
     protected $table = 'works';
-    protected $filliable = ['id', 'id_1', 'id_usertype'];
+    protected $filliable = ['id_sessions', 'id_abilities', 'id_per_student'];
 
     public $timestamps = false;
 

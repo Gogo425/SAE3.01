@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Abilities extends Model
+class Locations extends Model
 {
     use HasFactory;
 
-    protected $table = 'abilities';
-    protected $filliable = ['id_abilities', 'id_skills', 'description'];
+    protected $table = 'locations';
+    protected $filliable = ['id_location', 'type'];
 
     public $timestamps = false;
 
