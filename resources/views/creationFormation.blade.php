@@ -17,11 +17,18 @@
     @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
+    
+        <label for="nom">Nom de la formation :</label><br>
+            <input type="text" id="nom" name="nom" value="{{ old('nom') }}">
+            @error('email')
+                <p style="color: red;">{{ $message }}</p>
+            @enderror
+            <br><br>
 
-    <form action="" method="POST">
+        <form action="" method="POST">
         @csrf
-        <label for="id_usertype">Niveau de Formation :</label>
-        <select class="form-control" name="id_usertype">
+        <label for="id_level">Niveau de Formation :</label>
+        <select class="form-control" name="id_level">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3">3</option>

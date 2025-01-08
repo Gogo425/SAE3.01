@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Formation extends Model
+class Initiator extends Model
 {
     use HasFactory;
 
-    protected $table = 'formations';
-    protected $fillable = ['id','id_per_training_mananger','id_level','date_beginning','date_ending', 'nom'];
+    protected $table = 'initiators';
+    protected $fillable = ['id_per','id_level'];
 
     public $timestamps = false;
 
