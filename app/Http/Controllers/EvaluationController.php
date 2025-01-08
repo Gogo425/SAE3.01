@@ -14,6 +14,9 @@ class EvaluationController extends Controller
 {
     $eleves = Students::all(); // Liste des élèves
     $sessions = Sessions::all(); // Liste des sessions
+    foreach ($sessions as $session) {
+        dd($session->id_sessions, $session->id_location, $session->id_formation, $session->date_session);  // Remplacez 'id' et 'name' par les champs réels
+    }
     $abilities = Abilities::all(); // Liste des compétences (abilités)
 
     return view('abilities_evaluation', compact('eleves', 'sessions', 'abilities'));
