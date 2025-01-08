@@ -54,6 +54,7 @@ class CreateAccountController extends Controller
         $user = User::create([
             'id' => $person->id_per,
             'name' => $person->name,
+
             'email' => $person->email,
             'password' => $person->password,
         ]);

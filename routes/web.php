@@ -41,6 +41,10 @@ Route::post('/create-account', [CreateAccountController::class, 'choiceUser'])->
 Route::get('/evaluations', [EvaluationController::class, 'index'])->name('abilities_evaluation');
 Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');*/
 
+Route::post('/get-abilities', [EvaluationController::class, 'getAbilitiesByStudent'])->name('abilities.by.student');
+Route::post('/abilities-by-student', [EvaluationController::class, 'getAbilitiesByStudent'])->name('abilities.by.student');
+
+
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
 //     Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
