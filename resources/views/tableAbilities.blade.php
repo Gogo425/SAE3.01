@@ -16,6 +16,7 @@
 
     $idUser = 1;
     $levelUser = 1;
+    $idFormation = 1;
 
 
     $skillsArray = [];
@@ -35,7 +36,7 @@
     }
     $idSessionsArray = [];
     $dateSessionsArray = [];
-    $sessions = (new sessions)->selectAllTable();
+    $sessions = (new sessions)->selectByForamtion($idFormation);
     foreach($sessions as $session){
         array_push($dateSessionsArray, $session->DATE_SESSION);
         }

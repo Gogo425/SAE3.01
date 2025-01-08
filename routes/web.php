@@ -20,3 +20,5 @@ Route::get('/', function () {
 });
 
 Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage']);
+
+Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);

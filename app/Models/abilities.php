@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class abilities extends Model
+class Abilities extends Model
 {
     public $table = 'abilities';
     public $primary_key = 'id_abilities';

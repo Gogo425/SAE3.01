@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class sessions extends Model
+class Sessions extends Model
 {
     public $table = 'sessions';
     public $primary_key = 'id_abilities';
@@ -14,6 +14,11 @@ class sessions extends Model
 
     function selectAllTable(){
         $abilities = sessions::all()->sortBy('DATE_SESSION');
+        return $abilities;
+    }
+
+    function selectByForamtion($formation){
+        $abilities = sessions::where('ID_FORMATION',$formation)->get();
         return $abilities;
     }
 
