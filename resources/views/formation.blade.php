@@ -16,9 +16,25 @@
     <h1>Liste de formations</h1>
         
     
-    @foreach ($form as $f)
-    <p>This is form {{ $f->id }}</p>
+    @foreach ($forms as $form)
+    <div>
+        <h2>{{$form->NOM}}</h2>
+        <p>
+            Formation de niveau : {{$form->ID_LEVEL}}
+            <br>
+            Date de début : {{$form->DATE_BEGINNING}}
+            <br>
+            Date de fin : {{$form->DATE_ENDING}}
+        </p>
+        <p>
+            <a href="" class="btn btn-primary">Modifier</a>
+            <a href="" class="btn btn-primary">Supprimer</a>
+        </p>
+    </div>
     @endforeach
+    <p>
+        <a href="creationFormation" class="button"> Ajouter une formation </a>
+    </p>
 
     </form>
     </body>

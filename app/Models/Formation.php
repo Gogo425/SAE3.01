@@ -10,7 +10,7 @@ class Formation extends Model
     use HasFactory;
 
     protected $table = 'formations';
-    protected $fillable = ['id','id_per_training_mananger','id_level','date_beginning','date_ending', 'nom'];
+    protected $fillable = ['id','id_level','id_per_training_mananger','date_beginning','date_ending','nom'];
 
     public $timestamps = false;
 

@@ -17,16 +17,16 @@
     @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>
     @endif
-    
+
+        <form action="" method="POST">
+        @csrf
         <label for="nom">Nom de la formation :</label><br>
-            <input type="text" id="nom" name="nom" value="{{ old('nom') }}">
+        <input type="text" id="nom" name="nom" value="{{ old('nom') }}">
             @error('email')
                 <p style="color: red;">{{ $message }}</p>
             @enderror
             <br><br>
 
-        <form action="" method="POST">
-        @csrf
         <label for="id_level">Niveau de Formation :</label>
         <select class="form-control" name="id_level">
             <option value="1">1</option>
@@ -47,20 +47,14 @@
 
         <div class="container">  
             <label for="date_beginning"> Date de début de la formation </label>
-            <input class="date form-control" type="text" name="date_beginning">  
+            <input class="date form-control" type="date" name="date_beginning">  
         </div>  
 
         <div class="container2">  
             <label for="date_ending"> Date de fin de la formation </label>
-            <input class="date form-control" type="text" name="date_ending">  
+            <input class="date form-control" type="date" name="date_ending">  
         </div>
-
-        <script type="text/javascript">  
-            $('.date').datepicker({    
-            format: 'yyyy-mm-dd'  
-            });    
-        </script>
-        
+    
         <button type="submit">Enregistrer</button>
     </form>
     </body>

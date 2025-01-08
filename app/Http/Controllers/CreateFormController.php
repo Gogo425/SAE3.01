@@ -22,16 +22,17 @@ class CreateFormController extends Controller
             'id_level' => 'integer',
             'date_beginning' => 'date',
             'date_ending' => 'date',
-            'nom' => 'text'
+            'nom' => ''
         ]);
 
         $other = Persons::where('email', $request->email)->first();
+        //dd($other);
         $person = Initiator::where('id_per',$other->ID_PER)->first();
 
         $manager = new TrainingManager();
         $manager->id_per = $person->ID_PER;
         $manager->save();
-        
+
         $formation = new Formation();
         $formation->id_per_training_manager = $person->ID_PER;
         $formation->id_level = $request->id_level;

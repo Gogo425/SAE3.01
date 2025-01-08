@@ -32,6 +32,6 @@ Route::prefix('/formation')->name('formation')->controller(FormController::class
 
     Route::get('/','create')->name('create');
 
-    Route::get('/', 'showForm')->name('showForm');
+    Route::post('/','delete')->name('delete');
 
 });
