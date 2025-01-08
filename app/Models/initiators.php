@@ -10,6 +10,7 @@ class Initiators extends Model
     use HasFactory;
 
     protected $table = 'initiators';
+    protected $primaryKey = 'ID_PER';
     protected $fillable = ['id_per', 'id_level'];
     
     public $timestamps = false;
