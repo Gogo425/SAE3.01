@@ -13,7 +13,7 @@ class Student extends Model
     protected $filliable = ['id_per', 'id_level', 'id_formation'];
 
     public function user(){
-        return $this->belongsTo(Persons::class);
+        return $this->belongsTo(Person::class);
     }
 
 }
