@@ -6,11 +6,8 @@ use App\Models\Sessions;
 use App\Models\Works;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\DateTime;
 
-class seanceController extends Controller
+class SeanceController extends Controller
 {
 
     public function creation()
@@ -39,7 +36,7 @@ class seanceController extends Controller
 
     public function save(Request $request) {
 
-        dd($request->all());
+        //dd($request->all());
         
         $nb = ($request->collect()->count()-2)/5;
 

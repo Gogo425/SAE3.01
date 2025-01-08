@@ -2,19 +2,16 @@
 
 
 use Illuminate\Support\Facades\Hash;
-
-use App\Http\Controllers\CalendarController;
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
-use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\SeanceController;
 
 // Route de l'accueil
 Route::get('/', function () {
     return view('home');
 });
 
-Route::prefix('/seance')->name('seance.')->controller(App\Http\Controllers\seanceController::class)->group(function() {
+Route::prefix('/seance')->name('seance.')->controller(SeanceController::class)->group(function() {
 
     Route::post('/', 'save')->name('save');
 
@@ -58,9 +55,10 @@ Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evalu
 //     Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
 // });
 
+//Routes pour les différents calendriers
 Route::get('/calendar/calendarDirector', [\App\Http\Controllers\CalendarController::class, 'calendarDirector']);
-Route::get('/calendar/calendarStudent', [\App\Http\Controllers\CalendarController::class, 'calendarStudents']);
-Route::get('/calendar/calendarInitiator', [\App\Http\Controllers\CalendarController::class, 'calendarInitiator']);
-Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'BaseCalendar']);
-Route::get('/calendar/testdays/{newdate}', [\App\Http\Controllers\CalendarController::class, 'AddDate']);
+Route::get('/calendar/calendarStudent', [App\Http\Controllers\CalendarController::class, 'calendarStudents']);
+Route::get('/calendar/calendarInitiator', [App\Http\Controllers\CalendarController::class, 'calendarInitiator']);
+Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'BaseCalendar']);
+Route::get('/calendar/testdays/{newdate}', [App\Http\Controllers\CalendarController::class, 'AddDate']);
 
