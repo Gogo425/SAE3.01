@@ -20,5 +20,6 @@ Route::get('/', function () {
 
 Route::get('/calendar/calendarDirector', [\App\Http\Controllers\CalendarController::class, 'calendarDirector']);
 Route::get('/calendar/calendarStudent', [\App\Http\Controllers\CalendarController::class, 'calendarStudents']);
+Route::get('/calendar/calendarInitiator', [\App\Http\Controllers\CalendarController::class, 'calendarInitiator']);
 Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'BaseCalendar']);
 Route::get('/calendar/testdays/{newdate}', [\App\Http\Controllers\CalendarController::class, 'AddDate']);

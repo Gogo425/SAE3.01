@@ -18,6 +18,13 @@ class CalendarController extends BaseController
         return view('Calendar.calendarStudent');
     }
 
+    public function calendarInitiator (): View 
+    {
+        return view('Calendar.calendarInitiator');
+    }
+
+    
+
     public function BaseCalendar (): View 
     {
         return view('BaseCalendar');
