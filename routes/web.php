@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
+Route::get('/profile', function () {
+    return view('profile.profile');
+});
+
+Route::get('/hash', function () {
+    return Hash::make("0000");
+});
+    
+Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
+Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
+Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'doLogout']);

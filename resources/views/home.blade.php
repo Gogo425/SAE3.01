@@ -1,6 +1,5 @@
 @extends('base')
 
-
 @section('title', 'acceuil')
 
 @section('content')
@@ -8,5 +7,5 @@
         <button>Liste de formations</button>
         <button>Consulter ma formation</button>
         <button>Consulter l'emploi du temps</button>
-@endsection
 
+@endsection
