@@ -6,10 +6,12 @@
 
         <title>Accueil</title>
     </head>
-    <body>
-        <p><a href=""><img src="../image/logo.png" alt="logo"></p>
+    <header>
+        <img src="../image/logo.png" alt="logo"/>
         <button>Profil</button>
         <button>Déconnexion</button>
+    </header>
+    <body>
         <button>Liste d'élèves et d'initiateurs</button>
         <button>Liste de formations</button>
         <button>Consulter ma formation</button>
