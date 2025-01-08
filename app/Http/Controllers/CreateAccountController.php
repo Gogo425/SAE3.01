@@ -51,12 +51,6 @@ class CreateAccountController extends Controller
         ]);
         Log::info('Personne créée avec succès : ');
 
-        $user = User::create([
-            'id' => $person->id_per,
-            'name' => $person->name,
-            'email' => $person->email,
-            'password' => $person->password,
-        ]);
 
         // Gérer les rôles
         $lvl = 1;
