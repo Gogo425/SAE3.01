@@ -24,14 +24,15 @@
 
         <!-- Sélectionner une session -->
         <div class="form-group mt-3">
-            <label for="session_id">Sélectionner une session</label>
-            <select name="session_id" id="session_id" class="form-control" required>
+            <label for="id_sessions">Sélectionner une session</label>
+            <select name="id_sessions" id="id_sessions" class="form-control" required>
                 <option value="">-- Choisir une session --</option>
                 @foreach($sessions as $session)
-                    <option value="{{ $session->id }}">{{ $session->name }}</option>
+                    <option value="{{ $session->id_sessions }}">{{ $session->date_session }}</option>
                 @endforeach
             </select>
         </div>
+
 
         <!-- Sélectionner un élève -->
         <div class="form-group mt-3">
@@ -60,17 +61,17 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>
-                        <input type="hidden" name="abilities_id[]" value="{{ $ability->id }}">
-                        {{ $ability->name }}
+                        <input type="hidden" name="id_abilities" value="{{ $ability->id_abilities }}">
+                        {{ $ability->description }}
                     </td>
                     <td>
-                        <select name="status[{{ $ability->id }}]" class="form-control" required>
+                        <select name="status[{{ $ability->id_abilities }}]" class="form-control" required>
                             <option value="Évalué">Évalué</option>
                             <option value="Pas acquis">Pas acquis</option>
                         </select>
                     </td>
                     <td>
-                        <input type="text" name="observations[{{ $ability->id }}]" class="form-control" placeholder="Observation (optionnel)">
+                        <input type="text" name="observations[{{ $ability->id_abilities }}]" class="form-control" placeholder="Observation (optionnel)">
                     </td>
                 </tr>
                 @endforeach
