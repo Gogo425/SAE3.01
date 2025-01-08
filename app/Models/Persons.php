@@ -10,8 +10,7 @@ class Persons extends Model
     use HasFactory;
 
     public $timestamps = false;
-
-    protected $table = 'PERSONS';
-    protected $fillable = ['id', 'name', 'surname', 'password', 'email', 'licence_number','medical_certificate_date', 'birth_date', 'adress'];
+    protected $table = 'persons';
+    protected $fillable = ['id_per','name', 'surname', 'password', 'email', 'licence_number','medical_certificate_date', 'birth_date', 'adress'];
 
 }
