@@ -1,0 +1,124 @@
+     /* Général */
+     body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* Titre de la page */
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 2.5rem;
+        color: #333;
+    }
+    
+    /* Table */
+    table {
+        width: 90%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    /* Légende */
+    caption {
+        padding: 10px 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: #0069d9;
+        color: white;
+        text-transform: uppercase;
+        border-bottom: 2px solid #ddd;
+    }
+    
+    /* En-tête du tableau */
+    thead {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    /* Cellules du tableau */
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    
+    /* Style des titres de colonnes */
+    th {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+    }
+    
+    /* Lignes du tableau */
+    tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+    
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    
+    /* Colonnes spécifiques */
+    colgroup span {
+        width: 100px;
+    }
+    
+    /* Dernière colonne */
+    td:last-of-type {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    /* Classe pour "Non évalué" (gris) */
+    .vide {
+        background-color: #fff; /* Gris clair */
+        color: #555; /* Texte gris foncé pour un meilleur contraste */
+    }
+    /* Classe pour "Non évalué" (gris) */
+    .non-evalue {
+        background-color: #d3d3d3; /* Gris clair */
+        color: #555; /* Texte gris foncé pour un meilleur contraste */
+    }
+    
+    /* Classe pour "En cours" (orange) */
+    .en-cours {
+        background-color: #ffcc00; /* Jaune/orange */
+        color: #555; /* Texte gris foncé pour un meilleur contraste */
+    }
+    
+    /* Classe pour "Acquis" (vert) */
+    .acquis {
+        background-color: #28a745; /* Vert */
+        color: white; /* Texte blanc pour un bon contraste */
+    }
+    
+    /* Quelques autres styles pour rendre le tableau agréable */
+    table {
+        width: 90%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    tr:hover {
+        background-color: #f1f1f1;
+    }

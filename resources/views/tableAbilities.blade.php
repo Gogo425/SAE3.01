@@ -2,60 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ asset('css/tableAbilities.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <style>
-        table {
-        border-collapse: collapse;
-        border: 2px solid rgb(140 140 140);
-        font-family: sans-serif;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-        }
-
-        caption {
-        caption-side: bottom;
-        padding: 10px;
-        font-weight: bold;
-        }
-
-        thead,
-        tfoot {
-        background-color: rgb(228 240 245);
-        }
-
-        th,
-        td {
-        border: 1px solid rgb(160 160 160);
-        padding: 8px 10px;
-        }
-
-        td:last-of-type {
-        text-align: center;
-        }
-    </style>
-
-    
     <?php
     use App\Models\skills;
     use App\Models\abilities;
+    use App\Models\Evaluations;
     use App\Models\sessions;
+    use App\Models\status;
 
-    function getAndRemoveFirstElement(&$array) {
-        if (empty($array)) {
-            return null;
-        }
-        $firstElement = array_shift($array);
-        return $firstElement;
-    }
+    $idUser = 1;
+    $levelUser = 1;
 
 
     $skillsArray = [];
-    $skills = (new skills)->selectbyLevel(1);
+    $skills = (new skills)->selectbyLevel($levelUser);
     foreach($skills as $skill){
-            array_push($skillsArray, $skill->ID);
+            array_push($skillsArray, $skill->ID_SKILLS);
         }
     
 
@@ -64,15 +30,19 @@
     foreach($skillsArray as $skill){
         $abilities = (new abilities)->selectBySkill($skill);
         foreach($abilities as $abiliti){
-            array_push($abilitiesArray, $abiliti->ID);
+            array_push($abilitiesArray, $abiliti->ID_ABILITIES);
             }
     }
-    
+    $idSessionsArray = [];
     $dateSessionsArray = [];
     $sessions = (new sessions)->selectAllTable();
     foreach($sessions as $session){
         array_push($dateSessionsArray, $session->DATE_SESSION);
         }
+    foreach($sessions as $session){
+        array_push($idSessionsArray,$session->ID_SESSIONS);
+        }
+
     ?>
     <table>
         <col>
@@ -88,7 +58,6 @@
             ?>
         </tr>
         <tr>
-
             <?php
                 echo '<th scope="col"></th>';
                 foreach($abilitiesArray as $abi){
@@ -96,32 +65,37 @@
                 }
             ?>
         </tr>
-        
-
-
-            
             <?php
+            while(!empty($dateSessionsArray)){
+                $date = array_shift($dateSessionsArray);
+                $idSession = array_shift($idSessionsArray);
+                echo '<tr>';
+                echo '<th scope="row">'.$date.'</th>';
                 
-                //affichage de chaque ligne
-                while(!empty($dateSessionsArray)){
-                    echo '<tr>';
-                    echo '<th scope="row">'.getAndRemoveFirstElement($dateSessionsArray).'</th>';
-                    for($i = 0; $i < 5; $i++){
-                        echo '<td>50,000</td>';
+                foreach($abilitiesArray as $abiliti){
+                    $case = "";
+                    $class = "vide";
+                    $eval = (new evaluations)->getObservation($idSession,$abiliti,$idUser);
+                    
+                    foreach($eval as $evaluation){
+                        $idStatus = $evaluation->ID_STATUS;
+                        $descStatus = (new status)->getDesc($idStatus);
+                        foreach($descStatus as $desc){
+                            $case = $case . $desc->DESCRIPTION;
+                            if($case == "Non évalué") {
+                                $class = "non-evalue"; // Gris
+                            } elseif ($case == "En cours") {
+                                $class = "en-cours"; // Orange
+                            } elseif ($case == "Acquis") {
+                                $class = "acquis"; // Vert
+                            }
+                        }
                     }
-                    //foreach($abilitiesArray as $abi){
-                    //    echo '<td>50,000</td>';
-                    //}
-                    echo '</tr>';
+                    echo '<td class="' . $class . '">' . $case . '</td>';
                 }
-                
-                
-            ?>
-            
-            
-            
-        
+                echo '</tr>';
+                }  
+            ?>  
     </table>
-
 </body>
 </html>

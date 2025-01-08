@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 class TableAbilitiesController extends Controller
 {
     function TableAbilitiesPage(){
+        
         return view('tableAbilities');
     }
     
-
 }

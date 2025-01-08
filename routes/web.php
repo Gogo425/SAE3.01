@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TableAbilitiesController;
+use App\Http\Controllers\TableStudentController;
 use Illuminate\Support\Facades\Route;
 
 /*
