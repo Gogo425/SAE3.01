@@ -1,6 +1,6 @@
 <header>
     <menu>
-        <p><a href=""><img src="./img/logo.png" alt="logo"></p>
+        <img src="./img/logo.png" alt="logo">
         <button>Profil</button>
         <button>Déconnexion</button>
     </menu>
