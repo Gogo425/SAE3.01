@@ -18,4 +18,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'calendar']);
+Route::get('/calendar/calendarDirector', [\App\Http\Controllers\CalendarController::class, 'calendarDirector']);
+Route::get('/calendar/calendarStudent', [\App\Http\Controllers\CalendarController::class, 'calendarStudents']);
+Route::get('/calendar', [\App\Http\Controllers\CalendarController::class, 'BaseCalendar']);
+Route::get('/calendar/testdays/{newdate}', [\App\Http\Controllers\CalendarController::class, 'AddDate']);

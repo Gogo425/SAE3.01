@@ -1,8 +1,9 @@
 @extends('BaseCalendar')
 
-@section('title', 'Student Calendar')
+@section('title', 'Formateur Calendar')
 
 @section('link')
+
 <?php
     class Month{
 
@@ -108,6 +109,15 @@
             return new Month($month, $year);
         }
 
+        public function getYear(): int
+        {
+            return $this->year;
+        }
+
+        public function getMonth(): int
+        {
+            return $this->month;
+        }
 
 
 
@@ -143,6 +153,7 @@
                             <div class="calendar__weekday"><?= $day; ?></div>
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
+                        <button><a href="/calendar/testdays/{{ $date->format('Y-m-d') }}">+</a></button>
                     </td>
                     <?php endforeach; ?>
                 </tr>

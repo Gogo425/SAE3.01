@@ -34,3 +34,8 @@
 {
     opacity: 0.3;
 }
+
+.calendar__button
+{
+    color: blue;
+}

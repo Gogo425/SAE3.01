@@ -9,8 +9,14 @@
 </head>
 <body>
     <img src="{{ asset('image/logo.png') }}" alt="logo" height="8%" width="8%">
+    <button>Profil</button>
+    <button>Déconnexion</button>
+    <button>Liste d'élèves et d'initiateurs</button>
+    <button>Liste de formations</button>
+    <button>Consulter ma formation</button>
+    <button><a href="{{ asset('calendar/calendarDirector') }}">Consulter l'emploi du temps</a></button>
 
-    @yield('content')
+    @yield('link')
     
 </body>
 </html>
