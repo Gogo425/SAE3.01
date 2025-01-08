@@ -14,6 +14,14 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::prefix('/seance')->name('seance.')->controller(App\Http\Controllers\seanceController::class)->group(function() {
+
+    Route::post('/', 'save')->name('save');
+
+    Route::get('/creation', 'creation')->name('creation');
+
+});
+
 // Route du profile
 Route::get('/profile', function () {
     return view('profile.profile');

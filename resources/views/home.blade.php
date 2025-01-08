@@ -12,6 +12,8 @@
         <a href="/profile">Profil</a>
         <a href="/logout">Déconnexion</a>
         <button>Déconnexion</button>
+    </header>
+    <body>
         <button>Liste d'élèves et d'initiateurs</button>
         <button>Liste de formations</button>
         <button>Consulter ma formation</button>
