@@ -18,10 +18,14 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('auth.login');
+Route::get('/profile', function () {
+    return view('auth.profile');
+});
+
+Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
 
 Route::get('/hash', function () {
-    return Hash::make("test");
+    return Hash::make("aaaaa");
 });
     

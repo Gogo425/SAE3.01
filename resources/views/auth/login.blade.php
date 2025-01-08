@@ -13,13 +13,13 @@
         @csrf
 
         <label for="EMAIL">Email</label>
-        <input type="EMAIL" id="EMAIL" name="EMAIL" class="border-solid border-2" required value={{old('EMAIL')}} >
+        <input type="EMAIL" id="EMAIL" name="EMAIL" class="border-solid border-2" value={{old('EMAIL')}} >
         @error('EMAIL')
             {{$message}}
         @enderror
 
         <label for="password">Mot de passe</label>
-        <input type="password" id="password" name="password" class="border-solid border-2" required>
+        <input type="password" id="password" name="password" class="border-solid border-2">
         @error('password')
             {{$message}}
         @enderror
