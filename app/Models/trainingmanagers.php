@@ -14,4 +14,6 @@ class Trainingmanagers extends Model
     public function user(){
         return $this->belongsTo(Persons::class);
     }
+
+    public $timestamps = false;
 }

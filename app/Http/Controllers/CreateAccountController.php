@@ -45,16 +45,16 @@ class CreateAccountController extends Controller
         Log::info('Personne créée avec succès : ');
 
         // Gérer les rôles
-        $lvl = 0;
+        $lvl = 1;
         foreach($request->level as $lvle){
             if($lvle === 'ni1'){
-                $lvl = 1;
-            }
-            if($lvle === 'ni2'){
                 $lvl = 2;
             }
-            if($lvle === 'ni3'){
+            if($lvle === 'ni2'){
                 $lvl = 3;
+            }
+            if($lvle === 'ni3'){
+                $lvl = 4;
             }
         }
 
@@ -65,7 +65,7 @@ class CreateAccountController extends Controller
             }
 
             else if ($role === 'Student') {
-                Students::create(['id_per' => Persons::count() , 'id_level' => $lvl , 'id_formation' => $lvl+1]);
+                Students::create(['id_per' => Persons::count() , 'id_level' => $lvl , 'id_formation' => 2]);
             }
         }
            

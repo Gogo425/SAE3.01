@@ -16,4 +16,6 @@ class Students extends Model
         return $this->belongsTo(Persons::class);
     }
 
+    public $timestamps = false;
+
 }

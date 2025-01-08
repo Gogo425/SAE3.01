@@ -14,3 +14,13 @@ Route::get('/create-account', function () {
 
 // Route pour traiter le formulaire (POST)
 Route::post('/create-account', [CreateAccountController::class, 'choiceUser'])->name('account.create');
+
+
+Route::get('/abilities-evaluation', function () {
+    return view('abilities_evaluation'); // Charge la vue pour afficher le formulaire
+})->name('evaluation.form');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
+    Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
+});
