@@ -8,23 +8,26 @@ use Illuminate\Database\Eloquent\Model;
 class Abilities extends Model
 {
     public $table = 'abilities';
-    public $primary_key = 'ID_ABILITIES';
+
+    protected $fillable = ['id_abilities', 'id_skills', 'description'];
+
+    public $primary_key = 'id_abilities';
     public $incrementing = true;
     public $timestamps = false;
 
 
     function selectAllTable(){
-        $abilities = abilities::all()->sortBy('ID_SKILLS');
+        $abilities = abilities::all()->sortBy('id_skills');
         return $abilities;
     }
 
     function selectBySkill($skill){
-        $abilities = abilities::where('ID_SKILLS',$skill)->orderBy('ID_ABILITIES', 'asc')->get();
+        $abilities = abilities::where('id_skills',$skill)->orderBy('id_abilities', 'asc')->get();
         return $abilities;
     }
 
     function countBySkill($skill){
-        $abilities = abilities::where('ID_SKILLS',$skill)->count();
+        $abilities = abilities::where('id_skills',$skill)->count();
         return $abilities;
     }
 

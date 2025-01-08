@@ -6,30 +6,31 @@ use App\Models\Evaluations;
 use App\Models\Students;
 use App\Models\Session;
 use App\Models\Abilities;
+use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EvaluationController extends Controller
 {
     public function index()
 {
-    $eleves = Students::all(); // Liste des élèves
-    $session = Session::all(); // Liste des sessions
-    foreach ($session as $sessio) {
-        dd($sessio->id_sessions, $sessio->id_location, $sessio->id_formation, $sessio->date_session);  // Remplacez 'id' et 'name' par les champs réels
-    }
-    $abilities = Abilities::all(); // Liste des compétences (abilités)
 
-    return view('abilities_evaluation', compact('eleves', 'sessions', 'abilities'));
+    $eleves = DB::table('students')->get(); // Liste des élèves
+    $sessions =  DB::table('sessions')->get(); // Liste des sessions
+    $abilities =  DB::table('abilities')->get(); // Liste des compétences (abilités)
+    $status =  DB::table('status')->get();
+
+    return view('abilities_evaluation', ['eleves' => $eleves, 'sessions'=> $sessions, 'abilities' =>$abilities  ,'status' =>$status]);
 }
 
     public function store(Request $request)
     {
-        
+        dd($request->all());
       
 
         
         Evaluations::create([
-            'id_sessions'=> $request->session_id,
+            'id_sessions'=> $request->id_sessions,
             'id_abilities' => $request->abilities_id,
             'id_per_student' => $request->eleve_id,
             'id_per_initiator' => auth()->id(), 
