@@ -6,9 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-@extends('layouts.app')
 
-@section('content')
+
 <div class="container">
     <h1>Créer une évaluation</h1>
 
@@ -82,6 +81,6 @@
         <button type="submit" class="btn btn-primary mt-3">Enregistrer l'évaluation</button>
     </form>
 </div>
-@endsection
+
 </body>
 </html>
