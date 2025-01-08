@@ -1,17 +1,18 @@
-<footer>
-    <table class="w-full">
+<footer class="bg-[#ADD8E6] flex justify-center items-center">
+    <table class="w-11/12 text-left border-collapse">
         <tr>
-            <td rowspan="11">
-                <img src="./img/logo.png" alt="logo" class="w-full h-32">
+            <td rowspan="11" >
+                <img src="./img/logo.png" alt="logo" class="w-32 h-32 ">
             </td>
-            <th>NOM</th>
-            <th>A propos</th>
+            
+            <th class="text-left font-bold">NOM</th>
+            <th class="text-left font-bold">A propos</th>
         </tr>
         <tr>
             <td>DEMAIMAY Lucas</td>
-            <td rowspan="10">
+            <td rowspan="10" >
                 Si vous voulez d'autres informations, 
-                <a href="https://ffessm.fr/" target="_blank">cliquez ici</a>.
+                <a href="https://ffessm.fr/" target="_blank" class="text-blue-600 underline">cliquez ici</a>.
             </td>
         </tr>
         <tr>
