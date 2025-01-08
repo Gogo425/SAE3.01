@@ -22,14 +22,11 @@ class EvaluationController extends Controller
     public function store(Request $request)
     {
         
-        $request->validate([
-            'eleve_id' => 'required|exists:eleves,id',
-            'statut' => 'required|in:Évalué,Pas acquis',
-        ]);
+      
 
         
         Evaluations::create([
-            'id_session'=> $request->session_id,
+            'id_sessions'=> $request->session_id,
             'id_abilities' => $request->abilities_id,
             'id_per_student' => $request->eleve_id,
             'id_per_initiator' => auth()->id(), 
