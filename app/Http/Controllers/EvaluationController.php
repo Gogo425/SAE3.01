@@ -46,27 +46,21 @@ class EvaluationController extends Controller
     // Stores a new evaluation in the database
     public function store(Request $request)
     {
-        // Get the ID of the selected student
-        $eleve_id = $request->input('id_eleve');
+        dd($request->all());
+      
 
-        // Get the statuses and observations for each ability
-        $statuses = $request->input('status');
-        $observations = $request->input('observations');
+        
+        Evaluations::create([
+            'id_sessions'=> $request->id_sessions,
+            'id_abilities' => $request->abilities_id,
+            'id_per_student' => $request->eleve_id,
+            'id_per_initiator' => auth()->id(), 
+            'id_status' => $request->statut,
+            'observations' => $request->observations
+        
+        ]);
 
-        // Loop through each ability's status and save an evaluation
-        foreach ($statuses as $ability_id => $status_id) {
-            Evaluations::create([
-                'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
-                'id_abilities' => $ability_id, // ID of the ability
-                'id_per_student' => $eleve_id, // ID of the selected student
-                'id_per_initiator' => 1, // Hardcoded initiator ID (e.g., teacher's ID)
-                'id_status' => $status_id, // Status for the ability
-                'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null, // Optional observation
-            ]);
-        }
-
-        // Redirect back to the form with a success message
-        return redirect()->back()->with('success', 'Évaluation(s) enregistrée(s) avec succès.');
+        return redirect()->back()->with('success', 'Évaluation enregistrée avec succès.');
     }
 
     // Retrieves abilities for a specific student using AJAX

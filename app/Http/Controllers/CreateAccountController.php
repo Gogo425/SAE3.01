@@ -16,18 +16,24 @@ class CreateAccountController extends Controller
     {
         Log::info('Début du traitement du formulaire.');
 
+        $messages = [
+            'licence_number.regex' => 'Le numéro de licence doit suivre le format A-XX-XXXXXX (ex: A-03-253653).',
+        ];
+
         // Valider les données
         $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
             'email' => 'required|email|unique:persons,email',
             'password' => 'required|min:6|confirmed',
-            'licence_number' => 'required|string',
+            'licence_number' => ['required', 
+            'regex:/^[A-Z]-\d{2}-\d{6}$/',
+            ],
             'medical_certificate_date' => 'required|date',
             'birth_date' => 'required|date',
             'adress' => 'required|string',
             // 'roles' => 'required|array',
-        ]);
+        ], $messages);
 
         Log::info('Validation passée avec succès.');
 
@@ -48,8 +54,9 @@ class CreateAccountController extends Controller
         $user = User::create([
             'id' => $person->id_per,
             'name' => $person->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+
+            'email' => $person->email,
+            'password' => $person->password,
         ]);
 
         // Gérer les rôles
@@ -63,6 +70,12 @@ class CreateAccountController extends Controller
             }
             if($lvle === 'ni3'){
                 $lvl = 4;
+            }
+            if($lvle === 'mf1'){
+                $lvl = 5;
+            }
+            if($lvle === 'mf2'){
+                $lvl = 6;
             }
         }
 
