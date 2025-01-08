@@ -12,7 +12,7 @@ class Evaluations extends Model
     protected $table = 'evaluations';
     
     protected $fillable = [
-        'id_session',
+        'id_sessions',
         'id_abilities',
         'id_per_initiator',
         'id_per_student',
