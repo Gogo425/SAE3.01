@@ -21,8 +21,10 @@ class AuthController extends Controller {
 
         $user = Persons::where('EMAIL', $credentials['EMAIL'])->first();
 
-        if( Auth::attempt($credentials, true) ){
-            //Auth::login($user);
+        if( Auth::attempt($credentials) ){
+            
+            session()->regenerate();
+
             return view('auth.profile');
         }
 
