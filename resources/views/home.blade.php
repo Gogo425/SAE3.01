@@ -1,15 +1,6 @@
 @extends('base')
 
 
-        <title>Accueil</title>
-    </head>
-    <body>
-        <p>{{Auth::check()}}</p>
-        <p><a href=""><img src="../image/logo.png" alt="logo"></p>
-        <a href="/profile">Profil</a>
-        <a href="/logout">Déconnexion</a>
-        <button>Déconnexion</button>
-
 
 @section('title', 'acceuil')
 
@@ -24,7 +15,7 @@
     <?php
     dd(Auth::user());
     ?>
-</html>
+
 
 @endsection
 
