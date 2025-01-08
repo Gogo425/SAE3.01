@@ -7,7 +7,7 @@
 </head>
 <body>
     <p>{{Auth::check()}}</p>
-    <form method="post" action="">
+    <form method="post" action="/login">
         @csrf
 
         <label for="email"> Email </label>
