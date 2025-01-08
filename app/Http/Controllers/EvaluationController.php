@@ -16,7 +16,7 @@ class EvaluationController extends Controller
     $sessions = Sessions::all(); // Liste des sessions
     $abilities = Abilities::all(); // Liste des compétences (abilités)
 
-    return view('evaluations.index', compact('eleves', 'sessions', 'abilities'));
+    return view('abilities_evaluation', compact('eleves', 'sessions', 'abilities'));
 }
 
     public function store(Request $request)
