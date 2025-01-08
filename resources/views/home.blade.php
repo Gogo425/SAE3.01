@@ -7,6 +7,7 @@
         <title>Accueil</title>
     </head>
     <body>
+        <p>{{Auth::check()}}</p>
         <p><a href=""><img src="../image/logo.png" alt="logo"></p>
         <button>Profil</button>
         <button>Déconnexion</button>
