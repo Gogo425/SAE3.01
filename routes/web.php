@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\ManageController;
 
 // Route de l'accueil
 Route::get('/', function () {
@@ -45,3 +46,6 @@ Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evalu
 //     Route::get('/evaluations', [EvaluationController::class, 'index'])->name('evaluations.index');
 //     Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
 // });
+
+Route::get('/liste', [ManageController::class, 'index']);
+
