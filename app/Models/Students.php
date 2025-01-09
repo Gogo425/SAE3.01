@@ -16,11 +16,13 @@ class Students extends Model
         'id_level',
         'id_formation'
     ];
-
     public $timestamps = false;
-
     function selectAllTable(){
         $persons = students::all()->sortBy('ID_PER');
+        return $persons;
+    }
+    function selectByLevel($level){
+        $persons = students::where('ID_LEVEL',$level)->get();
         return $persons;
     }
 }

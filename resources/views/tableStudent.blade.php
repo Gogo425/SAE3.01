@@ -7,6 +7,8 @@
     <title>Document</title>
 </head>
 <body>
+
+    
     <?php
         use App\Models\skills;
         use App\Models\students;
@@ -16,7 +18,10 @@
         use App\Models\status;
         use App\Models\sessions;
 
-        $levelSelected = 1;
+
+        
+
+        $levelSelected = isset($_POST['level']) ? $_POST['level'] : 1;
 
 
         $skillsArray = [];
@@ -35,7 +40,7 @@
         
         $idStudent = [];
         $nameStudent = [];
-        $students = (new students)->selectAllTable();
+        $students = (new students)->selectByLevel($levelSelected);
         foreach($students as $student){
             array_push($idStudent, $student->ID_PER);
         }
@@ -43,7 +48,16 @@
             array_push($nameStudent, (new persons)->getNameOf($id));
         }
     ?>
-
+    <!-- Formulaire pour sélectionner le niveau -->
+    <form method="POST" action="">
+        @csrf
+        <label for="level">Select Level:</label>
+        <select name="level" id="level" onchange="this.form.submit()">
+            <option value="1" <?= $levelSelected == 1 ? 'selected' : '' ?>>Level 1</option>
+            <option value="2" <?= $levelSelected == 2 ? 'selected' : '' ?>>Level 2</option>
+            <option value="3" <?= $levelSelected == 3 ? 'selected' : '' ?>>Level 3</option>
+        </select>
+    </form>
 <table>
         <col>
         <colgroup span="2"></colgroup>
@@ -67,6 +81,7 @@
         </tr>
         <?php
             while(!empty($nameStudent)){
+                $valide = 0;
                 $name = array_shift($nameStudent);
                 $id = array_shift($idStudent);
                 echo '<tr>';
@@ -77,15 +92,32 @@
                     $classe = "vide";
                     $a = (new Evaluations)->getEvaluationsStudent($id, $abiliti);
                     if($a){
+                        $valide = $valide + 1;
                         $case = "Acquis";
                         $classe = "acquis";
                     }else{
                         $case = "En cours";
                         $classe = "en-cours";
                     }
-
-                    echo '<td class="'.$classe.'">'.$case.'</td>';
+                    //echo '<td class="'.$classe.'">'.$case.'</td>';
+                    echo '<td class="'.$classe.'" data-label="Ability A'.$abiliti.'">'.$case.'</td>';
+                    
                 }
+                echo '<td>';
+                if ($valide == count($abilitiesArray)) {
+                    echo '<div class="button-container">
+                            <button class="btn btn-valid">
+                                <span class="icon valid"></span> Valide
+                            </button>
+                        </div>';
+                } else {
+                    echo '<div class="button-container">
+                            <button class="btn btn-in-progress">
+                                <span class="icon in-progress"></span> En cours
+                            </button>
+                        </div>';
+                }
+                echo '</td>';
                 echo '</tr>';
                 }  
             ?>  

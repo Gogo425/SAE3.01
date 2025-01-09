@@ -47,7 +47,7 @@
         }
 
     ?>
-    <table>
+    <table class="responsive-table">
         <?php
             echo '<caption>'.$nameUser.'</caption>';
         ?>
