@@ -22,7 +22,15 @@
  /*Profil : class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"*/
  /*Déconnexion: class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"*/
 
-button {
+ .pink {
+    background-image: linear-gradient(to bottom right, rgba(212, 2, 114) 5%, rgba(212, 2, 114, 0.3) 50%, rgba(151, 0, 80))
+ }
+
+ .dark_blue {
+    background-image: linear-gradient(to bottom right, rgba(8, 101, 157) 5%, rgba(8, 101, 157, 0.3) 50%, rgba(1, 50, 90))
+ }
+
+ .pink, .dark_blue {
     margin: 10px;
     padding: 15px 45px;
     text-align: center;
@@ -35,11 +43,7 @@ button {
     display: block;
 }
 
- #pink {
-    background-image: linear-gradient(to right, #ff0084 0%, #33001b  51%, #ff0084  100%)
- }
-
- .pink:hover {
+ .pink:hover, .dark_blue:hover {
     background-position: right center; /* change the direction of the change here */
     color: #fff;
     text-decoration: none;
