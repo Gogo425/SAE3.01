@@ -7,10 +7,10 @@ use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\EvaluationController;
 
-// Route de l'accueil
+// Home route
 Route::get('/', function () {
     return view('home');
-});
+})->middleware('auth');
 
 Route::prefix('/seance')->name('seance.')->controller(SeanceController::class)->group(function() {
 
@@ -20,17 +20,17 @@ Route::prefix('/seance')->name('seance.')->controller(SeanceController::class)->
 
 });
 
-// Route du profile
+// Profile route
 Route::get('/profile', function () {
     return view('profile.profile');
 });
 
-// Donne le hashage de 0000 pour avoir un mot de passe au cas où
+// Hash test route
 Route::get('/hash', function () {
     return Hash::make("0000");
 });
 
-// Routes de connexion et déconnexion
+// Connection and disconnection routes
 Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
 Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
 Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'doLogout']);

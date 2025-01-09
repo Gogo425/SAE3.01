@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluations;
 use App\Models\Students;
-use App\Models\Session;
+use App\Models\Sessions;
 use App\Models\Abilities;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluationController extends Controller
 {
@@ -56,15 +57,33 @@ class EvaluationController extends Controller
         try{
         // Get the statuses and observations for each ability
         foreach ($statuses as $ability_id => $status_id) {
+            $evaluation = DB::table('evaluations')
+            ->where('id_sessions', 1) // session id (replace)
+                ->where('id_abilities', $ability_id)
+                ->where('id_per_student', $eleve_id)
+                ->first();
+
+            if ($evaluation) {
+        
+                DB::table('evaluations')
+                ->where('id_abilities', $ability_id)
+                ->where('id_per_student', $eleve_id)
+                ->update([
+                    'id_status' => $status_id,
+                    'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null,
+                    'id_per_initiator' => Auth::id(),
+                ]);
+            } else {
             Evaluations::create([
                 'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
                 'id_abilities' => $ability_id, // ID of the ability
                 'id_per_student' => $eleve_id, // ID of the selected student
-                'id_per_initiator' => 2, // Hardcoded initiator ID (e.g., teacher's ID)
+                'id_per_initiator' => Auth::id(), // Hardcoded initiator ID (e.g., teacher's ID)
                 'id_status' => $status_id, // Status for the ability
                 'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null, // Optional observation
             ]);
         }
+    }
     }catch (QueryException $e) {
         // Check if it's a foreign key constraint violation
         if ($e->getCode() === "23000") {

@@ -4,6 +4,7 @@
             <img src="./img/logo.png" alt="logo" class="w-16 h-16">
             <div class="flex space-x-4">
 
+
             
              @guest
                 <a href="{{ route('login') }}">
@@ -61,6 +62,10 @@
                         dd($id);
                     }
                 ?>
+
+                <a href="/profile"><button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Profil</button></a>
+                <a href="/logout"><button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">Déconnexion</button></a>
+
             </div>
         </div>    
     </menu>

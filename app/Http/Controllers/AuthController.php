@@ -21,6 +21,8 @@ class AuthController extends Controller
             'password' => $request['password']
         ])){
             session()->regenerate();
+
+            return view('home');
         }
 
         return view('home');

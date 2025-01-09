@@ -1,24 +1,43 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>@yield('title')</title> 
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
 </head>
-<body>
-    <p>{{Auth::check()}}</p>
-    <form method="post" action="/login">
-        @csrf
 
-        <label for="email"> Email </label>
-        <input type="email" name="email" id="email">
-        <label for="password"> Password </label>
+<body style="background-image: url('{{'img/fondEcran.jpg'}}');" class="bg-cover bg-center place-self-center">
+
+<div class="h-screen flex items-center justify-center">
+<form method="post" action="/login">
+    @csrf
+    <p class="text-xl text-center"> Connexion </p>
+    
+    <div class="flex justify-center p-4">
+        <label for="email" class="px-7"> Email </label>
+        <input type="email" name="email" id="email" >
+    </div>
+    
+    <div class="flex justify-center p-4">
+        <label for="password" class="px-4"> Password </label>
         <input type="password" name="password" id="password">
+    </div>
+    
+    <div class="flex justify-center">
+            <input type="submit" class="text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" value="Se Connecter">
+        </div>
 
         
         <input type="submit" value="Se Connecter">
  
         
-          </form>
+         
+</form>
+</div>
 </body>
+
+    
+
 </html>
