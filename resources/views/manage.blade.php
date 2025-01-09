@@ -47,6 +47,12 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
+                <th>Numéro de licence</th>
+                <th>Date certificat médical</th>
+                <th>Date d'anniversaire</th>
+                <th>Adresse</th>
+                <th>Niveau en cours</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -55,6 +61,11 @@
                     <td>{{ $student->name }}</td>
                     <td>{{ $student->surname }}</td>
                     <td>{{ $student->email }}</td>
+                    <td>{{ $student->licence_number }}</td>
+                    <td>{{ $student->medical_certificate_date }}</td>
+                    <td>{{ $student->birth_date }}</td>
+                    <td>{{ $student->adress }}</td>
+                    <td>{{ $student->description }}</td>
                     <td class="action-buttons">
                     <form action="{{ route('student.delete', $student->ID_PER) }}" method="POST" style="display:inline;">
                             @csrf
@@ -80,6 +91,11 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
+                <th>Numéro de licence</th>
+                <th>Date certificat médical</th>
+                <th>Date d'anniversaire</th>
+                <th>Adresse</th>
+                <th>Niveau en cours</th>
             </tr>
         </thead>
         <tbody>
@@ -88,6 +104,11 @@
                     <td>{{ $initiator->name }}</td>
                     <td>{{ $initiator->surname }}</td>
                     <td>{{ $initiator->email }}</td>
+                    <td>{{ $initiator->licence_number }}</td>
+                    <td>{{ $initiator->medical_certificate_date }}</td>
+                    <td>{{ $initiator->birth_date }}</td>
+                    <td>{{ $initiator->adress }}</td>
+                    <td>{{ $initiator->description }}</td>
                     <td class="action-buttons">
                         <form action="{{ route('initiator.delete', $initiator->ID_PER) }}" method="POST" style="display:inline;">
                                 @csrf
@@ -111,6 +132,11 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Email</th>
+                <th>Numéro de licence</th>
+                <th>Date certificat médical</th>
+                <th>Date d'anniversaire</th>
+                <th>Adresse</th>
+                <th>Niveau en cours</th>
             </tr>
         </thead>
         <tbody>
@@ -119,6 +145,12 @@
                     <td>{{ $training_manager->name }}</td>
                     <td>{{ $training_manager->surname }}</td>
                     <td>{{ $training_manager->email }}</td>
+                    <td>{{ $training_manager->licence_number }}</td>
+                    <td>{{ $training_manager->medical_certificate_date }}</td>
+                    <td>{{ $training_manager->birth_date }}</td>
+                    <td>{{ $training_manager->adress }}</td>
+                    <td>{{ $training_manager->description }}</td>
+
                     <td class="action-buttons">
                         <form action="{{ route('training_managers.delete', $training_manager->ID_PER) }}" method="POST" style="display:inline;">
                                 @csrf

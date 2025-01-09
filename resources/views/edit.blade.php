@@ -12,6 +12,10 @@
         @csrf
         @method('PUT')
         <div>
+            <label for="licence_number">Numéro de licence</label>
+            <input type="text" name="licence_number" id="licence_number" value="{{ $user->LICENCE_NUMBER }}" required />
+        </div>
+        <div>
             <label for="name">Nom</label>
             <input type="text" name="name" id="name" value="{{ $user->NAME }}" required />
         </div>
@@ -30,6 +34,27 @@
         <div>
             <label for="medical_certificate_date">Date du certificat médical</label>
             <input type="date" name="medical_certificate_date" id="medical_certificate_date" value="{{ $user->MEDICAL_CERTIFICATE_DATE}}" />
+        </div>
+        <div>
+            <label for="birth_date">Date de Naissance</label>
+            <input type="date" name="birth_date" id="birth_date" value="{{ $user->BIRTH_DATE}}" />
+        </div>
+        <div>
+            <label for="level_id">Sélectionner un nouveau niveau</label>
+            <select name="level_id" id="level_id">
+                <option value="{{ $currentLevel->id_level }}" selected>
+                    Niveau actuel : {{ $currentLevel->description }}
+                </option>
+            
+
+                @foreach ($levels as $level)
+                    @if(!isset($currentLevel) || $level->ID_LEVEL != $currentLevel->id_level)
+                        <option value="{{ $level->ID_LEVEL }}">
+                            {{ $level->DESCRIPTION }}
+                        </option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         <div>
             <button type="submit">Modifier</button>
