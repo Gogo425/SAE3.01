@@ -16,6 +16,8 @@ class CreateAccountController extends Controller
     {
         Log::info('Début du traitement du formulaire.');
 
+        dd($request->all());
+
         $messages = [
             'licence_number.regex' => 'Le numéro de licence doit suivre le format A-XX-XXXXXX (ex: A-03-253653).',
         ];

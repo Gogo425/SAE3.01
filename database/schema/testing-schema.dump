@@ -1,0 +1,615 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : mer. 08 jan. 2025 à 18:10
+-- Version du serveur : 10.4.25-MariaDB
+-- Version de PHP : 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `script`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `abilities`
+--
+
+CREATE TABLE `abilities` (
+  `ID_ABILITIES` int(11) NOT NULL,
+  `ID_SKILLS` int(11) NOT NULL,
+  `DESCRIPTION` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `abilities`
+--
+
+INSERT INTO `abilities` (`ID_ABILITIES`, `ID_SKILLS`, `DESCRIPTION`) VALUES
+(1, 1, 'Gréage et dégréage'),
+(2, 1, 'Capelage et décapelage'),
+(3, 1, 'Choix de son matériel personnel');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `evaluations`
+--
+
+CREATE TABLE `evaluations` (
+  `ID_SESSIONS` int(11) NOT NULL,
+  `ID_ABILITIES` int(11) NOT NULL,
+  `ID_PER_INITIATOR` int(11) NOT NULL,
+  `ID_PER_STUDENT` int(11) NOT NULL,
+  `ID_STATUS` int(11) NOT NULL,
+  `OBSERVATIONS` varchar(128) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `formations`
+--
+
+CREATE TABLE `formations` (
+  `ID_FORMATION` int(11) NOT NULL,
+  `ID_LEVEL` int(11) NOT NULL,
+  `ID_PER_TRAINING_MANAGER` int(11) NOT NULL,
+  `DATE_BEGINNING` date DEFAULT NULL,
+  `DATE_ENDING` date DEFAULT NULL,
+  `NOM` char(32) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `formations`
+--
+
+INSERT INTO `formations` (`ID_FORMATION`, `ID_LEVEL`, `ID_PER_TRAINING_MANAGER`, `DATE_BEGINNING`, `DATE_ENDING`, `NOM`) VALUES
+(1, 2, 2, '2025-01-16', '2025-01-31', 'formation débutant');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `initiators`
+--
+
+CREATE TABLE `initiators` (
+  `ID_PER` int(11) NOT NULL,
+  `ID_LEVEL` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `initiators`
+--
+
+INSERT INTO `initiators` (`ID_PER`, `ID_LEVEL`) VALUES
+(2, 4),
+(3, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `levels`
+--
+
+CREATE TABLE `levels` (
+  `ID_LEVEL` int(11) NOT NULL,
+  `DESCRIPTION` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `levels`
+--
+
+INSERT INTO `levels` (`ID_LEVEL`, `DESCRIPTION`) VALUES
+(1, 'Pas de niveau'),
+(2, 'Niveau 1\r\n'),
+(3, 'Niveau 2'),
+(4, 'Niveau 3\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `locations`
+--
+
+CREATE TABLE `locations` (
+  `ID_LOCATION` int(11) NOT NULL,
+  `TYPE` char(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `locations`
+--
+
+INSERT INTO `locations` (`ID_LOCATION`, `TYPE`) VALUES
+(1, 'en piscine'),
+(2, 'en milieu naturel');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `persons`
+--
+
+CREATE TABLE `persons` (
+  `ID_PER` int(11) NOT NULL,
+  `NAME` char(32) NOT NULL,
+  `SURNAME` char(32) NOT NULL,
+  `PASSWORD` varchar(255) NOT NULL,
+  `EMAIL` char(32) NOT NULL,
+  `LICENCE_NUMBER` char(32) NOT NULL,
+  `MEDICAL_CERTIFICATE_DATE` date NOT NULL,
+  `BIRTH_DATE` date NOT NULL,
+  `ADRESS` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `persons`
+--
+
+INSERT INTO `persons` (`ID_PER`, `NAME`, `SURNAME`, `PASSWORD`, `EMAIL`, `LICENCE_NUMBER`, `MEDICAL_CERTIFICATE_DATE`, `BIRTH_DATE`, `ADRESS`) VALUES
+(1, 'Gaudre', 'Soren', 'sososo', 'soso@mail.com', 'ABDHBDHE', '2025-01-29', '2006-01-12', '2 rue de la rue'),
+(2, 'Ravida', 'Lelyan', '123456', 'lelyan@mail.com', 'A.DK?FDKZ', '2025-01-30', '2025-01-02', '2 rue de la salle'),
+(3, 'RAMDANE', 'Nassim', '123456', 'nassim@mail.com', 'NFEBHE', '2025-01-22', '2025-01-01', '2 rue de wolfiez');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `sessions`
+--
+
+CREATE TABLE `sessions` (
+  `ID_SESSIONS` int(11) NOT NULL,
+  `ID_LOCATION` int(11) NOT NULL,
+  `ID_FORMATION` int(11) NOT NULL,
+  `DATE_SESSION` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `sessions`
+--
+
+INSERT INTO `sessions` (`ID_SESSIONS`, `ID_LOCATION`, `ID_FORMATION`, `DATE_SESSION`) VALUES
+(1, 2, 1, '2025-01-23');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `skills`
+--
+
+CREATE TABLE `skills` (
+  `ID_SKILLS` int(11) NOT NULL,
+  `ID_LEVEL` int(11) NOT NULL,
+  `DESCRIPTION` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `skills`
+--
+
+INSERT INTO `skills` (`ID_SKILLS`, `ID_LEVEL`, `DESCRIPTION`) VALUES
+(1, 2, 'S\'équiper et se déséquiper ');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `status`
+--
+
+CREATE TABLE `status` (
+  `ID_STATUS` int(11) NOT NULL,
+  `DESCRIPTION` char(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `status`
+--
+
+INSERT INTO `status` (`ID_STATUS`, `DESCRIPTION`) VALUES
+(1, 'non évaluée'),
+(2, 'en cours d\'acquisition'),
+(3, 'acquise'),
+(4, 'absent');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `students`
+--
+
+CREATE TABLE `students` (
+  `ID_PER` int(11) NOT NULL,
+  `ID_LEVEL` int(11) NOT NULL,
+  `ID_FORMATION` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `students`
+--
+
+INSERT INTO `students` (`ID_PER`, `ID_LEVEL`, `ID_FORMATION`) VALUES
+(1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `technical_directors`
+--
+
+CREATE TABLE `technical_directors` (
+  `ID_PER` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `technical_directors`
+--
+
+INSERT INTO `technical_directors` (`ID_PER`) VALUES
+(3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `training_managers`
+--
+
+CREATE TABLE `training_managers` (
+  `ID_PER` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `training_managers`
+--
+
+INSERT INTO `training_managers` (`ID_PER`) VALUES
+(2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `trains`
+--
+
+CREATE TABLE `trains` (
+  `ID_PER_INITIATOR` int(11) NOT NULL,
+  `ID_FORMATION` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `trains`
+--
+
+INSERT INTO `trains` (`ID_PER_INITIATOR`, `ID_FORMATION`) VALUES
+(2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `name`) VALUES
+(1, 'soso@mail.com', 'sososo', 'Soren');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `works`
+--
+
+CREATE TABLE `works` (
+  `ID_SESSIONS` int(11) NOT NULL,
+  `ID_ABILITIES` int(11) NOT NULL,
+  `ID_PER_STUDENT` int(11) NOT NULL,
+  `ID_PER_INITIATOR` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Déchargement des données de la table `works`
+--
+
+INSERT INTO `works` (`ID_SESSIONS`, `ID_ABILITIES`, `ID_PER_STUDENT`, `ID_PER_INITIATOR`) VALUES
+(1, 1, 1, 2);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `abilities`
+--
+ALTER TABLE `abilities`
+  ADD PRIMARY KEY (`ID_ABILITIES`),
+  ADD KEY `I_FK_ABILITIES_SKILLS` (`ID_SKILLS`);
+
+--
+-- Index pour la table `evaluations`
+--
+ALTER TABLE `evaluations`
+  ADD PRIMARY KEY (`ID_SESSIONS`,`ID_ABILITIES`,`ID_PER_INITIATOR`,`ID_PER_STUDENT`,`ID_STATUS`),
+  ADD KEY `I_FK_EVALUATIONS_SESSIONS` (`ID_SESSIONS`),
+  ADD KEY `I_FK_EVALUATIONS_ABILITIES` (`ID_ABILITIES`),
+  ADD KEY `I_FK_EVALUATIONS_INITIATORS` (`ID_PER_INITIATOR`),
+  ADD KEY `I_FK_EVALUATIONS_STUDENTS` (`ID_PER_STUDENT`),
+  ADD KEY `I_FK_EVALUATIONS_STATUS` (`ID_STATUS`);
+
+--
+-- Index pour la table `formations`
+--
+ALTER TABLE `formations`
+  ADD PRIMARY KEY (`ID_FORMATION`),
+  ADD KEY `I_FK_FORMATIONS_LEVELS` (`ID_LEVEL`),
+  ADD KEY `I_FK_FORMATIONS_TRAINING_MANAGERS` (`ID_PER_TRAINING_MANAGER`);
+
+--
+-- Index pour la table `initiators`
+--
+ALTER TABLE `initiators`
+  ADD PRIMARY KEY (`ID_PER`),
+  ADD KEY `I_FK_INITIATORS_LEVELS` (`ID_LEVEL`);
+
+--
+-- Index pour la table `levels`
+--
+ALTER TABLE `levels`
+  ADD PRIMARY KEY (`ID_LEVEL`);
+
+--
+-- Index pour la table `locations`
+--
+ALTER TABLE `locations`
+  ADD PRIMARY KEY (`ID_LOCATION`);
+
+--
+-- Index pour la table `persons`
+--
+ALTER TABLE `persons`
+  ADD PRIMARY KEY (`ID_PER`);
+
+--
+-- Index pour la table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD PRIMARY KEY (`ID_SESSIONS`),
+  ADD KEY `I_FK_SESSIONS_LOCATIONS` (`ID_LOCATION`),
+  ADD KEY `I_FK_SESSIONS_FORMATIONS` (`ID_FORMATION`);
+
+--
+-- Index pour la table `skills`
+--
+ALTER TABLE `skills`
+  ADD PRIMARY KEY (`ID_SKILLS`),
+  ADD KEY `I_FK_SKILLS_LEVELS` (`ID_LEVEL`);
+
+--
+-- Index pour la table `status`
+--
+ALTER TABLE `status`
+  ADD PRIMARY KEY (`ID_STATUS`);
+
+--
+-- Index pour la table `students`
+--
+ALTER TABLE `students`
+  ADD PRIMARY KEY (`ID_PER`),
+  ADD KEY `I_FK_STUDENTS_LEVELS` (`ID_LEVEL`),
+  ADD KEY `I_FK_STUDENTS_FORMATIONS` (`ID_FORMATION`);
+
+--
+-- Index pour la table `technical_directors`
+--
+ALTER TABLE `technical_directors`
+  ADD PRIMARY KEY (`ID_PER`);
+
+--
+-- Index pour la table `training_managers`
+--
+ALTER TABLE `training_managers`
+  ADD PRIMARY KEY (`ID_PER`);
+
+--
+-- Index pour la table `trains`
+--
+ALTER TABLE `trains`
+  ADD PRIMARY KEY (`ID_PER_INITIATOR`,`ID_FORMATION`),
+  ADD UNIQUE KEY `ID_PER_INITIATOR` (`ID_PER_INITIATOR`),
+  ADD KEY `I_FK_TRAINS_INITIATORS` (`ID_PER_INITIATOR`),
+  ADD KEY `I_FK_TRAINS_FORMATIONS` (`ID_FORMATION`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD KEY `FK_USERS_PERSONS` (`id`);
+
+--
+-- Index pour la table `works`
+--
+ALTER TABLE `works`
+  ADD PRIMARY KEY (`ID_SESSIONS`,`ID_ABILITIES`,`ID_PER_STUDENT`,`ID_PER_INITIATOR`),
+  ADD KEY `I_FK_WORKS_SESSIONS` (`ID_SESSIONS`),
+  ADD KEY `I_FK_WORKS_ABILITIES` (`ID_ABILITIES`),
+  ADD KEY `I_FK_WORKS_STUDENTS` (`ID_PER_STUDENT`),
+  ADD KEY `FK_WORKS_INITIATORS` (`ID_PER_INITIATOR`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `abilities`
+--
+ALTER TABLE `abilities`
+  MODIFY `ID_ABILITIES` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `formations`
+--
+ALTER TABLE `formations`
+  MODIFY `ID_FORMATION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `levels`
+--
+ALTER TABLE `levels`
+  MODIFY `ID_LEVEL` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT pour la table `locations`
+--
+ALTER TABLE `locations`
+  MODIFY `ID_LOCATION` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `persons`
+--
+ALTER TABLE `persons`
+  MODIFY `ID_PER` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `sessions`
+--
+ALTER TABLE `sessions`
+  MODIFY `ID_SESSIONS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `skills`
+--
+ALTER TABLE `skills`
+  MODIFY `ID_SKILLS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `status`
+--
+ALTER TABLE `status`
+  MODIFY `ID_STATUS` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `abilities`
+--
+ALTER TABLE `abilities`
+  ADD CONSTRAINT `FK_ABILITIES_SKILLS` FOREIGN KEY (`ID_SKILLS`) REFERENCES `skills` (`ID_SKILLS`);
+
+--
+-- Contraintes pour la table `evaluations`
+--
+ALTER TABLE `evaluations`
+  ADD CONSTRAINT `FK_EVALUATIONS_ABILITIES` FOREIGN KEY (`ID_ABILITIES`) REFERENCES `abilities` (`ID_ABILITIES`),
+  ADD CONSTRAINT `FK_EVALUATIONS_INITIATORS` FOREIGN KEY (`ID_PER_INITIATOR`) REFERENCES `initiators` (`ID_PER`),
+  ADD CONSTRAINT `FK_EVALUATIONS_SESSIONS` FOREIGN KEY (`ID_SESSIONS`) REFERENCES `sessions` (`ID_SESSIONS`),
+  ADD CONSTRAINT `FK_EVALUATIONS_STATUS` FOREIGN KEY (`ID_STATUS`) REFERENCES `status` (`ID_STATUS`),
+  ADD CONSTRAINT `FK_EVALUATIONS_STUDENT` FOREIGN KEY (`ID_PER_STUDENT`) REFERENCES `students` (`ID_PER`);
+
+--
+-- Contraintes pour la table `formations`
+--
+ALTER TABLE `formations`
+  ADD CONSTRAINT `FK_FORMATIONS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`),
+  ADD CONSTRAINT `FK_FORMATIONS_TRAINING_MANAGERS` FOREIGN KEY (`ID_PER_TRAINING_MANAGER`) REFERENCES `training_managers` (`ID_PER`);
+
+--
+-- Contraintes pour la table `initiators`
+--
+ALTER TABLE `initiators`
+  ADD CONSTRAINT `FK_INITIATORS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`),
+  ADD CONSTRAINT `FK_INITIATORS_PERSONS` FOREIGN KEY (`ID_PER`) REFERENCES `persons` (`ID_PER`);
+
+--
+-- Contraintes pour la table `sessions`
+--
+ALTER TABLE `sessions`
+  ADD CONSTRAINT `FK_SESSIONS_FORMATIONS` FOREIGN KEY (`ID_FORMATION`) REFERENCES `formations` (`ID_FORMATION`),
+  ADD CONSTRAINT `FK_SESSIONS_LOCATIONS` FOREIGN KEY (`ID_LOCATION`) REFERENCES `locations` (`ID_LOCATION`);
+
+--
+-- Contraintes pour la table `skills`
+--
+ALTER TABLE `skills`
+  ADD CONSTRAINT `FK_SKILLS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`);
+
+--
+-- Contraintes pour la table `students`
+--
+ALTER TABLE `students`
+  ADD CONSTRAINT `FK_STUDENTS_FORMATIONS` FOREIGN KEY (`ID_FORMATION`) REFERENCES `formations` (`ID_FORMATION`),
+  ADD CONSTRAINT `FK_STUDENTS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`),
+  ADD CONSTRAINT `FK_STUDENTS_PERSONS` FOREIGN KEY (`ID_PER`) REFERENCES `persons` (`ID_PER`);
+
+--
+-- Contraintes pour la table `technical_directors`
+--
+ALTER TABLE `technical_directors`
+  ADD CONSTRAINT `FK_TECHNICAL_DIRECTORS_INITIATORS` FOREIGN KEY (`ID_PER`) REFERENCES `initiators` (`ID_PER`);
+
+--
+-- Contraintes pour la table `training_managers`
+--
+ALTER TABLE `training_managers`
+  ADD CONSTRAINT `FK_TRAINING_MANAGERS_INITIATORS` FOREIGN KEY (`ID_PER`) REFERENCES `initiators` (`ID_PER`);
+
+--
+-- Contraintes pour la table `trains`
+--
+ALTER TABLE `trains`
+  ADD CONSTRAINT `FK_TRAINS_FORMATIONS` FOREIGN KEY (`ID_FORMATION`) REFERENCES `formations` (`ID_FORMATION`),
+  ADD CONSTRAINT `FK_TRAINS_INITIATORS` FOREIGN KEY (`ID_PER_INITIATOR`) REFERENCES `initiators` (`ID_PER`);
+
+--
+-- Contraintes pour la table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `FK_USERS_PERSONS` FOREIGN KEY (`id`) REFERENCES `persons` (`ID_PER`);
+
+--
+-- Contraintes pour la table `works`
+--
+ALTER TABLE `works`
+  ADD CONSTRAINT `FK_TRAINS_SESSION` FOREIGN KEY (`ID_SESSIONS`) REFERENCES `sessions` (`ID_SESSIONS`),
+  ADD CONSTRAINT `FK_TRAINS_STUDENT` FOREIGN KEY (`ID_PER_STUDENT`) REFERENCES `students` (`ID_PER`),
+  ADD CONSTRAINT `FK_WORKS_ABILITIES` FOREIGN KEY (`ID_ABILITIES`) REFERENCES `abilities` (`ID_ABILITIES`),
+  ADD CONSTRAINT `FK_WORKS_INITIATORS` FOREIGN KEY (`ID_PER_INITIATOR`) REFERENCES `initiators` (`ID_PER`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;

@@ -10,7 +10,7 @@ use App\Http\Controllers\EvaluationController;
 // Home route
 Route::get('/', function () {
     return view('home');
-})->middleware('auth');
+});//->middleware('auth');
 
 Route::prefix('/seance')->name('seance.')->controller(SeanceController::class)->group(function() {
 

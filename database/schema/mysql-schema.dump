@@ -1,0 +1,291 @@
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `abilities`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `abilities` (
+  `ID_ABILITIES` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_SKILLS` int(11) NOT NULL,
+  `DESCRIPTION` varchar(128) NOT NULL,
+  PRIMARY KEY (`ID_ABILITIES`),
+  KEY `I_FK_ABILITIES_SKILLS` (`ID_SKILLS`),
+  CONSTRAINT `FK_ABILITIES_SKILLS` FOREIGN KEY (`ID_SKILLS`) REFERENCES `skills` (`ID_SKILLS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `evaluations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `evaluations` (
+  `ID_SESSIONS` int(11) NOT NULL,
+  `ID_ABILITIES` int(11) NOT NULL,
+  `ID_PER_INITIATOR` int(11) NOT NULL,
+  `ID_PER_STUDENT` int(11) NOT NULL,
+  `ID_STATUS` int(11) NOT NULL,
+  `OBSERVATIONS` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`ID_SESSIONS`,`ID_ABILITIES`,`ID_PER_INITIATOR`,`ID_PER_STUDENT`,`ID_STATUS`),
+  KEY `I_FK_EVALUATIONS_SESSIONS` (`ID_SESSIONS`),
+  KEY `I_FK_EVALUATIONS_ABILITIES` (`ID_ABILITIES`),
+  KEY `I_FK_EVALUATIONS_INITIATORS` (`ID_PER_INITIATOR`),
+  KEY `I_FK_EVALUATIONS_STUDENTS` (`ID_PER_STUDENT`),
+  KEY `I_FK_EVALUATIONS_STATUS` (`ID_STATUS`),
+  CONSTRAINT `FK_EVALUATIONS_ABILITIES` FOREIGN KEY (`ID_ABILITIES`) REFERENCES `abilities` (`ID_ABILITIES`),
+  CONSTRAINT `FK_EVALUATIONS_INITIATORS` FOREIGN KEY (`ID_PER_INITIATOR`) REFERENCES `initiators` (`ID_PER`),
+  CONSTRAINT `FK_EVALUATIONS_SESSIONS` FOREIGN KEY (`ID_SESSIONS`) REFERENCES `sessions` (`ID_SESSIONS`),
+  CONSTRAINT `FK_EVALUATIONS_STATUS` FOREIGN KEY (`ID_STATUS`) REFERENCES `status` (`ID_STATUS`),
+  CONSTRAINT `FK_EVALUATIONS_STUDENT` FOREIGN KEY (`ID_PER_STUDENT`) REFERENCES `students` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `formations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `formations` (
+  `ID_FORMATION` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_LEVEL` int(11) NOT NULL,
+  `ID_PER_TRAINING_MANAGER` int(11) NOT NULL,
+  `DATE_BEGINNING` date DEFAULT NULL,
+  `DATE_ENDING` date DEFAULT NULL,
+  `NOM` char(32) DEFAULT NULL,
+  PRIMARY KEY (`ID_FORMATION`),
+  KEY `I_FK_FORMATIONS_LEVELS` (`ID_LEVEL`),
+  KEY `I_FK_FORMATIONS_TRAINING_MANAGERS` (`ID_PER_TRAINING_MANAGER`),
+  CONSTRAINT `FK_FORMATIONS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`),
+  CONSTRAINT `FK_FORMATIONS_TRAINING_MANAGERS` FOREIGN KEY (`ID_PER_TRAINING_MANAGER`) REFERENCES `training_managers` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `initiators`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `initiators` (
+  `ID_PER` int(11) NOT NULL,
+  `ID_LEVEL` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PER`),
+  KEY `I_FK_INITIATORS_LEVELS` (`ID_LEVEL`),
+  CONSTRAINT `FK_INITIATORS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`),
+  CONSTRAINT `FK_INITIATORS_PERSONS` FOREIGN KEY (`ID_PER`) REFERENCES `persons` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `levels`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `levels` (
+  `ID_LEVEL` int(11) NOT NULL AUTO_INCREMENT,
+  `DESCRIPTION` varchar(128) NOT NULL,
+  PRIMARY KEY (`ID_LEVEL`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `locations` (
+  `ID_LOCATION` int(11) NOT NULL AUTO_INCREMENT,
+  `TYPE` char(32) NOT NULL,
+  PRIMARY KEY (`ID_LOCATION`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `persons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `persons` (
+  `ID_PER` int(11) NOT NULL AUTO_INCREMENT,
+  `NAME` char(32) NOT NULL,
+  `SURNAME` char(32) NOT NULL,
+  `PASSWORD` varchar(255) NOT NULL,
+  `EMAIL` char(32) NOT NULL,
+  `LICENCE_NUMBER` char(32) NOT NULL,
+  `MEDICAL_CERTIFICATE_DATE` date NOT NULL,
+  `BIRTH_DATE` date NOT NULL,
+  `ADRESS` varchar(64) NOT NULL,
+  PRIMARY KEY (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `sessions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sessions` (
+  `ID_SESSIONS` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_LOCATION` int(11) NOT NULL,
+  `ID_FORMATION` int(11) NOT NULL,
+  `DATE_SESSION` date NOT NULL,
+  PRIMARY KEY (`ID_SESSIONS`),
+  KEY `I_FK_SESSIONS_LOCATIONS` (`ID_LOCATION`),
+  KEY `I_FK_SESSIONS_FORMATIONS` (`ID_FORMATION`),
+  CONSTRAINT `FK_SESSIONS_FORMATIONS` FOREIGN KEY (`ID_FORMATION`) REFERENCES `formations` (`ID_FORMATION`),
+  CONSTRAINT `FK_SESSIONS_LOCATIONS` FOREIGN KEY (`ID_LOCATION`) REFERENCES `locations` (`ID_LOCATION`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `skills`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `skills` (
+  `ID_SKILLS` int(11) NOT NULL AUTO_INCREMENT,
+  `ID_LEVEL` int(11) NOT NULL,
+  `DESCRIPTION` varchar(128) NOT NULL,
+  PRIMARY KEY (`ID_SKILLS`),
+  KEY `I_FK_SKILLS_LEVELS` (`ID_LEVEL`),
+  CONSTRAINT `FK_SKILLS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `status`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `status` (
+  `ID_STATUS` int(11) NOT NULL AUTO_INCREMENT,
+  `DESCRIPTION` char(255) DEFAULT NULL,
+  PRIMARY KEY (`ID_STATUS`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `students`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `students` (
+  `ID_PER` int(11) NOT NULL,
+  `ID_LEVEL` int(11) NOT NULL,
+  `ID_FORMATION` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PER`),
+  KEY `I_FK_STUDENTS_LEVELS` (`ID_LEVEL`),
+  KEY `I_FK_STUDENTS_FORMATIONS` (`ID_FORMATION`),
+  CONSTRAINT `FK_STUDENTS_FORMATIONS` FOREIGN KEY (`ID_FORMATION`) REFERENCES `formations` (`ID_FORMATION`),
+  CONSTRAINT `FK_STUDENTS_LEVELS` FOREIGN KEY (`ID_LEVEL`) REFERENCES `levels` (`ID_LEVEL`),
+  CONSTRAINT `FK_STUDENTS_PERSONS` FOREIGN KEY (`ID_PER`) REFERENCES `persons` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `technical_directors`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `technical_directors` (
+  `ID_PER` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PER`),
+  CONSTRAINT `FK_TECHNICAL_DIRECTORS_INITIATORS` FOREIGN KEY (`ID_PER`) REFERENCES `initiators` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `training_managers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `training_managers` (
+  `ID_PER` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PER`),
+  CONSTRAINT `FK_TRAINING_MANAGERS_INITIATORS` FOREIGN KEY (`ID_PER`) REFERENCES `initiators` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `trains`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trains` (
+  `ID_PER_INITIATOR` int(11) NOT NULL,
+  `ID_FORMATION` int(11) NOT NULL,
+  PRIMARY KEY (`ID_PER_INITIATOR`,`ID_FORMATION`),
+  UNIQUE KEY `ID_PER_INITIATOR` (`ID_PER_INITIATOR`),
+  KEY `I_FK_TRAINS_INITIATORS` (`ID_PER_INITIATOR`),
+  KEY `I_FK_TRAINS_FORMATIONS` (`ID_FORMATION`),
+  CONSTRAINT `FK_TRAINS_FORMATIONS` FOREIGN KEY (`ID_FORMATION`) REFERENCES `formations` (`ID_FORMATION`),
+  CONSTRAINT `FK_TRAINS_INITIATORS` FOREIGN KEY (`ID_PER_INITIATOR`) REFERENCES `initiators` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  KEY `FK_USERS_PERSONS` (`id`),
+  CONSTRAINT `FK_USERS_PERSONS` FOREIGN KEY (`id`) REFERENCES `persons` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `works`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `works` (
+  `ID_SESSIONS` int(11) NOT NULL,
+  `ID_ABILITIES` int(11) NOT NULL,
+  `ID_PER_STUDENT` int(11) NOT NULL,
+  `ID_PER_INITIATOR` int(11) NOT NULL,
+  PRIMARY KEY (`ID_SESSIONS`,`ID_ABILITIES`,`ID_PER_STUDENT`,`ID_PER_INITIATOR`),
+  KEY `I_FK_WORKS_SESSIONS` (`ID_SESSIONS`),
+  KEY `I_FK_WORKS_ABILITIES` (`ID_ABILITIES`),
+  KEY `I_FK_WORKS_STUDENTS` (`ID_PER_STUDENT`),
+  KEY `FK_WORKS_INITIATORS` (`ID_PER_INITIATOR`),
+  CONSTRAINT `FK_TRAINS_SESSION` FOREIGN KEY (`ID_SESSIONS`) REFERENCES `sessions` (`ID_SESSIONS`),
+  CONSTRAINT `FK_TRAINS_STUDENT` FOREIGN KEY (`ID_PER_STUDENT`) REFERENCES `students` (`ID_PER`),
+  CONSTRAINT `FK_WORKS_ABILITIES` FOREIGN KEY (`ID_ABILITIES`) REFERENCES `abilities` (`ID_ABILITIES`),
+  CONSTRAINT `FK_WORKS_INITIATORS` FOREIGN KEY (`ID_PER_INITIATOR`) REFERENCES `initiators` (`ID_PER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+INSERT INTO `abilities` (`ID_ABILITIES`, `ID_SKILLS`, `DESCRIPTION`) VALUES
+(1, 1, 'Gréage et dégréage'),
+(2, 1, 'Capelage et décapelage'),
+(3, 1, 'Choix de son matériel personnel');
+INSERT INTO `formations` (`ID_FORMATION`, `ID_LEVEL`, `ID_PER_TRAINING_MANAGER`, `DATE_BEGINNING`, `DATE_ENDING`, `NOM`) VALUES
+(1, 2, 2, '2025-01-16', '2025-01-31', 'formation débutant');
+INSERT INTO `initiators` (`ID_PER`, `ID_LEVEL`) VALUES
+(2, 4),
+(3, 4);
+INSERT INTO `levels` (`ID_LEVEL`, `DESCRIPTION`) VALUES
+(1, 'Pas de niveau'),
+(2, 'Niveau 1\r\n'),
+(3, 'Niveau 2'),
+(4, 'Niveau 3\r\n');
+
+INSERT INTO `locations` (`ID_LOCATION`, `TYPE`) VALUES
+(1, 'en piscine'),
+(2, 'en milieu naturel');
+
+INSERT INTO `persons` (`ID_PER`, `NAME`, `SURNAME`, `PASSWORD`, `EMAIL`, `LICENCE_NUMBER`, `MEDICAL_CERTIFICATE_DATE`, `BIRTH_DATE`, `ADRESS`) VALUES
+(1, 'Gaudre', 'Soren', 'sososo', 'soso@mail.com', 'ABDHBDHE', '2025-01-29', '2006-01-12', '2 rue de la rue'),
+(2, 'Ravida', 'Lelyan', '123456', 'lelyan@mail.com', 'A.DK?FDKZ', '2025-01-30', '2025-01-02', '2 rue de la salle'),
+(3, 'RAMDANE', 'Nassim', '123456', 'nassim@mail.com', 'NFEBHE', '2025-01-22', '2025-01-01', '2 rue de wolfiez');
+
+INSERT INTO `sessions` (`ID_SESSIONS`, `ID_LOCATION`, `ID_FORMATION`, `DATE_SESSION`) VALUES
+(1, 2, 1, '2025-01-23');
+
+INSERT INTO `skills` (`ID_SKILLS`, `ID_LEVEL`, `DESCRIPTION`) VALUES
+(1, 2, 'S\'équiper et se déséquiper ');
+
+
+INSERT INTO `status` (`ID_STATUS`, `DESCRIPTION`) VALUES
+(1, 'non évaluée'),
+(2, 'en cours d\'acquisition'),
+(3, 'acquise'),
+(4, 'absent');
+
+INSERT INTO `students` (`ID_PER`, `ID_LEVEL`, `ID_FORMATION`) VALUES
+(1, 1, 1);
+
+INSERT INTO `technical_directors` (`ID_PER`) VALUES
+(3);
+
+INSERT INTO `training_managers` (`ID_PER`) VALUES
+(2);
+
+INSERT INTO `trains` (`ID_PER_INITIATOR`, `ID_FORMATION`) VALUES
+(2, 1);
+
+
+INSERT INTO `users` (`id`, `email`, `password`, `name`) VALUES
+(1, 'soso@mail.com', 'sososo', 'Soren');
+
+INSERT INTO `works` (`ID_SESSIONS`, `ID_ABILITIES`, `ID_PER_STUDENT`, `ID_PER_INITIATOR`) VALUES
+(1, 1, 1, 2);
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
