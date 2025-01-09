@@ -9,11 +9,11 @@
 
 </head>
 <body>
-    @include("header")
+   @include("header")
     <div class="container">
         @yield('content')
     </div>  
-    @include("footer")
+ @include("footer")
 </body>
 
 </html>
