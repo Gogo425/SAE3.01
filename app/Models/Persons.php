@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
 
 class Persons extends Model
 {
@@ -29,9 +31,13 @@ class Persons extends Model
         $persons = persons::all()->sortBy('ID_PER');
         return $persons;
     }
+
     function getNameOf($id){
         $name = persons::where('ID_PER',$id)->select('NAME','SURNAME')->get();
         return $name[0]->NAME." ".$name[0]->SURNAME;
-        
+    }
+
+    public function getAuthPassword() {
+        return $this->PASSWORD;
     }
 }

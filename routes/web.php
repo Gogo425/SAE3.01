@@ -1,9 +1,15 @@
 <?php
 
 
+
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\TableAbilitiesController;
 use App\Http\Controllers\TableStudentController;
+
+use App\Http\Controllers\createFormController;
+use App\Http\Controllers\CreateFormController as ControllersCreateFormController;
+use App\Http\Controllers\FormController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\SeanceController;
@@ -24,6 +30,7 @@ Route::prefix('/seance')->name('seance.')->controller(SeanceController::class)->
     Route::get('/creation/{date_session}', 'creation')->name('creation');
 
 });
+
 
 // Profile route
 Route::get('/profile', function () {
@@ -82,4 +89,23 @@ Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPa
 Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage'])->name('tableStudent');
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
 Route::post('/validate',[ValidateController::class, 'levelUp'])->name('validate');
+
+
+Route::prefix('/creationFormation')->name('creationFormation')->controller(ControllersCreateFormController::class)->group(function () {
+
+    Route::get('/','create')->name('create');
+
+    Route::post('/', 'store')->name('store');
+
+});
+
+Route::prefix('/formation')->name('formation')->controller(FormController::class)->group(function () {
+
+    Route::get('/','create')->name('create');
+
+});
+
+Route::get('/formation',[FormController::class,'create'])->name('formation');
+
+Route::delete('/formation/{ID_FORMATION}',[FormController::class, 'deleteFormation'])->name('formation.delete');
 

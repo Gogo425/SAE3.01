@@ -1,7 +1,11 @@
 <?php
+
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as BasicAuthenticatable;
+
 class Students extends Model
 {
     use HasFactory;
@@ -26,4 +30,5 @@ class Students extends Model
         $persons = students::where('ID_LEVEL',$level)->get();
         return $persons;
     }
+
 }
