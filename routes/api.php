@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PersonsController;
+use App\Http\Controllers\Api\RequeteController;
 use App\Http\Controllers\Api\StudentsController;
 
 /*
@@ -23,3 +24,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::apiResource('persons', PersonsController::class);
 
 Route::apiResource('students', StudentsController::class);
+
+Route::apiResource('requete', RequeteController::class);

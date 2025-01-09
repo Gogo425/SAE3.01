@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Students;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class StudentsController extends Controller
+class RequeteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class StudentsController extends Controller
      */
     public function index()
     {
-        return Students::all();
+        return "Aucune requête entrée...";
     }
 
     /**
@@ -38,7 +37,7 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        return Students::where('ID_PER',$id)->get();
+        return DB::select($id);
     }
 
     /**
