@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Abilities;
 use Illuminate\Http\Request;
 
 class AbilitiesController extends Controller
@@ -14,7 +15,7 @@ class AbilitiesController extends Controller
      */
     public function index()
     {
-        //
+        return Abilities::all();
     }
 
     /**
@@ -36,7 +37,7 @@ class AbilitiesController extends Controller
      */
     public function show($id)
     {
-        //
+        return Abilities::where('ID_ABILITIES',$id)->get();
     }
 
     /**

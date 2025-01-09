@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AbilitiesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\PersonsController;
@@ -26,3 +27,5 @@ Route::apiResource('persons', PersonsController::class);
 Route::apiResource('students', StudentsController::class);
 
 Route::apiResource('requete', RequeteController::class);
+
+Route::apiResource('abilities', AbilitiesController::class);

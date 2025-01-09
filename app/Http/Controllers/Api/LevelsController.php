@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Levels;
 use Illuminate\Http\Request;
 
 class LevelsController extends Controller
@@ -14,7 +15,7 @@ class LevelsController extends Controller
      */
     public function index()
     {
-        //
+        return Levels::all();
     }
 
     /**
@@ -36,7 +37,7 @@ class LevelsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Levels::where('ID_LEVEL', $id);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Formations;
 use Illuminate\Http\Request;
 
 class FormationsController extends Controller
@@ -14,7 +15,7 @@ class FormationsController extends Controller
      */
     public function index()
     {
-        //
+        Formations::all();
     }
 
     /**
@@ -36,7 +37,7 @@ class FormationsController extends Controller
      */
     public function show($id)
     {
-        //
+        Formations::find($id);
     }
 
     /**

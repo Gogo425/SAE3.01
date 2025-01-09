@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Initiators;
 use Illuminate\Http\Request;
 
 class InitiatorsController extends Controller
@@ -14,7 +15,7 @@ class InitiatorsController extends Controller
      */
     public function index()
     {
-        //
+        Initiators::all();
     }
 
     /**
@@ -36,7 +37,7 @@ class InitiatorsController extends Controller
      */
     public function show($id)
     {
-        //
+        Initiators::where('ID_PER', $id)->get();
     }
 
     /**
