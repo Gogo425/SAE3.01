@@ -1,6 +1,4 @@
 <?php
 use App\Models\Evaluations;
+use Illuminate\Support\Facades\DB;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-}
