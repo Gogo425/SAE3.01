@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends BaseController
 {
@@ -22,6 +23,7 @@ class CalendarController extends BaseController
         ->select(DB::raw('distinct sessions.id_sessions, date_session'))
         ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
         ->join('students', 'students.id_per', '=', 'works.id_per_student')
+        ->where('works.id_per_student', Auth::id())
         ->get();
         return view('Calendar.calendarStudent', [
             'sessions' => $sessions
@@ -34,6 +36,7 @@ class CalendarController extends BaseController
         ->select(DB::raw('distinct sessions.id_sessions, date_session'))
         ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
         ->join('initiators', 'initiators.id_per', '=', 'works.id_per_initiator')
+        ->where('works.id_per_initiator', Auth::id())
         ->get();
         return view('Calendar.calendarInitiator', [
             'sessions' => $sessions
