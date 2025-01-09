@@ -14,12 +14,15 @@
     use App\Models\sessions;
     use App\Models\status;
     use App\Models\persons;
+use App\Models\Students;
+use Illuminate\Support\Facades\Auth;
 
-    $idUser = 2;
+    $idUser = 2 /*Auth::id()*/;
+
     $nameUser = (new persons)->getNameOf($idUser);
-    $levelUser = 1;
-    $idFormation = 1;
 
+    $levelUser = DB::select('select ID_LEVEL from students where id_per = :id', ['id' => $idUser])[0]->ID_LEVEL;
+    $idFormation = DB::select('select ID_FORMATION from students where id_per = :id', ['id' => $idUser])[0]->ID_FORMATION;
 
     $skillsArray = [];
     $skills = (new skills)->selectbyLevel($levelUser);

@@ -8,19 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Students extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
-    
     protected $table = 'students';
-    protected $filliable = ['id_per', 'id_level', 'id_formation'];
-
-    public function user(){
-        return $this->belongsTo(Persons::class);
-    }
-}
-=======
-
-    protected $table = 'students';
-
     protected $fillable = [
         'id_per',
         'id_level',
@@ -36,4 +24,3 @@ class Students extends Model
         return $persons;
     }
 }
->>>>>>> tablestudent
