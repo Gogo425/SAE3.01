@@ -17,32 +17,43 @@ class EvaluationController extends Controller
     // Displays the form to create an evaluation
     public function index()
     {
-        // Hardcoded session ID (replace with dynamic session ID logic if needed)
-        $id = 1;
+        $initia =DB::table('persons')
+        ->join('initiators', 'initiators.id_per', '=', 'initiators.id_per')
+        ->select('initiators.id_per')
+        ->get();
 
-        // Retrieve the list of students associated with the session
-        $eleves = DB::table('persons')
-            ->join('students', 'students.id_per', '=', 'persons.id_per')
-            ->join('formations', 'students.id_formation', '=', 'formations.id_formation')
-            ->join('sessions', 'sessions.id_formation', '=', 'formations.id_formation')
-            ->where('sessions.id_sessions', '=', $id)
-            ->get();
+        $idPerArray = $initia->pluck('id_per')->toArray();
 
-        // Retrieve the abilities linked to the session
-        $abilities = DB::table('abilities')
-            ->join('works', 'abilities.id_abilities', '=', 'works.id_abilities')
-            ->where('works.id_sessions', '=', $id)
-            ->get();
+        if (in_array(Auth::id(), $idPerArray)) {
+            // Hardcoded session ID (replace with dynamic session ID logic if needed)
+            $id = 1;
 
-        // Retrieve all available statuses
-        $status = DB::table('status')->get();
+            // Retrieve the list of students associated with the session
+            $eleves = DB::table('persons')
+                ->join('students', 'students.id_per', '=', 'persons.id_per')
+                ->join('formations', 'students.id_formation', '=', 'formations.id_formation')
+                ->join('sessions', 'sessions.id_formation', '=', 'formations.id_formation')
+                ->where('sessions.id_sessions', '=', $id)
+                ->get();
 
-        // Pass data to the evaluation creation view
-        return view('abilities_evaluation', [
-            'eleves' => $eleves,
-            'abilities' => $abilities,
-            'status' => $status
-        ]);
+            // Retrieve the abilities linked to the session
+            $abilities = DB::table('abilities')
+                ->join('works', 'abilities.id_abilities', '=', 'works.id_abilities')
+                ->where('works.id_sessions', '=', $id)
+                ->get();
+
+            // Retrieve all available statuses
+            $status = DB::table('status')->get();
+
+            // Pass data to the evaluation creation view
+            return view('abilities_evaluation', [
+                'eleves' => $eleves,
+                'abilities' => $abilities,
+                'status' => $status
+            ]);
+        }else{
+            echo "Vous ne pouvez pas acceder a cette page";
+        }
     }
 
     // Stores a new evaluation in the database
