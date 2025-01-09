@@ -31,8 +31,14 @@
             }
         }
     </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
 </head>
 <body>
+
+    @include('header')
+
     <h1>Gestion des étudiants et initiateurs</h1>
     <!-- Boutons pour afficher les sections -->
     <button onclick="toggleDisplay('students')">Afficher les Élèves</button>
@@ -167,5 +173,8 @@
             @endforeach
         </tbody>
     </table>
+
+    @include('footer')
+
 </body>
 </html>
