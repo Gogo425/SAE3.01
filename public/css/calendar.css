@@ -1,41 +1,122 @@
-.calendar__table
-{
+.calendar__table {
     width: 100%;
     height: calc(100vh - 128px);
+    border-collapse: collapse;
+    background: linear-gradient(to bottom, #e0f7fa, #80deea);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.calendar__table td 
-{
-    padding:10px;
-    border: 1px solid #ccc;
+.calendar__table td {
+    padding: 10px;
+    border: 1px solid #008080;
     vertical-align: top;
     width: 14.29%;
     height: 20%;
+    background-color: rgba(255, 255, 255, 0.6);
+    transition: background-color 0.3s ease;
 }
 
-.calendar__table.calendar__table--6weeks td
-{
+.calendar__table td:hover {
+    background-color: rgba(0, 150, 136, 0.2);
+    cursor: pointer;
+}
+
+.calendar__table.calendar__table--6weeks td {
     height: 16.66%;
 }
 
-.calendar__weekday
-{
+.calendar__weekday {
     font-weight: bold;
-    color: #000;
-    font-style: 1.2em;
+    font-size: 1.2em;
+    color: #004d40;
+    background-color: #b2dfdb;
+    text-align: center;
+    padding: 10px 0;
+    text-transform: uppercase;
+    box-shadow: inset 0 -2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.calendar__day
-{
+.calendar__day {
     font-size: 1.3em;
+    color: #00796b;
+    font-weight: bold;
 }
 
-.calendar__othermonth .calendar__day
-{
+.calendar__othermonth .calendar__day {
     opacity: 0.3;
+    color: #004d40;
 }
 
-.calendar__button
-{
-    color: blue;
+.calendar__button {
+    color: #00796b;
+    font-weight: bold;
+    padding: 8px 16px;
+    border: 1px solid #004d40;
+    border-radius: 4px;
+    background: linear-gradient(to bottom, #80cbc4, #4db6ac);
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.calendar__button:hover {
+    background-color: #004d40;
+    color: #e0f2f1;
+    transform: translateY(-2px);
+}
+
+.calendar__header {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    color: #004d40;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, #004d40, #00796b);
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-buttonnav {
+    background: linear-gradient(to right, #00796b, #004d40);
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.custom-button a {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.custom-button:hover {
+    background: linear-gradient(to right, #004d40, #00796b);
+    transform: translateY(-2px);
+}
+
+.custom-button:active {
+    background: #00332a;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.custom-button {
+    background: linear-gradient(to right, #00796b, #004d40);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 12px; 
+    font-size: 14px; 
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
 }
