@@ -83,3 +83,8 @@ Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage'])-
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
 Route::post('/validate',[ValidateController::class, 'levelUp'])->name('validate');
 
+
+
+
+//abilities_edit routes
+Route::get('/abilities/{level}', [EvaluationController::class, 'index'])->name('ablities_edit');
