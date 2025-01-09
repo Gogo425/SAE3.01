@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\ManageController;
 
 // Home route
 Route::get('/', function () {
@@ -29,7 +30,7 @@ Route::get('/profile', function () {
 
 // Hash test route
 Route::get('/hash', function () {
-    return Hash::make("0000");
+    return Hash::make("1234");
 });
 
 // Connection and disconnection routes
@@ -71,6 +72,17 @@ Route::get('/calendar/testdays/{newdate}', [App\Http\Controllers\CalendarControl
 
 
 //Tablestudent routes
-Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage']);
-Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);
+Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage'])->name('tableAbilities');
+Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage'])->name('tableStudents');;
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
+
+Route::get('/liste', [ManageController::class, 'index'])->name('liste');
+Route::delete('/student/{ID_PER}', [ManageController::class, 'manageDeleteStudent'])->name('student.delete');
+Route::delete('/initiator/{ID_PER}', [ManageController::class, 'manageDeleteInitiator'])->name('initiator.delete');
+Route::delete('/training_managers/{ID_PER}', [ManageController::class, 'manageDeleteTrainingManager'])->name('training_managers.delete');
+
+
+
+Route::get('/persons/{ID_PER}/edit', [ManageController::class, 'editUser'])->name('persons.edit');
+Route::put('/persons/{ID_PER}', [ManageController::class, 'updateUser'])->name('persons.update');
+

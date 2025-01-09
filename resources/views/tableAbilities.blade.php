@@ -5,8 +5,13 @@
     <link rel="stylesheet" href="{{ asset('css/tableAbilities.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
 </head>
 <body>
+
+    @include('header')
+    
     <?php
     use App\Models\skills;
     use App\Models\abilities;
@@ -17,7 +22,7 @@
 use App\Models\Students;
 use Illuminate\Support\Facades\Auth;
 
-    $idUser = 2 /*Auth::id()*/;
+    $idUser = Auth::id();
 
     $nameUser = (new persons)->getNameOf($idUser);
 
@@ -106,5 +111,7 @@ use Illuminate\Support\Facades\Auth;
                 }  
             ?>  
     </table>
+
+    @include('footer')
 </body>
 </html>

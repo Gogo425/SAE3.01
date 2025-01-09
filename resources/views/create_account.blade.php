@@ -41,7 +41,7 @@
 <body>
   
 <form action="{{url('/create-account')}}" method="post" class="">
-<h1>Inscrivez-vous</h1>
+<h1>Créer un compte</h1>
   @csrf
   <div class="">
     <label for="name">Nom </label>
