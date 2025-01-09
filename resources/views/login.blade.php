@@ -18,17 +18,36 @@
     <div class="flex justify-center p-4">
         <label for="email" class="px-7"> Email </label>
         <input type="email" name="email" id="email" >
+        
     </div>
     
     <div class="flex justify-center p-4">
-        <label for="password" class="px-4"> Password </label>
+        <label for="password" class="px-4"> Mot de passe </label>
         <input type="password" name="password" id="password">
+
+       
     </div>
+    
+    @if($errors->has('email'))
+    <div class="bg-red-500 text-white p-4">
+        {{ $errors->first('email') }}
+    </div>
+@endif
+
+@if($errors->has('password'))
+    <div class="bg-red-500 text-white p-4">
+        {{ $errors->first('password') }}
+    </div>
+@endif
+
+
+    
     
     <div class="flex justify-center">
             <input type="submit" class="text-center px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" value="Se Connecter">
-        </div>
+    </div>
 
+    
 </form>
 </div>
 </body>
