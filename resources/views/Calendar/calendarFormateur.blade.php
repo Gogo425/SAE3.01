@@ -146,14 +146,17 @@
                 <tr>
                     <?php 
                         foreach($month->days as $k => $day): 
-                        $date = (clone $start_day)->modify('+' . ($k + $i * 7) . ' days')
+                        $date = (clone $start_day)->modify('+' . ($k + $i * 7) . ' days');
+                        $today = new DateTime();
                     ?>
                     <td class="<?=$month->withInMonth($date) ? '' : 'calendar__othermonth';?>">
                         <?php if($i === 0): ?>
                             <div class="calendar__weekday"><?= $day; ?></div>
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
-                        <button class="custom-button"><a href="/seance/creation/{{ $date->format('Y-m-d') }}">Créer une séance</a></button>
+                        <?php if ($date >= $today):  ?>
+                            <button class="custom-button"><a href="/seance/creation/{{ $date->format('Y-m-d') }}">Créer une séance</a></button>
+                        <?php endif; ?>
                         @foreach ($sessions as $session)
                             @if ($date->format('Y-m-d') === $session->DATE_SESSION)
                                 @php
