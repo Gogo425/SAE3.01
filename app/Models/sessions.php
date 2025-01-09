@@ -20,6 +20,12 @@ class Sessions extends Model
         $abilities = sessions::all()->sortBy('DATE_SESSION');
         return $abilities;
     }
+
+    function selectByForamtion($formation){
+        $abilities = sessions::where('ID_FORMATION',$formation)->get();
+        return $abilities;
+    }
+    
     function selectAllDate(){
         $abilities = sessions::all()->sortBy('DATE_SESSION');
         return $abilities;
