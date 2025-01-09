@@ -71,17 +71,19 @@ class SeanceController extends Controller
         $nbInitiator = array();
 
         for($i = 1; $i <= $nb; $i++){
-            $initiator = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->ID_PER;
-            $initiatorName = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->NAME;
+            if($request->get('initiator'.$i) != null) {
+                $initiator = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->ID_PER;
+                $initiatorName = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->NAME;
 
-            if(!array_key_exists($initiator, $nbInitiator)) {
-                $nbInitiator[$initiator] = 1;
-            }
-            else if($nbInitiator[$initiator] < 2) {
-                $nbInitiator[$initiator] += 1;
-            }
-            else if($nbInitiator[$initiator] >= 2) {
-                return redirect()->back()->with('failure', "l'initiateur ".$initiatorName." a plus de 2 élèves");
+                if(!array_key_exists($initiator, $nbInitiator)) {
+                    $nbInitiator[$initiator] = 1;
+                }
+                else if($nbInitiator[$initiator] < 2) {
+                    $nbInitiator[$initiator] += 1;
+                }
+                else if($nbInitiator[$initiator] >= 2) {
+                    return redirect()->back()->with('failure', "l'initiateur ".$initiatorName." a plus de 2 élèves");
+                }
             }
             
         }
@@ -104,37 +106,44 @@ class SeanceController extends Controller
         
         for($i = 1; $i <= $nb; $i++){
             $student = DB::table('persons')->where('name', $request->get('student'.$i))->get()->collect()->get('0')->ID_PER;
-            $initiator = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->ID_PER;
 
-            $abilitie1 = DB::table('abilities')->where('description',$request->get('abilities1'.$i))->get()->collect()->get('0')->ID_ABILITIES;
-            $abilitie2 = DB::table('abilities')->where('description',$request->get('abilities2'.$i))->get()->collect()->get('0')->ID_ABILITIES;
-            $abilitie3 = DB::table('abilities')->where('description',$request->get('abilities3'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+            if($request->get('initiator'.$i) != null) {
 
-            if(null !== $abilitie1){
-                $works = new Works();
-                $works->id_sessions = $idSession;
-                $works->id_per_student = $student;
-                $works->id_abilities = $abilitie1;
-                $works->id_per_initiator = $initiator;
-                $works->save();
-            }
+                $initiator = DB::table('persons')->where('name', $request->get('initiator'.$i))->get()->collect()->get('0')->ID_PER;
 
-            if(null !== $abilitie2 &&  $abilitie1 != $abilitie2){
-                $works = new Works();
-                $works->id_sessions = $idSession;
-                $works->id_per_student = $student;
-                $works->id_abilities = $abilitie2;
-                $works->id_per_initiator = $initiator;
-                $works->save();
-            }
+                $abilitie1Null = $request->get('abilities1'.$i);
+                $abilitie2Null = $request->get('abilities2'.$i);
+                $abilitie3Null = $request->get('abilities3'.$i);
 
-            if(null !== $abilitie3 && $abilitie1 != $abilitie3 && $abilitie2 != $abilitie3){
-                $works = new Works();
-                $works->id_sessions = $idSession;
-                $works->id_per_student = $student;
-                $works->id_abilities = $abilitie3;
-                $works->id_per_initiator = $initiator;
-                $works->save();
+                if(null !== $abilitie1Null){
+                    $abilitie1 = DB::table('abilities')->where('description',$request->get('abilities1'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+                    $works = new Works();
+                    $works->id_sessions = $idSession;
+                    $works->id_per_student = $student;
+                    $works->id_abilities = $abilitie1;
+                    $works->id_per_initiator = $initiator;
+                    $works->save();
+                }
+
+                if(null !== $abilitie2Null &&  $abilitie1Null != $abilitie2Null){
+                    $abilitie2 = DB::table('abilities')->where('description',$request->get('abilities2'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+                    $works = new Works();
+                    $works->id_sessions = $idSession;
+                    $works->id_per_student = $student;
+                    $works->id_abilities = $abilitie2;
+                    $works->id_per_initiator = $initiator;
+                    $works->save();
+                }
+
+                if(null !== $abilitie3Null && $abilitie1Null != $abilitie3Null && $abilitie2Null != $abilitie3Null){
+                    $abilitie3 = DB::table('abilities')->where('description',$request->get('abilities3'.$i))->get()->collect()->get('0')->ID_ABILITIES;
+                    $works = new Works();
+                    $works->id_sessions = $idSession;
+                    $works->id_per_student = $student;
+                    $works->id_abilities = $abilitie3;
+                    $works->id_per_initiator = $initiator;
+                    $works->save();
+                }
             }
             
         }

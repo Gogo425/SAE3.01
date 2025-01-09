@@ -11,7 +11,7 @@ class CalendarController extends BaseController
     public function calendarDirector (): View 
     {
         $sessions = DB::table('sessions')->get('date_session');
-        //dd($sessions);
+        //dd($initiators);
         return view('Calendar.calendarFormateur', [
             'sessions' => $sessions
         ]);
@@ -27,7 +27,7 @@ class CalendarController extends BaseController
 
     public function calendarInitiator (): View 
     {
-        $sessions = DB::table('sessions')->get('date_session');
+        $sessions = DB::table('sessions')->get();
         return view('Calendar.calendarInitiator', [
             'sessions' => $sessions
         ]);
