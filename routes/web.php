@@ -71,6 +71,6 @@ Route::get('/calendar/testdays/{newdate}', [App\Http\Controllers\CalendarControl
 
 
 //Tablestudent routes
-Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage']);
+Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage'])->name('tableAbilities');
 Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);

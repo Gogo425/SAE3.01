@@ -41,7 +41,7 @@ use Illuminate\Support\Facades\Auth;
     }
     $idSessionsArray = [];
     $dateSessionsArray = [];
-    $sessions = (new sessions)->selectByForamtion($idFormation);
+    $sessions = (new sessions)->selectByFormation($idFormation);
     foreach($sessions as $session){
         array_push($dateSessionsArray, $session->DATE_SESSION);
         }

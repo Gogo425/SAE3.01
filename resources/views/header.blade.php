@@ -31,7 +31,7 @@
                     }
                     if($student->count == 1){
                         echo "
-                            <button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Mon bilan de la formation</button>
+                            <a href=".route('tableAbilities')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Mon bilan de la formation</button></a>
                             <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste de mes séances</button>";
                     }
                 ?>
