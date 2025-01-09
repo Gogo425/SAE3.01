@@ -24,7 +24,7 @@ class EvaluationController extends Controller
 
         $idPerArray = $initia->pluck('id_per')->toArray();
 
-        // if (in_array(Auth::id(), $idPerArray)) {
+        if (in_array(Auth::id(), $idPerArray)) {
             // Hardcoded session ID (replace with dynamic session ID logic if needed)
             $id = $idSession;
 
@@ -52,9 +52,9 @@ class EvaluationController extends Controller
                 'status' => $status,
                 'idSession' => $idSession
             ]);
-        // }else{
-            // echo "Vous ne pouvez pas acceder a cette page";
-        // }
+        }else{
+            echo "Vous ne pouvez pas acceder a cette page";
+        }
     }
 
     // Stores a new evaluation in the database

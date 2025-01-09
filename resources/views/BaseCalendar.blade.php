@@ -8,7 +8,7 @@
     
 </head>
 <body>
-    <img src="{{ asset('image/logo.png') }}" alt="logo" height="8%" width="8%">
+    <img src="{{ asset('img/logo.png') }}" alt="logo" height="8%" width="8%">
     <button class="custom-button">Profil</button>
     <button class="custom-button">Déconnexion</button>
     <button class="custom-button">Liste d'élèves et d'initiateurs</button>
