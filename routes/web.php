@@ -46,12 +46,7 @@ Route::get('/create-account', function () {
 // Route pour traiter le formulaire (POST)
 Route::post('/create-account', [CreateAccountController::class, 'choiceUser'])->name('account.create');
 
-
-Route::get('/abilities-evaluation', function () {
-    return view('abilities_evaluation'); // Charge la vue pour afficher le formulaire
-})->name('evaluation.form');
-
-Route::get('/evaluations', [EvaluationController::class, 'index'])->name('abilities_evaluation');
+Route::get('/evaluations/{idSession}', [EvaluationController::class, 'index'])->name('abilities_evaluation');
 Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
 
 Route::post('/get-abilities', [EvaluationController::class, 'getAbilitiesByStudent'])->name('abilities.by.student');

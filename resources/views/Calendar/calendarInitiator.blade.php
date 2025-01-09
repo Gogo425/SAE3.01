@@ -143,7 +143,6 @@
                             <div class="calendar__weekday"><?= $day; ?></div>
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
-                        <button class="custom-button"><a href="/seance/creation/{{ $date->format('Y-m-d') }}">+</a></button>
                         @foreach ($sessions as $session)
                         @if ($date->format('Y-m-d') === $session->date_session)
                             @php
@@ -153,6 +152,7 @@
                             @endphp
 
                             @if ($idSession)
+                            <button class="custom-button"><a href="/evaluations/{{$idSession}}">Evaluer les aptitudes</a></button>
                                 <p>Initiateur : 
                                     {{ DB::table('persons') 
                                             ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')

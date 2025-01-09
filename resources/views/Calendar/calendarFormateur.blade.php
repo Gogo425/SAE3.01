@@ -153,7 +153,7 @@
                             <div class="calendar__weekday"><?= $day; ?></div>
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
-                        <button class="custom-button"><a href="/seance/creation/{{ $date->format('Y-m-d') }}">+</a></button>
+                        <button class="custom-button"><a href="/seance/creation/{{ $date->format('Y-m-d') }}">Créer une séance</a></button>
                         @foreach ($sessions as $session)
                         @if ($date->format('Y-m-d') === $session->DATE_SESSION)
                             @php

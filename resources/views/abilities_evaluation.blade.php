@@ -27,11 +27,11 @@
     <form action="{{ route('evaluations.store') }}" method="POST">
         @csrf
 
-        
+        <input type="hidden" name="idSession" value="{{ $idSession }}">
 
         <!-- Affichage des compétences pour chaque élève -->
         <div id="abilities-container" class="mt-4">
-            <h3 class="mt-5">Évaluation des compétences par Mr/Mme {{Auth::user()->name}}</h3>
+            <h3 class="mt-5">Évaluation des compétences par Mr/Mme{{Auth::user()->name}}</h3>
             <table class="table table-bordered">
                 <thead>
                     <tr>

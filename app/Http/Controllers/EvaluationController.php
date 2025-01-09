@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 class EvaluationController extends Controller
 {
     // Displays the form to create an evaluation
-    public function index()
+    public function index(string $idSession)
     {
         $initia =DB::table('persons')
         ->join('initiators', 'initiators.id_per', '=', 'initiators.id_per')
@@ -24,9 +24,9 @@ class EvaluationController extends Controller
 
         $idPerArray = $initia->pluck('id_per')->toArray();
 
-        if (in_array(Auth::id(), $idPerArray)) {
+        // if (in_array(Auth::id(), $idPerArray)) {
             // Hardcoded session ID (replace with dynamic session ID logic if needed)
-            $id = 1;
+            $id = $idSession;
 
             // Retrieve the list of students associated with the session
             $eleves = DB::table('persons')
@@ -49,11 +49,12 @@ class EvaluationController extends Controller
             return view('abilities_evaluation', [
                 'eleves' => $eleves,
                 'abilities' => $abilities,
-                'status' => $status
+                'status' => $status,
+                'idSession' => $idSession
             ]);
-        }else{
-            echo "Vous ne pouvez pas acceder a cette page";
-        }
+        // }else{
+            // echo "Vous ne pouvez pas acceder a cette page";
+        // }
     }
 
     // Stores a new evaluation in the database
@@ -69,7 +70,7 @@ class EvaluationController extends Controller
         // Get the statuses and observations for each ability
         foreach ($statuses as $ability_id => $status_id) {
             $evaluation = DB::table('evaluations')
-            ->where('id_sessions', 1) // session id (replace)
+            ->where('id_sessions', $request->idSession) // session id (replace)
                 ->where('id_abilities', $ability_id)
                 ->where('id_per_student', $eleve_id)
                 ->first();
@@ -86,7 +87,7 @@ class EvaluationController extends Controller
                 ]);
             } else {
             Evaluations::create([
-                'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
+                'id_sessions' => $request->idSession,  // Hardcoded session ID (replace with dynamic logic if needed)
                 'id_abilities' => $ability_id, // ID of the ability
                 'id_per_student' => $eleve_id, // ID of the selected student
                 'id_per_initiator' => Auth::id(), // Hardcoded initiator ID (e.g., teacher's ID)
