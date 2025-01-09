@@ -17,7 +17,7 @@
 use App\Models\Students;
 use Illuminate\Support\Facades\Auth;
 
-    $idUser = 2 /*Auth::id()*/;
+    $idUser = Auth::id();
 
     $nameUser = (new persons)->getNameOf($idUser);
 
