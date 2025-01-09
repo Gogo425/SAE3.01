@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ asset('css/tableAbilities.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
     <title>Document</title>
 </head>
 <body>
 
-    
+    @include("header")
+
     <?php
+
+
+    
+    
+
         use App\Models\skills;
         use App\Models\students;
         use App\Models\abilities;
@@ -104,26 +112,40 @@
                     
                 }
                 echo '<td>';
-                if ($valide == count($abilitiesArray)) {
-                    echo '<div class="button-container">
-                            <button class="btn btn-valid">
-                                <span class="icon valid"></span> Valide
-                            </button>
-                        </div>';
-                } else {
-                    echo '<div class="button-container">
-                            <button class="btn btn-in-progress">
+                    if($valide == count($abilitiesArray)) {
+                        echo '<form method="POST" action="' . route('validate') . '" >
+                        ' . csrf_field() . '
+                         <input type="hidden" name="student_id" value="' . $id . '">
+                        <button type="submit" class="btn btn-valid">
+                            <span class="icon valid"></span> Valider
+                        </button>
+                    </form>';
+                    }else {
+                        echo '<div class="button-container">
+                            <button class="btn btn-in-progress" disabled>
                                 <span class="icon in-progress"></span> En cours
                             </button>
                         </div>';
-                }
+                    }
                 echo '</td>';
                 echo '</tr>';
-                }  
+            } 
+
             ?>  
         
-    </table>
 
     
+    </table>
+    @include("footer")
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

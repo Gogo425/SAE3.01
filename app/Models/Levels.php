@@ -10,8 +10,7 @@ class Levels extends Model
     use HasFactory;
 
     protected $table = 'levels';
-    protected $filliable = ['id_level', 'description'];
-
+    protected $fillable = ['id_level', 'description'];
+    
     public $timestamps = false;
-
 }

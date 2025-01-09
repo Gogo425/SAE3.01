@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 class Students extends Model
 {
     use HasFactory;
@@ -14,6 +11,12 @@ class Students extends Model
         'id_level',
         'id_formation'
     ];
+
+
+    public function validateAbility($studentId, $abilityId){
+        
+    }
+
     public $timestamps = false;
     function selectAllTable(){
         $persons = students::all()->sortBy('ID_PER');

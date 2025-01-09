@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\ManageController;
+use App\Http\Controllers\ValidateController;
 use App\Http\Controllers\AuthController;
 
 // Home route
@@ -65,7 +67,19 @@ Route::get('/calendar/calendarInitiator', [App\Http\Controllers\CalendarControll
 Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'BaseCalendar']);
 
 
-//Tablestudent routes
-Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage']);
-Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);
+Route::get('/liste', [ManageController::class, 'index'])->name('liste');
+Route::delete('/student/{ID_PER}', [ManageController::class, 'manageDeleteStudent'])->name('student.delete');
+Route::delete('/initiator/{ID_PER}', [ManageController::class, 'manageDeleteInitiator'])->name('initiator.delete');
+Route::delete('/training_managers/{ID_PER}', [ManageController::class, 'manageDeleteTrainingManager'])->name('training_managers.delete');
+
+
+
+Route::get('/persons/{ID_PER}/edit', [ManageController::class, 'editUser'])->name('persons.edit');
+Route::put('/persons/{ID_PER}', [ManageController::class, 'updateUser'])->name('persons.update');
+
+
+Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage'])->name('tableAbilities');
+Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage'])->name('tableStudent');
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
+Route::post('/validate',[ValidateController::class, 'levelUp'])->name('validate');
+

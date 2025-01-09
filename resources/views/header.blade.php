@@ -1,7 +1,7 @@
 <header>
     <menu>
         <div class="flex flex-wrap items-center justify-between p-4 bg-gray-100">
-            <img src="./img/logo.png" alt="logo" class="w-16 h-16 mb-4 md:mb-0">
+            <a href="/"><img src="./img/logo.png" alt="logo" class="w-16 h-16 mb-4 md:mb-0"></a>
             <div class="flex flex-wrap justify-center gap-4 md:flex-nowrap">
                 <?php
                     $id = Auth::id();
@@ -13,9 +13,9 @@
                   
                     if($technicalDirectors->count == 1){
                         echo "
-                            <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste des utilisateurs</button>
+                            <a href=".route('liste')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste des utilisateurs</button></a>
                             <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste des formations</button>
-                            <button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Bilan des élèves</button>";
+                            <a href=".route('tableStudent')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Bilan des élèves</button></a>";
                     }
                     if($trainingManager->count == 1){
                         echo "
@@ -31,7 +31,7 @@
                     }
                     if($student->count == 1){
                         echo "
-                            <button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Mon bilan de la formation</button>
+                            <a href=".route('tableAbilities')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Mon bilan de la formation</button></a>
                             <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste de mes séances</button>";
                     }
                 ?>
