@@ -123,7 +123,7 @@
         ?>
 
         <div>
-            <h1 class="text-3xl"><?= $month->toString(); ?></h1>
+            <h1 class="text-4xl text-center pb-4"><?= $month->toString(); ?></h1>
             <div class="calendar__button">
                 <button class="custom-buttonnav"><a href="/calendar/calendarStudent/?month=<?= $month->prevMonth()->month; ?>&year=<?= $month->prevMonth()->year; ?>">&lt;</a></button>
                 <button class="custom-buttonnav"><a href="/calendar/calendarStudent/?month=<?= $month->nextMonth()->month; ?> &year=<?= $month->nextMonth()->year; ?>" class="btn btn-primary">&gt;</a></button>
@@ -152,6 +152,7 @@
                             @endphp
 
                             @if ($idSession)
+                                <a href=""><button></button>Voir ma séance</a>
                                 <p>Initiateur : 
                                     {{ DB::table('persons') 
                                             ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')

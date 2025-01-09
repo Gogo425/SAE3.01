@@ -133,7 +133,7 @@
         ?>
 
         <div>
-            <h1 class="text-3xl"><?= $month->toString(); ?></h1>
+            <h1 class="text-4xl text-center pb-4"><?= $month->toString(); ?></h1>
             <div class="calendar__button">
                 <button class="custom-buttonnav"><a href="/calendar/calendarDirector/?month=<?= $month->prevMonth()->month; ?>&year=<?= $month->prevMonth()->year; ?>">&lt;</a></button>
                 <button class="custom-buttonnav"><a href="/calendar/calendarDirector/?month=<?= $month->nextMonth()->month; ?> &year=<?= $month->nextMonth()->year; ?>" class="btn btn-primary">&gt;</a></button>
@@ -162,19 +162,19 @@
                                 @php
                                     $idSession = DB::table('sessions')
                                         ->where('date_session', $session->DATE_SESSION)
-                                        ->value('id_sessions'); // Récupère une valeur unique
+                                        ->value('id_sessions');
                                 @endphp
 
                                 @if ($idSession)
-                                <?php $initiators = DB::table('persons')
-                                                ->select(DB::raw('distinct name'))
+                                    <?php $initiators = DB::table('persons')
+                                                ->select(DB::raw('distinct name, surname'))
                                                 ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')
                                                 ->join('works', 'works.id_per_initiator', '=', 'initiators.id_per')
                                                 ->where('id_sessions', '=', $idSession)
                                                 ->get() ?? 'Nom introuvable' ?>
                                     @foreach($initiators as $initiator)
                                         <p>Initiateur : 
-                                            {{ $initiator->name }}
+                                            {{ $initiator->name }} {{ $initiator->surname }}
                                         </p>
                                     @endforeach
                                 @endif
