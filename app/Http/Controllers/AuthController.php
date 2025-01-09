@@ -23,7 +23,7 @@ class AuthController extends Controller
             session()->regenerate();
         }
 
-        return view('login');
+        return view('home');
     }
 
     public function doLogout(){
