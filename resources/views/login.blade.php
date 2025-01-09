@@ -30,8 +30,7 @@
         </div>
 
         
-        <input type="submit" value="Se Connecter">
- 
+      
         
          
 </form>

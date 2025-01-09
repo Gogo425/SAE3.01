@@ -27,7 +27,7 @@ Route::get('/profile', function () {
 
 // Hash test route
 Route::get('/hash', function () {
-    return Hash::make("0000");
+    return Hash::make("1234");
 });
 
 // Connection and disconnection routes
