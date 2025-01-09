@@ -9,45 +9,72 @@ use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends BaseController
 {
-    public function calendarDirector (): View 
+    /**
+     * Display the calendar for directors.
+     * 
+     * @return View
+     */
+    public function calendarDirector(): View
     {
+        // Retrieve all sessions from the database
         $sessions = DB::table('sessions')->get();
+
+        // Pass the sessions data to the director's calendar view
         return view('Calendar.calendarFormateur', [
             'sessions' => $sessions
         ]);
     }
 
-    public function calendarStudents (): View 
+    /**
+     * Display the calendar for students.
+     * 
+     * @return View
+     */
+    public function calendarStudents(): View
     {
+        // Retrieve distinct session IDs and dates for the currently authenticated student
         $sessions = DB::table('sessions')
-        ->select(DB::raw('distinct sessions.id_sessions, date_session'))
-        ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
-        ->join('students', 'students.id_per', '=', 'works.id_per_student')
-        ->where('works.id_per_student', Auth::id())
-        ->get();
+            ->select(DB::raw('distinct sessions.id_sessions, date_session'))
+            ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
+            ->join('students', 'students.id_per', '=', 'works.id_per_student')
+            ->where('works.id_per_student', Auth::id()) // Filter sessions for the logged-in student
+            ->get();
+
+        // Pass the sessions data to the student's calendar view
         return view('Calendar.calendarStudent', [
             'sessions' => $sessions
         ]);
     }
 
-    public function calendarInitiator (): View 
+    /**
+     * Display the calendar for initiators.
+     * 
+     * @return View
+     */
+    public function calendarInitiator(): View
     {
+        // Retrieve distinct session IDs and dates for the currently authenticated initiator
         $sessions = DB::table('sessions')
-        ->select(DB::raw('distinct sessions.id_sessions, date_session'))
-        ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
-        ->join('initiators', 'initiators.id_per', '=', 'works.id_per_initiator')
-        ->where('works.id_per_initiator', Auth::id())
-        ->get();
+            ->select(DB::raw('distinct sessions.id_sessions, date_session'))
+            ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
+            ->join('initiators', 'initiators.id_per', '=', 'works.id_per_initiator')
+            ->where('works.id_per_initiator', Auth::id()) // Filter sessions for the logged-in initiator
+            ->get();
+
+        // Pass the sessions data to the initiator's calendar view
         return view('Calendar.calendarInitiator', [
             'sessions' => $sessions
         ]);
     }
 
-    
-
-    public function BaseCalendar (): View 
+    /**
+     * Display the base calendar.
+     * 
+     * @return View
+     */
+    public function BaseCalendar(): View
     {
+        // Return the base calendar view (no session-specific data)
         return view('BaseCalendar');
     }
-
 }
