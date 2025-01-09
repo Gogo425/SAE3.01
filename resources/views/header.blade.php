@@ -19,40 +19,46 @@
                 @endauth
 
                 <?php
-                    $technicalDirectors = DB::select('select * from technical_directors where id_per = :id', ['id' => $id])[0];
-                    $trainingManager = DB::select('select * from training_managers where id_per = :id', ['id' => $id])[0];
-                    $initiator =DB::select('select * from initiators where id_per = :id', ['id' => $id])[0];
-                    $student =DB::select('select * from students where id_per = :id', ['id' => $id])[0];
-
-                    if($technicalDirectors == 1){
+                    $id = Auth::id();
+                    
+                    $technicalDirectors = DB::select('select count(*) as count from technical_directors where id_per = :id', ['id' => $id])[0];
+                    $trainingManager = DB::select('select count(*) as count from training_managers where id_per = :id', ['id' => $id])[0];
+                    $initiator =DB::select('select count(*) as count from initiators where id_per = :id', ['id' => $id])[0];
+                    $student =DB::select('select count(*) as count from students where id_per = :id', ['id' => $id])[0];
+                    //dd($technicalDirectors->count);
+                    if($technicalDirectors->count == 1){
                         /* aptitudes et compétences / formation et peut les modif si jamais le manuel technique évolue 
                                 - listes des utilisateurs ds la base -> ajout et modif info
                                 - créer formation, attribuer un responsable de formation ds eleves et initiateurs
                                 - voir ensemble formations existantes
                                 - bilan /eleves
                         */
+                        dd($id);
                     }
-                    if($trainingManager == 1){
+                    if($trainingManager->count == 1){
                         /*
                         - voir ensemble élèves et initiateurs de la formation
                         - créer des séances,voir les séances déjà faites
                         - voir bilan de sa formation /eleves pour toutes les compétences
                         */
+                        dd($id);
                     }
 
-                    if($initiator == 1){
+                    if($initiator->count == 1){
                         /*  - voir ses séances, séances passées, 
                             -qui il a
                             - quelle aptitude il travaille
                             - evaluer eleves
                         */
+                        dd($id);
                     }
 
-                    if($student == 1){
+                    if($student->count == 1){
                         /*
                           - bilan formation
                             - seance passée et avenir
                         */
+                        dd($id);
                     }
                 ?>
             </div>
