@@ -86,7 +86,7 @@ class CreateAccountController extends Controller
             }
 
             else if ($role === 'Student') {
-                Students::create(['id_per' => Persons::count() , 'id_level' => $lvl , 'id_formation' => 1]);
+                Students::create(['id_per' => Persons::count() , 'id_level' => $lvl , 'id_formation' => null]);
             }
         }
            

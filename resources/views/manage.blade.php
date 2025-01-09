@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des étudiants et initiateurs</title>
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <style>
         .hidden {
             display: none;
@@ -38,8 +39,8 @@
 <body>
 
     @include('header')
+    <h1>Gestion des élèves, initiateurs et responsables formations</h1>
 
-    <h1>Gestion des étudiants et initiateurs</h1>
     <!-- Boutons pour afficher les sections -->
     <button onclick="toggleDisplay('students')">Afficher les Élèves</button>
     <button onclick="toggleDisplay('initiators')">Afficher les Initiateurs</button>
