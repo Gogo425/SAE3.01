@@ -13,33 +13,44 @@ use Laravel\Nova\Fields\DateTime;
 class seanceController extends Controller
 {
 
-    public function creation()
+    public function creation(/*date $date, int $form*/)
     {
+        $d=mktime(11, 14, 54, 8, 12, 2025); //a supp quand params mit
+        $date = date("Y-m-d", $d); //a supp quand les params mit
+        $form = 1; //a supp quand les params mit
 
-        $id_formation = 1;
+        $formations = DB::table('formations')->where('id_formation', $form)->get()->collect()->get('0');
 
-        $formations = DB::table('formations')->where('id_formation', $id_formation)->get();
-        $students = DB::table('persons')->join('students', 'persons.id_per', '=', 'students.id_per')->join('formations', 'formations.id_formation', '=', 'students.id_formation')->get();
-        $abilities = DB::table('abilities')->get();
-        $initiators = DB::table('persons')->join('initiators', 'persons.id_per', '=', 'initiators.id_per')->get();
+        $students = DB::table('persons')->join('students', 'persons.id_per', '=', 'students.id_per')
+                                        ->join('formations', 'formations.id_formation', '=', 'students.id_formation')
+                                        ->where("students.id_formation", $form)->get();
+
+        $abilities = DB::table('formations')->join('levels', 'formations.id_level', '=', 'levels.id_level')
+                                            ->join('skills', 'skills.id_level', '=', 'levels.id_level')
+                                            ->join('abilities', 'skills.id_skills', '=', 'abilities.id_skills')
+                                            ->where("formations.id_formation", $form)->get();
+
+        $initiators = DB::table('trains')->join('initiators', 'trains.id_per_initiator', '=', 'initiators.id_per')
+                                          ->join('persons', 'persons.id_per', '=', 'initiators.id_per')
+                                          ->where("id_formation", $form)->get();
+
+
         $locations = DB::table('locations')->get();
-        //dd($locations);
-        //dd($initiators);
-        //dd($abilities);
-        //dd($students);
 
         return view('creationSeance', [
             'students' => $students,
             'abilities' => $abilities,
             'initiators' => $initiators,
             'locations' => $locations,
-            'formations' => $formations
+            'formations' => $formations,
+            'date' => $date
         ]);
     }
 
     public function save(Request $request) {
 
         //dd($request->all());
+
         $sysdate = date("Y-m-d");
         if($sysdate >= $request->dateSession) {
             return redirect()->back()->with('failure', "la date est ultérieur à la date du jour, il n'est pas possible de faire une séance !");
