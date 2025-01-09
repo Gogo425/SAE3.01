@@ -16,6 +16,7 @@
     use App\Models\persons;
 use App\Models\Students;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
     $idUser = 2 /*Auth::id()*/;
 

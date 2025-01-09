@@ -31,13 +31,12 @@ class Evaluations extends Model
     function getEvaluationsStudent($idStudent, $abiliti){
         
         $obeservations = Evaluations::where('ID_PER_STUDENT',$idStudent)->where('ID_ABILITIES',$abiliti)->get();
-        
+
         $idStatus = [];
         foreach($obeservations as $ob){
             array_push($idStatus, $ob->ID_STATUS);
         }
         $nb = 0;
-        
         foreach($idStatus as $statu){
             if($statu == 3){
                 $nb = $nb+1;
@@ -48,8 +47,6 @@ class Evaluations extends Model
                 return true;
             }
         }
-        
         return false;
     }
-
 }

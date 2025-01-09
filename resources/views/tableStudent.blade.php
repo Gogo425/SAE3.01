@@ -7,7 +7,19 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+    // Exemple de fonction PHP
+    function myFunction($parameter)
+    {
+        echo "La fonction PHP a été appelée avec le paramètre : $parameter";
+    }
 
+    // Vérifier si le formulaire a été soumis
+    if (isset($_POST['call_function'])) {
+        $param = $_POST['call_function'];
+        myFunction($param);
+    }
+    ?>
     
     <?php
         use App\Models\skills;
@@ -104,26 +116,38 @@
                     
                 }
                 echo '<td>';
-                if ($valide == count($abilitiesArray)) {
-                    echo '<div class="button-container">
-                            <button class="btn btn-valid">
-                                <span class="icon valid"></span> Valide
-                            </button>
-                        </div>';
-                } else {
-                    echo '<div class="button-container">
-                            <button class="btn btn-in-progress">
+                    if($valide == count($abilitiesArray)) {
+                        echo '<form method="POST" action="' . route('validate') . '" >
+                        ' . csrf_field() . '
+                         <input type="hidden" name="student_id" value="' . $id . '">
+                        <button type="submit" class="btn btn-valid">
+                            <span class="icon valid"></span> Valider
+                        </button>
+                    </form>';
+                    }else {
+                        echo '<div class="button-container">
+                            <button class="btn btn-in-progress" disabled>
                                 <span class="icon in-progress"></span> En cours
                             </button>
                         </div>';
-                }
+                    }
                 echo '</td>';
                 echo '</tr>';
-                }  
+            } 
+
             ?>  
         
-    </table>
 
-    
+    </table>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+

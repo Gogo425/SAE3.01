@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\ValidateController;
 
 // Home route
 Route::get('/', function () {
@@ -72,5 +73,6 @@ Route::get('/calendar/testdays/{newdate}', [App\Http\Controllers\CalendarControl
 
 //Tablestudent routes
 Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage']);
-Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);
+Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage'])->name('tableStudent');
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
+Route::post('/validate',[ValidateController::class, 'levelUp'])->name('validate');
