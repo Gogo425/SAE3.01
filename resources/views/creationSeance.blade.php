@@ -1,3 +1,5 @@
+<?php  use Illuminate\Support\Arr;?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -45,17 +47,17 @@
                         <select name="abilities1{{ $index + 1 }}" id="abilities1{{ $index + 1 }}"> <!--vérifier qu'il n'y a pas 2 fois la même abilities -->
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 
                             @endforeach
                         </select>
-
+                        
                         <select name="abilities2{{ $index + 1 }}" id="abilities2{{ $index + 1 }}">
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 
@@ -65,7 +67,7 @@
                         <select name="abilities3{{ $index + 1 }}" id="abilities3{{ $index + 1 }}">
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 

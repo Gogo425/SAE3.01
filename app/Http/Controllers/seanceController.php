@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Sessions;
 use App\Models\Works;
+use App\Models\Evaluations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use Laravel\Nova\Fields\Date;
 use Laravel\Nova\Fields\DateTime;
+use Illuminate\Support\Arr;
 
 class seanceController extends Controller
 {
@@ -25,10 +26,32 @@ class seanceController extends Controller
                                         ->join('formations', 'formations.id_formation', '=', 'students.id_formation')
                                         ->where("students.id_formation", $form)->get();
 
-        $abilities = DB::table('formations')->join('levels', 'formations.id_level', '=', 'levels.id_level')
-                                            ->join('skills', 'skills.id_level', '=', 'levels.id_level')
-                                            ->join('abilities', 'skills.id_skills', '=', 'abilities.id_skills')
-                                            ->where("formations.id_formation", $form)->get();
+        //début modif --------------------------------------------------------------------------------------------------------------------------------------
+        $abilities = array();
+
+        $tabAbilities = DB::table('formations')->join('levels', 'formations.id_level', '=', 'levels.id_level')
+                                                ->join('skills', 'skills.id_level', '=', 'levels.id_level')
+                                                ->join('abilities', 'skills.id_skills', '=', 'abilities.id_skills')
+                                                ->where("formations.id_formation", $form)->distinct('ID_ABILITIES')->get();
+
+
+        foreach($students as $student) {
+
+            $studentAbilities = array();
+
+            $evaluation = new Evaluations();
+
+            foreach($tabAbilities as $abiliti) {
+                $rep = $evaluation->getEvaluationsStudent($student->ID_PER, $abiliti->ID_ABILITIES);
+                if(!$rep) {
+                    array_push($studentAbilities, $abiliti);
+                }
+            }
+
+            array_push($abilities, $studentAbilities);
+        }
+        //Fin modif ---------------------------------------------------------------------------------------------------------------------------------------------
+        
 
         $initiators = DB::table('trains')->join('initiators', 'trains.id_per_initiator', '=', 'initiators.id_per')
                                           ->join('persons', 'persons.id_per', '=', 'initiators.id_per')
