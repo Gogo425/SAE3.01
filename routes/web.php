@@ -34,8 +34,6 @@ Route::prefix('/formation')->name('formation')->controller(FormController::class
 
 });
 
+Route::get('/formation',[FormController::class,'create'])->name('formation');
+
 Route::delete('/formation/{ID_FORMATION}',[FormController::class, 'deleteFormation'])->name('formation.delete');
-
-// Route::get('/editFormation/{ID_FORMATION}', [FormController::class, 'showEditFormaion'])->name('editFormation.show');
-
-// Route::put('/editFormation/{ID_FORMATION}', [FormController::class, 'editFormation'])->name('formation.edit');

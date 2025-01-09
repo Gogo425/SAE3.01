@@ -27,9 +27,15 @@
             <div class="mb-3">
                 <label for="id_level" class="form-label">Niveau de Formation :</label>
                 <select class="form-select" name="id_level">
+                @if($forma1 === null)
                     <option value="1">1</option>
+                @endif
+                @if($forma2 === null)
                     <option value="2">2</option>
+                @endif
+                @if($forma3 === null)
                     <option value="3">3</option>
+                @endif
                 </select>
                 @error('name')
                     <div class="text-danger mt-1">{{ $message }}</div>
@@ -41,7 +47,7 @@
                 <label for="name" class="form-label">Choix du responsable de formation :</label>
                 <select class="form-select" name="name">
                     @foreach ($initsLess as $initLess)
-                        <option value="{{$initLess->NAME}}">{{$initLess->NAME}}</option>
+                        <option value="{{$initLess->NAME}}">{{$initLess->NAME}} {{$initLess->SURNAME}}</option>
                     @endforeach
                 </select>
                 @error('email')
@@ -56,7 +62,7 @@
                     @foreach ($inits as $init)
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" value="{{$init->ID_PER}}" id="init-{{$init->ID_PER}}" name="inits[]">
-                            <label class="form-check-label" for="init-{{$init->ID_PER}}">{{$init->NAME}}</label>
+                            <label class="form-check-label" for="init-{{$init->ID_PER}}">{{$init->NAME}} {{$init->SURNAME}}</label>
                         </div>
                     @endforeach
                 </div>
@@ -69,7 +75,7 @@
                     @foreach ($studs as $stud)
                         <div class="form-check">
                             <input type="checkbox" class="form-check-input" value="{{$stud->ID_PER}}" id="stud-{{$stud->ID_PER}}" name="studs[]">
-                            <label class="form-check-label" for="stud-{{$stud->ID_PER}}">{{$stud->NAME}}</label>
+                            <label class="form-check-label" for="stud-{{$stud->ID_PER}}">{{$stud->NAME}} {{$stud->SURNAME}}</label>
                         </div>
                     @endforeach
                 </div>

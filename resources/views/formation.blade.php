@@ -32,13 +32,25 @@
                 <p class="card-text">
                     <strong>Initiateurs :</strong><br>
                     @foreach ($inits->where('ID_FORMATION','=',$form->ID_FORMATION) as $init)
-                        {{$init->NAME}} {{$init->SURNAME}}<br>
+                        {{$init->NAME}} {{$init->SURNAME}} : niveau de formation 
+                        @if($init->ID_LEVEL == 5)
+                            MF1
+                        @elseif($init->ID_LEVEL == 6)
+                            MF2
+                        @elseif($init->ID_LEVEL == 7)
+                            MF3
+                        @else
+                            {{$init->ID_LEVEL-1}}
+                        @endif
+
+                        <br>
                     @endforeach
                 </p>
                 <p class="card-text">
                     <strong>Élèves :</strong><br>
                     @foreach ($studs->where('ID_FORMATION','=',$form->ID_FORMATION) as $stud)
-                        {{$stud->NAME}} {{$stud->SURNAME}}<br>
+                        {{$stud->NAME}} {{$stud->SURNAME}}
+                        <br>
                     @endforeach
                 </p>
                 @if($sessions->where('ID_FORMATION',$form->ID_FORMATION)->count() == 0)
@@ -48,19 +60,17 @@
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation?')">Supprimer</button>
                     </form>
-                    <!-- <form action="" method="PUT">
-                        @csrf
-                        <button type="submit" class="btn btn-warning btn-sm">Modifier</button>
-                    </form> -->
                 </div>
                 @endif
             </div>
         </div>
         @endforeach
 
+        @if($nbFormations < 3)
         <div class="text-center">
             <a href="creationFormation" class="btn btn-primary">Ajouter une formation</a>
         </div>
+        @endif
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
