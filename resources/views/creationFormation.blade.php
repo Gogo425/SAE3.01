@@ -46,7 +46,7 @@
 
         <label for="choice_initiateur">Choix des initiateurs :</label>
         @foreach ($inits as $init)
-            <input type="checkbox" value="{{$init->ID_PER}}" id="{{$init->ID_PER}}" name="{{$init->ID_PER}}">
+            <input type="checkbox" value="{{$init->ID_PER}}" id="{{$init->ID_PER}}" name="inits[]">
             <label for="le for">{{$init->NAME}}</label>
         @endforeach
 
@@ -54,7 +54,7 @@
 
         <label for="choice_students">Choix des Eleves :</label>
         @foreach ($studs as $stud)
-            <input type="checkbox" value="{{$stud->ID_PER}}" id="{{$stud->ID_PER}}" name="{{$stud->ID_PER}}">
+            <input type="checkbox" value="{{$stud->ID_PER}}" id="{{$stud->ID_PER}}" name="studs[]">
             <label for="le for">{{$stud->NAME}}</label>
         @endforeach
 

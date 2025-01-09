@@ -19,43 +19,48 @@
     
     @foreach ($forms as $form)
     <div>
-        <h2>{{$form->NOM}}</h2>
-        <p>
-            Formation de niveau : {{$form->ID_LEVEL}}
+        <tr>
+            <td>Formation de niveau : {{$form->ID_LEVEL-1}}</td>
             <br>
-            Date de début : {{$form->DATE_BEGINNING}}
+            <td>Date de début : {{$form->DATE_BEGINNING}}</td>
             <br>
-            Date de fin : {{$form->DATE_ENDING}}
+            <td>Date de fin : {{$form->DATE_ENDING}}</td>
             <br>
-            Responsable de formation : {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->NAME }} , {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->SURNAME }}
-        </p>
-        <p>
-            Initiateurs :
+            <td>Responsable de formation : {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->NAME }}  {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->SURNAME }}</td>
             <br>
-            @foreach ($inits->where('ID_FORMATION','=',$form->ID_FORMATION) as $init)
-                {{$init->NAME}}
-                {{$init->SURNAME}}
-                <br>
-                
-            @endforeach
-        </p>
-        <p>
-            Eleves :
-            <br>
-            @foreach ($studs->where('ID_FORMATION','=',$form->ID_FORMATION) as $stud)
-                {{$stud->NAME}}
-                {{$stud->SURNAME}}
-                <br>
-                
-            @endforeach
-        </p>
-        <p>
-            <a href="" class="btn btn-primary">Modifier</a>
-            <a href="" class="btn btn-primary">Supprimer</a>
-            <a href="" class="btn btn-primary">Gérer les séances</a>
-        </p>
+            <td>Initiateurs :</td>
+            <td>
+                @foreach ($inits->where('ID_FORMATION','=',$form->ID_FORMATION) as $init)
+                    {{$init->NAME}}
+                    {{$init->SURNAME}}
+                @endforeach
+            </td>
+            <br><br>
+            <td>Eleves :</td>
+            <td>
+                @foreach ($studs->where('ID_FORMATION','=',$form->ID_FORMATION) as $stud)
+                    {{$stud->NAME}}
+                    {{$stud->SURNAME}}
+                @endforeach
+            </td>
+            <br><br>
+            <td class="action-buttons">
+                <form action="{{ route('formation.delete', $form->ID_FORMATION) }}" method="POST" style="display: inline;">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation?')">Supprimer</button>
+                </form>
+                <form action="" method="GET" style="display: inline;">
+                    @csrf 
+                    <button type="submit">Modifier</button>
+                </form>
+
+
+            </td>
+        </tr>
     </div>
     @endforeach
+    <br><br>
     <p>
         <a href="creationFormation" class="btn btn-primary"> Ajouter une formation </a>
     </p>
