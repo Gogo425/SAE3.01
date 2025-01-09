@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evaluations;
 use App\Models\Students;
-use App\Models\Session;
+use App\Models\Sessions;
 use App\Models\Abilities;
 use App\Models\Status;
 use Illuminate\Http\Request;
