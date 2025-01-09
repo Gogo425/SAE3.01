@@ -22,7 +22,7 @@
         <form action="{{ route('seance.save') }}" method="POST" id="formulaire">
             @csrf
             <label>Date :</label>
-            <input type="date" id="dateSession" name="dateSession" required/> <!-- vérifier que la date n'est pas avant date du jour-->
+            <input type="date" id="dateSession" name="dateSession" min="<?php $d= strtotime("+1 day"); echo date("Y-m-d", $d); ?>" required/> 
 
             <select name="location" id="location" required>
                     <option value="">--choisir un type de location--</option>
