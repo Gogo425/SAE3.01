@@ -46,7 +46,7 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Abilités</th>
+                        <th>Aptitudes</th>
                         <th>Statut</th>
                         <th>Observation</th>
                     </tr>

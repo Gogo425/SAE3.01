@@ -56,6 +56,24 @@ class EvaluationController extends Controller
         try{
         // Get the statuses and observations for each ability
         foreach ($statuses as $ability_id => $status_id) {
+            $evaluation = DB::table('evaluations')
+            ->where('id_sessions', 1) // session id (replace)
+                ->where('id_abilities', $ability_id)
+                ->where('id_per_student', $eleve_id)
+                ->where('id_per_initiator', 2) // initiator id (replace)
+                ->first();
+
+            if ($evaluation) {
+        
+                DB::table('evaluations')
+                ->where('id_abilities', $ability_id)
+                ->where('id_per_student', $eleve_id)
+                ->where('id_per_initiator', 2)
+                ->update([
+                    'id_status' => $status_id,
+                    'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null,
+                ]);
+            } else {
             Evaluations::create([
                 'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
                 'id_abilities' => $ability_id, // ID of the ability
@@ -65,6 +83,7 @@ class EvaluationController extends Controller
                 'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null, // Optional observation
             ]);
         }
+    }
     }catch (QueryException $e) {
         // Check if it's a foreign key constraint violation
         if ($e->getCode() === "23000") {
