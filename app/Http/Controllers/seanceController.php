@@ -40,6 +40,10 @@ class seanceController extends Controller
     public function save(Request $request) {
 
         //dd($request->all());
+        $sysdate = date("Y-m-d");
+        if($sysdate >= $request->dateSession) {
+            return redirect()->back()->with('failure', "la date est ultérieur à la date du jour, il n'est pas possible de faire une séance !");
+        }
         
         $nb = ($request->collect()->count()-2)/5;
 
