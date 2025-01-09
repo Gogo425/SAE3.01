@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\SeanceController;
 use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\AuthController;
 
 // Route de l'accueil
 Route::get('/', function () {
@@ -31,9 +32,9 @@ Route::get('/hash', function () {
 });
 
 // Routes de connexion et déconnexion
-Route::get('/login', [\App\Http\Controllers\AuthController::class, 'login'])->name('login');
-Route::post('/login', [\App\Http\Controllers\AuthController::class, 'doLogin']);
-Route::get('/logout', [\App\Http\Controllers\AuthController::class, 'doLogout']);
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'doLogin']);
+Route::get('/logout', [AuthController::class, 'doLogout']);
 
 // Route pour afficher le formulaire
 Route::get('/create-account', function () {

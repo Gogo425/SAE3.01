@@ -16,10 +16,13 @@
         @if(session('success'))
             <p style="color: green;">{{session('success')}}</p>
         @endif
+        @if(session('failure'))
+            <p style="color: red;">{{session('failure')}}</p>
+        @endif
         <form action="{{ route('seance.save') }}" method="POST" id="formulaire">
             @csrf
-            <label>Date :</label>
-            <input type="date" value="{{ $date_session }}" id="dateSession" name="dateSession"/>
+            <label>Date : </label>
+            <input type="date" value="{{ $date_session }}" id="dateSession" name="dateSession" min="<?php $d= strtotime("+1 day"); echo date("Y-m-d", $d); ?>" required/> 
 
             <select name="location" id="location" required>
                     <option value="">--choisir un type de location--</option>
@@ -30,7 +33,7 @@
 
                     @endforeach
             </select>
-            <p name="test" id="test">Test</p>
+
             <br>
             <div id="students">
                 @foreach($students as $index => $student)
