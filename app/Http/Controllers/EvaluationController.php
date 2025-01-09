@@ -10,6 +10,7 @@ use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\Auth;
 
 class EvaluationController extends Controller
 {
@@ -60,7 +61,6 @@ class EvaluationController extends Controller
             ->where('id_sessions', 1) // session id (replace)
                 ->where('id_abilities', $ability_id)
                 ->where('id_per_student', $eleve_id)
-                ->where('id_per_initiator', 2) // initiator id (replace)
                 ->first();
 
             if ($evaluation) {
@@ -68,17 +68,17 @@ class EvaluationController extends Controller
                 DB::table('evaluations')
                 ->where('id_abilities', $ability_id)
                 ->where('id_per_student', $eleve_id)
-                ->where('id_per_initiator', 2)
                 ->update([
                     'id_status' => $status_id,
                     'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null,
+                    'id_per_initiator' => Auth::id(),
                 ]);
             } else {
             Evaluations::create([
                 'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
                 'id_abilities' => $ability_id, // ID of the ability
                 'id_per_student' => $eleve_id, // ID of the selected student
-                'id_per_initiator' => 2, // Hardcoded initiator ID (e.g., teacher's ID)
+                'id_per_initiator' => Auth::id(), // Hardcoded initiator ID (e.g., teacher's ID)
                 'id_status' => $status_id, // Status for the ability
                 'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null, // Optional observation
             ]);
