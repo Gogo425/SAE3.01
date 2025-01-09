@@ -9,7 +9,7 @@
 </head>
 
 <body style="background-image: url('{{'img/fondEcran.jpg'}}');" class="bg-cover bg-center place-self-center">
-
+<p>{{Auth::user();}}</p>
 <div class="h-screen flex items-center justify-center">
 <form method="post" action="/login">
     @csrf
