@@ -17,6 +17,7 @@
             // Cache toutes les sections
             document.getElementById('studentsTable').classList.add('hidden');
             document.getElementById('initiatorsTable').classList.add('hidden');
+            document.getElementById('training_managersTable').classList.add('hidden');
 
             // Affiche la section sélectionnée
             if (type === 'students') {
@@ -60,6 +61,10 @@
                             @method('DELETE')
                             <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet élève ?')">Supprimer</button>
                     </form>
+                    <form action="{{ route('persons.edit', $student->ID_PER) }}" method="GET" style="display:inline;">
+                        @csrf
+                        <button type="submit">Modifier</button>
+                    </form>
                         
                     </td>
                 </tr>
@@ -89,6 +94,10 @@
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet initiateur ?')">Supprimer</button>
                         </form>
+                        <form action="{{ route('persons.edit', $initiator->ID_PER) }}" method="GET" style="display:inline;">
+                        @csrf
+                        <button type="submit">Modifier</button>
+                    </form>
                     </td>
                    
                 </tr>
@@ -111,11 +120,15 @@
                     <td>{{ $training_manager->surname }}</td>
                     <td>{{ $training_manager->email }}</td>
                     <td class="action-buttons">
-                        <form action="{{ route('training_managers.delete', $training_managers->ID_PER) }}" method="POST" style="display:inline;">
+                        <form action="{{ route('training_managers.delete', $training_manager->ID_PER) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" onclick="return confirm('Êtes-vous sûr de vouloir supprimer le rôle du responsable formation ?')">Supprimer</button>
                         </form>
+                        <form action="{{ route('persons.edit', $training_manager->ID_PER) }}" method="GET" style="display:inline;">
+                            @csrf
+                        <button type="submit">Modifier</button>
+                    </form>
                     </td>
                    
                 </tr>

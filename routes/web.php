@@ -50,4 +50,10 @@ Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evalu
 Route::get('/liste', [ManageController::class, 'index']);
 Route::delete('/student/{ID_PER}', [ManageController::class, 'manageDeleteStudent'])->name('student.delete');
 Route::delete('/initiator/{ID_PER}', [ManageController::class, 'manageDeleteInitiator'])->name('initiator.delete');
-Route::delete('/training-managers/{ID_PER}', [ManageController::class, 'manageDeleteTrainingManager'])->name('training_managers.delete');
+Route::delete('/training_managers/{ID_PER}', [ManageController::class, 'manageDeleteTrainingManager'])->name('training_managers.delete');
+
+
+
+Route::get('/persons/{ID_PER}/edit', [ManageController::class, 'editUser'])->name('persons.edit');
+Route::put('/persons/{ID_PER}', [ManageController::class, 'updateUser'])->name('persons.update');
+
