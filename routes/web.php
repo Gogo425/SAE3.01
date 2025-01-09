@@ -69,3 +69,8 @@ Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'BaseCa
 Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage']);
 Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
+
+
+
+//abilities_edit routes
+Route::get('/abilities/{level}', [EvaluationController::class, 'index'])->name('ablities_edit');
