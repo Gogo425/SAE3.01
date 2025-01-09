@@ -1,3 +1,5 @@
+<?php  use Illuminate\Support\Arr;?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,7 +10,7 @@
         <title>Création d'une séance</title>
     </head>
     <header>
-        <img src="{{ asset('image/logo.png') }}" alt="logo"/>
+        <img src="{{ asset('img/logo.png') }}" alt="logo"/>
         <button>Profil</button>
         <button>Déconnexion</button>
     </header>
@@ -45,7 +47,7 @@
                         <select name="abilities1{{ $index + 1 }}" id="abilities1{{ $index + 1 }}"> <!--vérifier qu'il n'y a pas 2 fois la même abilities -->
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 
@@ -55,7 +57,7 @@
                         <select name="abilities2{{ $index + 1 }}" id="abilities2{{ $index + 1 }}">
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 
@@ -65,7 +67,7 @@
                         <select name="abilities3{{ $index + 1 }}" id="abilities3{{ $index + 1 }}">
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 
