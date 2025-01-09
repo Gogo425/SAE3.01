@@ -154,6 +154,11 @@
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
                         <button><a href="/seance/creation/{{ $date->format('Y-m-d') }}">+</a></button>
+                        @foreach ($sessions as $session)
+                            @if($date->format('Y-m-d') === $session->date_session)
+                                <p>{{ $session->date_session }}</p>
+                            @endif
+                        @endforeach
                     </td>
                     <?php endforeach; ?>
                 </tr>

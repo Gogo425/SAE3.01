@@ -103,7 +103,7 @@ class SeanceController extends Controller
             
         }
 
-        return redirect()->back()->with('success', 'Session ajoutée avec succès');
+        return redirect()->route('calendar.calendarDirector')->with('success', 'Session ajoutée avec succès');
 
     }
 

@@ -3,23 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Routing\Controller as BaseController;
 
 class CalendarController extends BaseController
 {
     public function calendarDirector (): View 
     {
-        return view('Calendar.calendarFormateur');
+        $sessions = DB::table('sessions')->get('date_session');
+        //dd($sessions);
+        return view('Calendar.calendarFormateur', [
+            'sessions' => $sessions
+        ]);
     }
 
     public function calendarStudents (): View 
     {
-        return view('Calendar.calendarStudent');
+        $sessions = DB::table('sessions')->get('date_session');
+        return view('Calendar.calendarStudent', [
+            'sessions' => $sessions
+        ]);
     }
 
     public function calendarInitiator (): View 
     {
-        return view('Calendar.calendarInitiator');
+        $sessions = DB::table('sessions')->get('date_session');
+        return view('Calendar.calendarInitiator', [
+            'sessions' => $sessions
+        ]);
     }
 
     
@@ -27,13 +38,6 @@ class CalendarController extends BaseController
     public function BaseCalendar (): View 
     {
         return view('BaseCalendar');
-    }
-
-    public function AddDate(string $newdate)
-    {
-        return view('Calendar.testdays', [
-            'newdate' => $newdate
-        ]);
     }
 
 }

@@ -61,7 +61,7 @@ Route::post('/abilities-by-student', [EvaluationController::class, 'getAbilities
 // });
 
 //Routes pour les différents calendriers
-Route::get('/calendar/calendarDirector/', [\App\Http\Controllers\CalendarController::class, 'calendarDirector']);
+Route::get('/calendar/calendarDirector/', [\App\Http\Controllers\CalendarController::class, 'calendarDirector'])->name('calendar.calendarDirector');
 Route::get('/calendar/calendarStudent', [App\Http\Controllers\CalendarController::class, 'calendarStudents']);
 Route::get('/calendar/calendarInitiator', [App\Http\Controllers\CalendarController::class, 'calendarInitiator']);
 Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'BaseCalendar']);

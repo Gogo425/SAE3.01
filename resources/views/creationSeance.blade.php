@@ -19,9 +19,9 @@
         <form action="{{ route('seance.save') }}" method="POST" id="formulaire">
             @csrf
             <label>Date :</label>
-            <input type="date" value="{{ $date_session }}" id="dateSession" name="dateSession"/> <!-- vérifier que la date n'est pas avant date du jour-->
+            <input type="date" value="{{ $date_session }}" id="dateSession" name="dateSession"/>
 
-            <select name="location" id="location">
+            <select name="location" id="location" required>
                     <option value="">--choisir un type de location--</option>
 
                     @foreach ($locations as $location)
