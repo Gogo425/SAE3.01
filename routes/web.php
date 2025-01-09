@@ -73,9 +73,10 @@ Route::get('/calendar/testdays/{newdate}', [App\Http\Controllers\CalendarControl
 
 //Tablestudent routes
 Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage'])->name('tableAbilities');
-Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);
+Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage'])->name('tableStudents');;
 Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
-Route::get('/liste', [ManageController::class, 'index']);
+
+Route::get('/liste', [ManageController::class, 'index'])->name('liste');
 Route::delete('/student/{ID_PER}', [ManageController::class, 'manageDeleteStudent'])->name('student.delete');
 Route::delete('/initiator/{ID_PER}', [ManageController::class, 'manageDeleteInitiator'])->name('initiator.delete');
 Route::delete('/training_managers/{ID_PER}', [ManageController::class, 'manageDeleteTrainingManager'])->name('training_managers.delete');

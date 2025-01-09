@@ -38,7 +38,7 @@
     <button onclick="toggleDisplay('students')">Afficher les Élèves</button>
     <button onclick="toggleDisplay('initiators')">Afficher les Initiateurs</button>
     <button onclick="toggleDisplay('training_managers')">Afficher les Responsables Formations</button>
-
+    <a href="{{route('account.form')}}"><button>Créer un utilisateur</button></a>
     <!-- Tableau des élèves -->
     <table id="studentsTable" class="hidden">
        
