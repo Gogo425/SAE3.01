@@ -47,7 +47,7 @@ Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evalu
 //     Route::post('/evaluations', [EvaluationController::class, 'store'])->name('evaluations.store');
 // });
 
-Route::get('/liste', [ManageController::class, 'index']);
+Route::get('/liste', [ManageController::class, 'index'])->name('liste');
 Route::delete('/student/{ID_PER}', [ManageController::class, 'manageDeleteStudent'])->name('student.delete');
 Route::delete('/initiator/{ID_PER}', [ManageController::class, 'manageDeleteInitiator'])->name('initiator.delete');
 Route::delete('/training_managers/{ID_PER}', [ManageController::class, 'manageDeleteTrainingManager'])->name('training_managers.delete');

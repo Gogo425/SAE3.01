@@ -21,7 +21,6 @@ class ManageController extends Controller
         ->get();
 
 
-
       
         
         $initiators = DB::table('initiators')->join('persons', 'initiators.ID_PER', '=', 'persons.ID_PER')
@@ -64,11 +63,35 @@ class ManageController extends Controller
     }
 
     public function manageDeleteTrainingManager($ID_PER) {
-        DB::table('formations')
-        ->where('ID_PER_TRAINING_MANAGER', $ID_PER)
-        ->delete();
-        $training_managers =  DB::table('training_managers')->where('ID_PER', $ID_PER)->delete();
-        return redirect()->back()->with('success', 'Responsable Formation supprimé avec succès.');
+       
+       
+            $formation = DB::table('formations')
+            ->where('ID_PER_TRAINING_MANAGER', $ID_PER)
+            ->first(); 
+        
+            if ($formation) {
+            DB::table('formations')
+                ->where('ID_PER_TRAINING_MANAGER', $ID_PER)
+                ->delete(); 
+
+            $training_manager = DB::table('training_managers')
+                ->where('ID_PER', $ID_PER)
+                ->first(); 
+
+            if ($training_manager) {
+                DB::table('training_managers')
+                    ->where('ID_PER', $ID_PER)
+                    ->delete(); 
+            }
+            DB::table('sessions')
+                ->where('ID_PER_TRAINING_MANAGER', $ID_PER)
+                ->delete();
+
+            return redirect()->back()->with('success', 'Responsable Formation supprimé avec succès.');
+            } else {
+            return redirect()->back()->with('error', 'Aucun responsable Formation trouvé.');
+            }
+
     }
 
 
@@ -129,10 +152,10 @@ class ManageController extends Controller
             'licence_number' => ['required', 
             'regex:/^[A-Z]-\d{2}-\d{6}$/',
             ],
-            'id_level' => 'required|exists:levels,ID_LEVEL',
+            'level_id' => 'required|exists:levels,id_level',
         ]);
 
-        dd($validatedData);
+        //dd($validatedData);
 
         DB::table('persons')
             ->where('ID_PER', $ID_PER)
@@ -146,22 +169,25 @@ class ManageController extends Controller
                 'licence_number' =>$validatedData['licence_number'],
             ]);
 
-
             $student = DB::table('students')->where('ID_PER', $ID_PER)->first();
-            if ($student) {
+            if ($student != null) {
                 DB::table('students')->where('ID_PER', $ID_PER)->update([
                     'id_level' => $validatedData['level_id'],
                 ]);
             }
         
             $initiator = DB::table('initiators')->where('ID_PER', $ID_PER)->first();
-            if ($initiator) {
+    
+            if ($initiator != null) {
                 DB::table('initiators')->where('ID_PER', $ID_PER)->update([
                     'id_level' => $validatedData['level_id'],
                 ]);
             }
 
-        return view('manage')->with('success', 'Informations modifiées avec succès.');
+
+           
+
+        return redirect()->route('liste');
 }
 
 }
