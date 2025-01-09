@@ -153,7 +153,7 @@
                             <div class="calendar__weekday"><?= $day; ?></div>
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
-                        <button><a href="/calendar/testdays/{{ $date->format('Y-m-d') }}">+</a></button>
+                        <button><a href="/seance/creation/{{ $date->format('Y-m-d') }}">+</a></button>
                     </td>
                     <?php endforeach; ?>
                 </tr>

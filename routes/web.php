@@ -16,7 +16,7 @@ Route::prefix('/seance')->name('seance.')->controller(SeanceController::class)->
 
     Route::post('/', 'save')->name('save');
 
-    Route::get('/creation', 'creation')->name('creation');
+    Route::get('/creation/{date_session}', 'creation')->name('creation');
 
 });
 
@@ -61,9 +61,8 @@ Route::post('/abilities-by-student', [EvaluationController::class, 'getAbilities
 // });
 
 //Routes pour les différents calendriers
-Route::get('/calendar/calendarDirector', [\App\Http\Controllers\CalendarController::class, 'calendarDirector']);
+Route::get('/calendar/calendarDirector/', [\App\Http\Controllers\CalendarController::class, 'calendarDirector']);
 Route::get('/calendar/calendarStudent', [App\Http\Controllers\CalendarController::class, 'calendarStudents']);
 Route::get('/calendar/calendarInitiator', [App\Http\Controllers\CalendarController::class, 'calendarInitiator']);
 Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'BaseCalendar']);
-Route::get('/calendar/testdays/{newdate}', [App\Http\Controllers\CalendarController::class, 'AddDate']);
 

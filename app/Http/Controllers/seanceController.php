@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class SeanceController extends Controller
 {
 
-    public function creation()
+    public function creation(string $date_session)
     {
 
         $id_formation = 1;
@@ -30,7 +30,8 @@ class SeanceController extends Controller
             'abilities' => $abilities,
             'initiators' => $initiators,
             'locations' => $locations,
-            'formations' => $formations
+            'formations' => $formations,
+            'date_session' => $date_session
         ]);
     }
 
