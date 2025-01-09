@@ -1,0 +1,335 @@
+     /* Général */
+     body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+    }
+    
+
+    /* Style de base pour le conteneur de la liste déroulante */
+form {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Label de la liste déroulante */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin-right: 10px;
+}
+
+/* Liste déroulante */
+select {
+    width: 200px;
+    padding: 8px 12px;
+    font-size: 14px;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    appearance: none; /* Cache la flèche par défaut dans certains navigateurs */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="none" stroke="%23333" stroke-width=".5" d="M2 0L0 2h4z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px 12px;
+}
+
+/* Effet au survol */
+select:hover {
+    border-color: #888;
+    background-color: #f1f1f1;
+}
+
+/* Effet lors du focus */
+select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Options de la liste */
+option {
+    padding: 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Pour les petits écrans */
+@media (max-width: 600px) {
+    select {
+        width: 100%;
+        font-size: 16px;
+    }
+}
+
+
+    /* Titre de la page */
+    h1 {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 2.5rem;
+        color: #333;
+    }
+    
+    /* Table */
+    table {
+        width: 90%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    /* Légende */
+    caption {
+        padding: 10px 20px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        background-color: #0069d9;
+        color: white;
+        text-transform: uppercase;
+        border-bottom: 2px solid #ddd;
+    }
+    
+    /* En-tête du tableau */
+    thead {
+        background-color: #007bff;
+        color: white;
+    }
+    
+    /* Cellules du tableau */
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    
+    /* Style des titres de colonnes */
+    th {
+        font-size: 1.1rem;
+        text-transform: uppercase;
+    }
+    
+    /* Lignes du tableau */
+    tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+    
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+    
+    /* Colonnes spécifiques */
+    colgroup span {
+        width: 100px;
+    }
+    
+    /* Dernière colonne */
+    td:last-of-type {
+        text-align: center;
+        font-weight: bold;
+    }
+    
+    /* Classe pour "Non évalué" (gris) */
+    .vide {
+        background-color: #fff; /* Gris clair */
+        color: #555; /* Texte gris foncé pour un meilleur contraste */
+    }
+    /* Classe pour "Non évalué" (gris) */
+    .non-evalue {
+        background-color: #d3d3d3; /* Gris clair */
+        color: #555; /* Texte gris foncé pour un meilleur contraste */
+    }
+    
+    /* Classe pour "En cours" (orange) */
+    .en-cours {
+        background-color: #ffcc00; /* Jaune/orange */
+        color: #555; /* Texte gris foncé pour un meilleur contraste */
+    }
+    
+    /* Classe pour "Acquis" (vert) */
+    .acquis {
+        background-color: #28a745; /* Vert */
+        color: white; /* Texte blanc pour un bon contraste */
+    }
+    
+    /* Quelques autres styles pour rendre le tableau agréable */
+    table {
+        width: 90%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    
+    th, td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+    
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+
+    /* Conteneur pour centrer les boutons */
+.button-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Style de base pour les boutons */
+.btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: Arial, sans-serif;
+}
+
+/* Bouton "Valide" */
+.btn-valid {
+    background-color: #4CAF50; /* Vert */
+    color: white;
+}
+
+.btn-valid:hover {
+    background-color: #45a049;
+}
+
+/* Bouton "En cours" */
+.btn-in-progress {
+    background-color: #FFA500; /* Orange */
+    color: white;
+}
+
+.btn-in-progress:hover {
+    background-color: #e69500;
+}
+
+/* Icônes dans les boutons */
+.icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Icône pour le bouton "Valide" */
+.icon.valid {
+    background-color: white; /* Icône blanche */
+    border: 2px solid #4CAF50; /* Bord vert */
+}
+
+/* Icône pour le bouton "En cours" */
+.icon.in-progress {
+    background-color: white; /* Icône blanche */
+    border: 2px solid #FFA500; /* Bord orange */
+}
+
+.responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    overflow-x: auto; /* Permet le défilement horizontal */
+    display: block; /* Nécessaire pour activer le défilement sur les petits écrans */
+}
+
+.responsive-table thead th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+    text-align: center;
+}
+
+.responsive-table th, .responsive-table td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+    white-space: nowrap; /* Évite les retours à la ligne intempestifs */
+}
+
+.responsive-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+@media (max-width: 768px) {
+    .responsive-table th:nth-child(n+2):nth-child(-n+4), /* Cache certaines colonnes spécifiques */
+    .responsive-table td:nth-child(n+2):nth-child(-n+4) {
+        display: none;
+    }
+}
+
+.btn {
+    font-size: 12px;
+    padding: 6px 10px;
+    border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+    .btn {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .responsive-table thead {
+        display: none; /* Cache l'en-tête du tableau */
+    }
+
+    .responsive-table tr {
+        display: block; /* Empile les lignes */
+        margin-bottom: 10px;
+    }
+
+    .responsive-table td {
+        display: block; /* Empile les cellules */
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+        white-space: normal; /* Permet les retours à la ligne */
+    }
+
+    .responsive-table td::before {
+        content: attr(data-label); /* Ajoute un label avant chaque cellule */
+        position: absolute;
+        left: 10px;
+        width: calc(50% - 20px);
+        white-space: nowrap;
+        font-weight: bold;
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-wrap: wrap; /* Permet d'adapter les boutons en cas de manque d'espace */
+}
+
+.btn {
+    margin: 5px; /* Ajoute un espace entre les boutons pour éviter qu'ils se touchent */
+}
