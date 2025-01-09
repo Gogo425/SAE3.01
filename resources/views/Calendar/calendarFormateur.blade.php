@@ -1,6 +1,6 @@
 @extends('BaseCalendar')
 
-@section('title', 'Formateur Calendar')
+@section('title', 'Director Calendar')
 
 @section('link')
 
@@ -135,8 +135,8 @@
         <div>
             <h1><?= $month->toString(); ?></h1>
             <div class="calendar__button">
-                <button><a href="/calendar/calendarDirector/?month=<?= $month->prevMonth()->month; ?>&year=<?= $month->prevMonth()->year; ?>">&lt;</a></button>
-                <button><a href="/calendar/calendarDirector/?month=<?= $month->nextMonth()->month; ?> &year=<?= $month->nextMonth()->year; ?>" class="btn btn-primary">&gt;</a></button>
+                <button class="custom-buttonnav"><a href="/calendar/calendarDirector/?month=<?= $month->prevMonth()->month; ?>&year=<?= $month->prevMonth()->year; ?>">&lt;</a></button>
+                <button class="custom-buttonnav"><a href="/calendar/calendarDirector/?month=<?= $month->nextMonth()->month; ?> &year=<?= $month->nextMonth()->year; ?>" class="btn btn-primary">&gt;</a></button>
             </div>
         </div>
         
@@ -153,7 +153,26 @@
                             <div class="calendar__weekday"><?= $day; ?></div>
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
-                        <button><a href="/calendar/testdays/{{ $date->format('Y-m-d') }}">+</a></button>
+                        <button class="custom-button"><a href="/seance/creation/{{ $date->format('Y-m-d') }}">Créer une séance</a></button>
+                        @foreach ($sessions as $session)
+                        @if ($date->format('Y-m-d') === $session->DATE_SESSION)
+                            @php
+                                $idSession = DB::table('sessions')
+                                    ->where('date_session', $session->DATE_SESSION)
+                                    ->value('id_sessions'); // Récupère une valeur unique
+                            @endphp
+
+                            @if ($idSession)
+                                <p>Initiateur : 
+                                    {{ DB::table('persons') 
+                                            ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')
+                                            ->join('works', 'works.id_per_initiator', '=', 'initiators.id_per')
+                                            ->where('id_sessions', '=', $idSession)
+                                            ->first()->NAME ?? 'Nom introuvable' }}
+                                </p>
+                            @endif
+                        @endif
+                        @endforeach
                     </td>
                     <?php endforeach; ?>
                 </tr>

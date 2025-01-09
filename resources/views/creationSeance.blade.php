@@ -1,3 +1,5 @@
+<?php  use Illuminate\Support\Arr;?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -8,7 +10,7 @@
         <title>Création d'une séance</title>
     </head>
     <header>
-        <img src="{{ asset('image/logo.png') }}" alt="logo"/>
+        <img src="{{ asset('img/logo.png') }}" alt="logo"/>
         <button>Profil</button>
         <button>Déconnexion</button>
     </header>
@@ -16,12 +18,15 @@
         @if(session('success'))
             <p style="color: green;">{{session('success')}}</p>
         @endif
+        @if(session('failure'))
+            <p style="color: red;">{{session('failure')}}</p>
+        @endif
         <form action="{{ route('seance.save') }}" method="POST" id="formulaire">
             @csrf
-            <label>Date :</label>
-            <input type="date" id="dateSession" name="dateSession" required/> <!-- vérifier que la date n'est pas avant date du jour-->
+            <label>Date : </label>
+            <input type="date" value="{{ $date_session }}" id="dateSession" name="dateSession" min="<?php $d= strtotime("+1 day"); echo date("Y-m-d", $d); ?>" required/> 
 
-            <select name="location" id="location">
+            <select name="location" id="location" required>
                     <option value="">--choisir un type de location--</option>
 
                     @foreach ($locations as $location)
@@ -30,7 +35,7 @@
 
                     @endforeach
             </select>
-            <p name="test" id="test">Test</p>
+
             <br>
             <div id="students">
                 @foreach($students as $index => $student)
@@ -42,7 +47,7 @@
                         <select name="abilities1{{ $index + 1 }}" id="abilities1{{ $index + 1 }}"> <!--vérifier qu'il n'y a pas 2 fois la même abilities -->
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 
@@ -52,7 +57,7 @@
                         <select name="abilities2{{ $index + 1 }}" id="abilities2{{ $index + 1 }}">
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 
@@ -62,7 +67,7 @@
                         <select name="abilities3{{ $index + 1 }}" id="abilities3{{ $index + 1 }}">
                             <option value="">--choisir une aptitude--</option>
 
-                            @foreach ($abilities as $abilitie)
+                            @foreach (Arr::get($abilities, $index) as $abilitie)
 
                                 <option value ="{{ $abilitie->DESCRIPTION }}">{{ $abilitie->DESCRIPTION }}</option>
 

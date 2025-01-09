@@ -7,16 +7,24 @@ use App\Models\Students;
 use App\Models\Sessions;
 use App\Models\Abilities;
 use App\Models\Status;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class EvaluationController extends Controller
 {
     // Displays the form to create an evaluation
-    public function index()
+    public function index(string $idSession)
     {
+        
+         //dd('idSession is an array:', $idSession);
+        
+        if (is_array($idSession)) {
+            throw new Exception('idSession is an array, expected a string: ' . json_encode($idSession));
+        }
         $initia =DB::table('persons')
         ->join('initiators', 'initiators.id_per', '=', 'initiators.id_per')
         ->select('initiators.id_per')
@@ -26,7 +34,7 @@ class EvaluationController extends Controller
 
         if (in_array(Auth::id(), $idPerArray)) {
             // Hardcoded session ID (replace with dynamic session ID logic if needed)
-            $id = 1;
+            $id = $idSession;
 
             // Retrieve the list of students associated with the session
             $eleves = DB::table('persons')
@@ -44,70 +52,58 @@ class EvaluationController extends Controller
 
             // Retrieve all available statuses
             $status = DB::table('status')->get();
+            Log::info('go to view');
 
             // Pass data to the evaluation creation view
             return view('abilities_evaluation', [
                 'eleves' => $eleves,
                 'abilities' => $abilities,
-                'status' => $status
+                'status' => $status,
+                'idSession' => $idSession
             ]);
         }else{
             echo "Vous ne pouvez pas acceder a cette page";
         }
+        
     }
 
     // Stores a new evaluation in the database
     public function store(Request $request)
-    {
-        //dd($request->all());
-        // Get the statuses and observations for each ability
-        $eleve_id = $request->input('id_eleve');
-        $statuses = $request->input('status');
-        $observations = $request->input('observations');
-       
-        try{
-        // Get the statuses and observations for each ability
-        foreach ($statuses as $ability_id => $status_id) {
-            $evaluation = DB::table('evaluations')
-            ->where('id_sessions', 1) // session id (replace)
-                ->where('id_abilities', $ability_id)
-                ->where('id_per_student', $eleve_id)
-                ->first();
+{
+    //dd($request->all());
+    $idSession = $request->input('idSession');
+    $eleve_ids = $request->input('id'); // Student IDs
+    $statuses = $request->input('status'); // Statuses for abilities
+    $observations = $request->input('observations'); // Observations
 
-            if ($evaluation) {
-        
-                DB::table('evaluations')
-                ->where('id_abilities', $ability_id)
-                ->where('id_per_student', $eleve_id)
-                ->update([
-                    'id_status' => $status_id,
-                    'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null,
-                    'id_per_initiator' => Auth::id(),
-                ]);
-            } else {
-            Evaluations::create([
-                'id_sessions' => 1,  // Hardcoded session ID (replace with dynamic logic if needed)
-                'id_abilities' => $ability_id, // ID of the ability
-                'id_per_student' => $eleve_id, // ID of the selected student
-                'id_per_initiator' => Auth::id(), // Hardcoded initiator ID (e.g., teacher's ID)
-                'id_status' => $status_id, // Status for the ability
-                'observations' => isset($observations[$ability_id]) ? $observations[$ability_id] : null, // Optional observation
-            ]);
+    try {
+        foreach ($eleve_ids as $eleve_id => $value) {
+            foreach ($statuses[$eleve_id] as $ability_id => $status_id) {
+                DB::table('evaluations')->updateOrInsert(
+                    [
+                        'id_sessions' => $idSession,
+                        'id_abilities' => $ability_id,
+                        'id_per_student' => $eleve_id,
+                    ],
+                    [
+                        'id_status' => $status_id,
+                        'observations' => $observations[$eleve_id][$ability_id] ?? null,
+                        'id_per_initiator' => Auth::id(),
+                    ]
+                );
+            }
         }
-    }
-    }catch (QueryException $e) {
-        // Check if it's a foreign key constraint violation
+
+        return redirect()->back()->with('success', 'Évaluation enregistrée avec succès.');
+    } catch (QueryException $e) {
         if ($e->getCode() === "23000") {
-            // Redirect with an alert message
             return redirect()->back()->with('alert', 'Une ou plusieurs évaluations n\'ont pas pu être enregistrées à cause d\'une contrainte de clé étrangère.');
         }
 
-        // Rethrow other database errors if needed
         throw $e;
     }
+}
 
-        return redirect()->back()->with('success', 'Évaluation enregistrée avec succès.');
-    }
 
     // Retrieves abilities for a specific student using AJAX
     public function getAbilitiesByStudent(Request $request)

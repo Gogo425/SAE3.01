@@ -8,15 +8,15 @@
     
 </head>
 <body>
-    <img src="{{ asset('image/logo.png') }}" alt="logo" height="8%" width="8%">
-    <button>Profil</button>
-    <button>Déconnexion</button>
-    <button>Liste d'élèves et d'initiateurs</button>
-    <button>Liste de formations</button>
-    <button>Consulter ma formation</button>
-    <button><a href="{{ asset('calendar/calendarDirector') }}">Consulter l'emploi du temps Responsable de Formation</a></button>
-    <button><a href="{{ asset('calendar/calendarStudent') }}">Consulter l'emploi du temps élèves</a></button>
-    <button><a href="{{ asset('calendar/calendarInitiator') }}">Consulter l'emploi du temps Initiateur</a></button>
+    <img src="{{ asset('img/logo.png') }}" alt="logo" height="8%" width="8%">
+    <button class="custom-button">Profil</button>
+    <button class="custom-button">Déconnexion</button>
+    <button class="custom-button">Liste d'élèves et d'initiateurs</button>
+    <button class="custom-button">Liste de formations</button>
+    <button class="custom-button">Consulter ma formation</button>
+    <button class="custom-button"><a href="{{ asset('calendar/calendarDirector') }}">Consulter l'emploi du temps Responsable de Formation</a></button>
+    <button class="custom-button"><a href="{{ asset('calendar/calendarStudent') }}">Consulter l'emploi du temps élèves</a></button>
+    <button class="custom-button"><a href="{{ asset('calendar/calendarInitiator') }}">Consulter l'emploi du temps Initiateur</a></button>
 
     @yield('link')
     

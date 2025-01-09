@@ -27,7 +27,7 @@
     <form action="{{ route('evaluations.store') }}" method="POST">
         @csrf
 
-        
+        <input type="hidden" name="idSession" value="{{ $idSession }}">
 
         <!-- Affichage des compétences pour chaque élève -->
         <div id="abilities-container" class="mt-4">
@@ -43,34 +43,35 @@
                 </thead>
                 <tbody>
                     <!-- Parcourir tous les élèves et leurs compétences -->
-                    @foreach($eleves as $eleve)
-                        
-                        @foreach($abilities as $ability)
-                            <tr>
-                                
-                                <td colspan="1" class="bg-light text-center"><strong>{{ $eleve->SURNAME }} {{ $eleve->NAME }}</strong></td>
-                                
-                                
-                                    <input type="hidden" name="ability[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" value="{{ $ability->ID_ABILITIES }}">
-                                
-                                
-                                <td>
-                                    <input type="hidden" name="description[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" value="{{ $ability->DESCRIPTION}}">
-                                    {{ $ability->DESCRIPTION }}
-                                </td>
-                                <td>
-                                    <select name="status[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" class="form-control" required>
-                                        @foreach($status as $sta)
-                                            <option value="{{ $sta->ID_STATUS }}">{{ $sta->DESCRIPTION }}</option>
-                                        @endforeach
-                                    </select>
-                                </td>
-                                <td>
-                                    <input type="text" name="observations[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" class="form-control" placeholder="Observation (optionnel)">
-                                </td>
-                            </tr>
-                        @endforeach
+     @foreach($eleves as $eleve)
+    @foreach($abilities as $ability)
+        <tr>
+            <!-- Hidden field for student ID -->
+            <input type="hidden" name="id[{{ $eleve->ID_PER }}]" value="{{ $eleve->ID_PER }}">
+
+
+            <!-- Ability ID -->
+            <input type="hidden" name="ability[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" value="{{ $ability->ID_ABILITIES }}">
+
+            <td>{{ $eleve->SURNAME }} {{ $eleve->NAME }}</td>
+            <td>
+                <input type="hidden" name="description[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" value="{{ $ability->DESCRIPTION }}">
+                {{ $ability->DESCRIPTION }}
+            </td>
+            <td>
+                <select name="status[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" class="form-control" required>
+                    @foreach($status as $sta)
+                        <option value="{{ $sta->ID_STATUS }}">{{ $sta->DESCRIPTION }}</option>
                     @endforeach
+                </select>
+            </td>
+            <td>
+                <input type="text" name="observations[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" class="form-control" placeholder="Observation (optionnel)">
+            </td>
+        </tr>
+    @endforeach
+@endforeach
+
                 </tbody>
             </table>
         </div>
