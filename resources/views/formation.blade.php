@@ -12,7 +12,7 @@
 </head>
 <body class="bg-light">
     <div class="container py-5">
-        <h1 class="text-center mb-4">Liste de formations</h1>
+        <h1 class="text-center mb-4">Liste des formations</h1>
 
         @if (session('success'))
             <div class="alert alert-success">
