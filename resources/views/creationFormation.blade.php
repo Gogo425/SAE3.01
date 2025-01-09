@@ -1,78 +1,98 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>CreationFormation</title>
+    <title>Création de Formation</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">  
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css" rel="stylesheet">  
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
-    </head>
-    <body >
-    <h1>Créer une formation</h1>
-    @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-5">
+        <h1 class="text-center mb-4">Créer une formation</h1>
 
-        <form action="" method="POST">
-        @csrf
-        <label for="id_level">Niveau de Formation :</label>
-        <select class="form-control" name="id_level">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-        @error('name')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
 
-        <br><br>
-        
-        <label for="name">Choix du responsable de foramtion</label>
-        <select class="form-control" name="name">
-            @foreach ($initsLess as $initLess)
-            <option value="{{$initLess->NAME}}">{{$initLess->NAME}}</option>
-            @endforeach
-        </select>
-        @error('email')
-            <p style="color: red;">{{ $message }}</p>
-        @enderror
+        <form action="" method="POST" class="bg-white p-4 shadow-sm rounded">
+            @csrf
 
-        <br><br>
+            <!-- Niveau de Formation -->
+            <div class="mb-3">
+                <label for="id_level" class="form-label">Niveau de Formation :</label>
+                <select class="form-select" name="id_level">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+                @error('name')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 
-        <label for="choice_initiateur">Choix des initiateurs :</label>
-        @foreach ($inits as $init)
-            <input type="checkbox" value="{{$init->ID_PER}}" id="{{$init->ID_PER}}" name="inits[]">
-            <label for="le for">{{$init->NAME}}</label>
-        @endforeach
+            <!-- Responsable de formation -->
+            <div class="mb-3">
+                <label for="name" class="form-label">Choix du responsable de formation :</label>
+                <select class="form-select" name="name">
+                    @foreach ($initsLess as $initLess)
+                        <option value="{{$initLess->NAME}}">{{$initLess->NAME}}</option>
+                    @endforeach
+                </select>
+                @error('email')
+                    <div class="text-danger mt-1">{{ $message }}</div>
+                @enderror
+            </div>
 
-        <br><br>
+            <!-- Initiateurs -->
+            <div class="mb-3">
+                <label for="choice_initiateur" class="form-label">Choix des initiateurs :</label>
+                <div>
+                    @foreach ($inits as $init)
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" value="{{$init->ID_PER}}" id="init-{{$init->ID_PER}}" name="inits[]">
+                            <label class="form-check-label" for="init-{{$init->ID_PER}}">{{$init->NAME}}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
-        <label for="choice_students">Choix des Eleves :</label>
-        @foreach ($studs as $stud)
-            <input type="checkbox" value="{{$stud->ID_PER}}" id="{{$stud->ID_PER}}" name="studs[]">
-            <label for="le for">{{$stud->NAME}}</label>
-        @endforeach
+            <!-- Élèves -->
+            <div class="mb-3">
+                <label for="choice_students" class="form-label">Choix des élèves :</label>
+                <div>
+                    @foreach ($studs as $stud)
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" value="{{$stud->ID_PER}}" id="stud-{{$stud->ID_PER}}" name="studs[]">
+                            <label class="form-check-label" for="stud-{{$stud->ID_PER}}">{{$stud->NAME}}</label>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
-        <br><br>
+            <!-- Dates -->
+            <div class="mb-3">
+                <label for="date_beginning" class="form-label">Date de début de la formation :</label>
+                <input type="date" class="form-control" name="date_beginning">
+            </div>
 
-        <div class="container">  
-            <label for="date_beginning"> Date de début de la formation </label>
-            <input class="date form-control" type="date" name="date_beginning">  
-        </div>  
+            <div class="mb-3">
+                <label for="date_ending" class="form-label">Date de fin de la formation :</label>
+                <input type="date" class="form-control" name="date_ending">
+            </div>
 
-        <div class="container2">  
-            <label for="date_ending"> Date de fin de la formation </label>
-            <input class="date form-control" type="date" name="date_ending">  
-        </div>
-    
-        <button type="submit">Enregistrer</button>
-    </form>
-    </body>
+            <!-- Bouton d'enregistrement -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
-
-

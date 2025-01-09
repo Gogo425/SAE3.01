@@ -8,6 +8,7 @@ use App\Models\Initiator;
 use App\Models\Persons;
 use App\Models\TrainingManager;
 use App\Models\Trains;
+use App\Models\Sessions;
 use Illuminate\Support\Facades\DB;
 
 class CreateFormController extends Controller
@@ -24,7 +25,7 @@ class CreateFormController extends Controller
                 $query->select('id_per_initiator')->from('trains');
             })->get(),
 
-            'studs' => DB::table('students')->join('persons','students.id_per','=','persons.id_per')->get()
+            'studs' => DB::table('students')->join('persons','students.id_per','=','persons.id_per')->get(),
 
         ]);
     }
@@ -32,7 +33,6 @@ class CreateFormController extends Controller
 
     public function store(Request $request){
         $validated = $request->validate([
-            
             'id_per_training_manager' => 'integer',
             'id_level' => 'integer',
             'date_beginning' => 'date',
@@ -68,17 +68,6 @@ class CreateFormController extends Controller
         }
 
         return redirect()->back()->with('success', 'Formation ajoutée avec succès');
-    }
-
-
-
-    public function deleteFormation($ID_FORMATION){
-        DB::table('students')->where('id_formation',$ID_FORMATION)->update(['id_formation' => 1]);
-        DB::table('trains')->where('id_formation',$ID_FORMATION)->delete();
-        $id = DB::table('formations')->where('id_formation',$ID_FORMATION)->get();
-        DB::table('formations')->where('id_formation',$ID_FORMATION)->delete();
-        DB::table('training_managers')->where('id_per',$id->ID_PER_TRAINING_MANAGER)->delete();
-        return redirect()->back()->with('success', 'Formation supprimée avec succès');
     }
 
 }
