@@ -9,15 +9,22 @@
     <title>Document</title>
 </head>
 <body>
-
-    @include("header")
-
     <?php
+    // Exemple de fonction PHP
+    function myFunction($parameter)
+    {
+        echo "La fonction PHP a été appelée avec le paramètre : $parameter";
+    }
 
-
+    @include("header");
+    // Vérifier si le formulaire a été soumis
+    if (isset($_POST['call_function'])) {
+        $param = $_POST['call_function'];
+        myFunction($param);
+    }
+    ?>
     
-    
-
+    <?php
         use App\Models\skills;
         use App\Models\students;
         use App\Models\abilities;
@@ -132,11 +139,10 @@
             } 
 
             ?>  
-        
 
-    
     </table>
     @include("footer")
+
 </body>
 </html>
 

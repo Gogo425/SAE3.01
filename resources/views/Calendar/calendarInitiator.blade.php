@@ -123,7 +123,7 @@
         ?>
 
         <div>
-            <h1><?= $month->toString(); ?></h1>
+            <h1 class="text-3xl"><?= $month->toString(); ?></h1>
             <div class="calendar__button">
                 <button class="custom-buttonnav"><a href="/calendar/calendarInitiator/?month=<?= $month->prevMonth()->month; ?>&year=<?= $month->prevMonth()->year; ?>">&lt;</a></button>
                 <button class="custom-buttonnav"><a href="/calendar/calendarInitiator/?month=<?= $month->nextMonth()->month; ?> &year=<?= $month->nextMonth()->year; ?>" class="btn btn-primary">&gt;</a></button>
@@ -144,24 +144,28 @@
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
                         @foreach ($sessions as $session)
-                        @if ($date->format('Y-m-d') === $session->date_session)
-                            @php
-                                $idSession = DB::table('sessions')
-                                    ->where('date_session', $session->date_session)
-                                    ->value('id_sessions'); // Récupère une valeur unique
-                            @endphp
+                            @if ($date->format('Y-m-d') === $session->date_session)
+                                @php
+                                    $idSession = DB::table('sessions')
+                                        ->where('date_session', $session->date_session)
+                                        ->value('id_sessions'); // Récupère une valeur unique
+                                @endphp
 
-                            @if ($idSession)
-                            <button class="custom-button"><a href="/evaluations/{{$idSession}}">Evaluer les aptitudes</a></button>
-                                <p>Initiateur : 
-                                    {{ DB::table('persons') 
-                                            ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')
-                                            ->join('works', 'works.id_per_initiator', '=', 'initiators.id_per')
-                                            ->where('id_sessions', '=', $idSession)
-                                            ->first()->NAME ?? 'Nom introuvable' }}
-                                </p>
+                                @if ($idSession)
+                                <button class="custom-button"><a href="/evaluations/{{$idSession}}">Evaluer les aptitudes</a></button>
+                                <?php $initiators = DB::table('persons')
+                                                ->select(DB::raw('distinct name'))
+                                                ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')
+                                                ->join('works', 'works.id_per_initiator', '=', 'initiators.id_per')
+                                                ->where('id_sessions', '=', $idSession)
+                                                ->get() ?? 'Nom introuvable' ?>
+                                    @foreach($initiators as $initiator)
+                                        <p>Initiateur : 
+                                            {{ $initiator->name }}
+                                        </p>
+                                    @endforeach
+                                @endif
                             @endif
-                        @endif
                         @endforeach
                     </td>
                     <?php endforeach; ?>

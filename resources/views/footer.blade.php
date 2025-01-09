@@ -2,7 +2,7 @@
     <div class="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-6 md:space-y-0">
         <!-- Logo Section -->
         <div class="flex flex-col items-center md:items-start">
-            <img src="./img/logo.png" alt="logo" class="w-16 h-16 mb-3">
+            <img src="../img/logo.png" alt="logo" class="w-16 h-16 mb-3">
             <p class="text-sm text-center md:text-left">© 2025 Your Organization. Tous droits réservés.</p>
         </div>
 

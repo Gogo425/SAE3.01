@@ -6,7 +6,7 @@
     <title>@yield('title')</title> 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tailwind.config.js"></script>
-
+    <link href="{{ asset('css/calendar.css') }}" rel="stylesheet">
 </head>
 <body>
    @include("header")

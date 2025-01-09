@@ -95,6 +95,6 @@ class CreateAccountController extends Controller
         Log::info('Fin du traitement du formulaire.');
 
         // Rediriger avec un message de succès
-        return redirect()->back()->with('success', 'Utilisateur enregistré avec succès !');
+        return redirect()->route('')->with('success', 'Utilisateur enregistré avec succès !');
     }
 }

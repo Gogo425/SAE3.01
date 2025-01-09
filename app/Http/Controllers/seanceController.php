@@ -19,7 +19,7 @@ class SeanceController extends Controller
     {
         $d=mktime(11, 14, 54, 8, 12, 2025); //a supp quand params mit
         $date = date("Y-m-d", $d); //a supp quand les params mit
-        $form = 1; //a supp quand les params mit
+        $form = 2; //a supp quand les params mit
 
         $formations = DB::table('formations')->where('id_formation', $form)->get()->collect()->get('0');
 
@@ -122,7 +122,7 @@ class SeanceController extends Controller
         
         $session = new Sessions();
         $session->id_location = $idLocation;
-        $session->id_formation = 1;//valeur fixe pour l'instant
+        $session->id_formation = 2;//valeur fixe pour l'instant
         $session->date_session = $request->dateSession;
         $session->save();
 

@@ -123,7 +123,7 @@
         ?>
 
         <div>
-            <h1><?= $month->toString(); ?></h1>
+            <h1 class="text-3xl"><?= $month->toString(); ?></h1>
             <div class="calendar__button">
                 <button class="custom-buttonnav"><a href="/calendar/calendarStudent/?month=<?= $month->prevMonth()->month; ?>&year=<?= $month->prevMonth()->year; ?>">&lt;</a></button>
                 <button class="custom-buttonnav"><a href="/calendar/calendarStudent/?month=<?= $month->nextMonth()->month; ?> &year=<?= $month->nextMonth()->year; ?>" class="btn btn-primary">&gt;</a></button>

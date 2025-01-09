@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>form_account</title>
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const initiatorRadio = document.getElementById('Initiator');
@@ -39,7 +41,7 @@
 
 </head>
 <body>
-  
+@include("header")
 <form action="{{url('/create-account')}}" method="post" class="">
 <h1>Créer un compte</h1>
   @csrf
@@ -140,6 +142,6 @@
   </div>
 </form>
 
-
+@include("footer")
 </body>
 </html>

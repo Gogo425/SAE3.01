@@ -1,7 +1,7 @@
 <header>
     <menu>
         <div class="flex flex-wrap items-center justify-between p-4 bg-gray-100">
-            <a href="/"><img src="./img/logo.png" alt="logo" class="w-16 h-16 mb-4 md:mb-0"></a>
+            <a href="/"><img src="../img/logo.png" alt="logo" class="w-16 h-16 mb-4 md:mb-0"></a>
             <div class="flex flex-wrap justify-center gap-4 md:flex-nowrap">
                 <?php
                     $id = Auth::id();
@@ -19,20 +19,18 @@
                     }
                     if($trainingManager->count == 1){
                         echo "
-                            <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste des utilisateurs</button>
-                            <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste des séances</button>
-                            <button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Bilan des élèves</button>";
+                            <a href=".route('calendar.calendarDirector')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Consulter l'emploi du temps de votre formation</button></a>";
                     }
                     if($initiator->count == 1){
                         echo "
-                            <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste de mes séances</button>
-                            <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste de mes aptitudes</button>
-                            <button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Evaluer des élèves</button>";
+                            <a href=".route('calendar.calendarInitiator')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Consulter vos séances</button></a>
+                            ";
                     }
                     if($student->count == 1){
                         echo "
                             <a href=".route('tableAbilities')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Mon bilan de la formation</button></a>
-                            <button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste de mes séances</button>";
+                            <a href=".route('calendar.calendarStudents')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Consulter vos séances</button></a>
+                            ";
                     }
                 ?>
                 <a href="/profile">
