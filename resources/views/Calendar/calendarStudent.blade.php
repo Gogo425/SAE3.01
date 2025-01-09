@@ -144,9 +144,23 @@
                         <?php endif; ?>
                         <div class="calendar__day"><?= $date->format('d') ?></div>
                         @foreach ($sessions as $session)
-                            @if($date->format('Y-m-d') === $session->date_session)
-                                <p>{{ $session->date_session }}</p>
+                        @if ($date->format('Y-m-d') === $session->date_session)
+                            @php
+                                $idSession = DB::table('sessions')
+                                    ->where('date_session', $session->date_session)
+                                    ->value('id_sessions'); // Récupère une valeur unique
+                            @endphp
+
+                            @if ($idSession)
+                                <p>Initiateur : 
+                                    {{ DB::table('persons') 
+                                            ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')
+                                            ->join('works', 'works.id_per_initiator', '=', 'initiators.id_per')
+                                            ->where('id_sessions', '=', $idSession)
+                                            ->first()->NAME ?? 'Nom introuvable' }}
+                                </p>
                             @endif
+                        @endif
                         @endforeach
                     </td>
                     <?php endforeach; ?>

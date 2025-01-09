@@ -10,8 +10,7 @@ class CalendarController extends BaseController
 {
     public function calendarDirector (): View 
     {
-        $sessions = DB::table('sessions')->get('date_session');
-        //dd($initiators);
+        $sessions = DB::table('sessions')->get();
         return view('Calendar.calendarFormateur', [
             'sessions' => $sessions
         ]);
@@ -19,7 +18,11 @@ class CalendarController extends BaseController
 
     public function calendarStudents (): View 
     {
-        $sessions = DB::table('sessions')->get('date_session');
+        $sessions = DB::table('sessions')
+        ->select(DB::raw('distinct sessions.id_sessions, date_session'))
+        ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
+        ->join('students', 'students.id_per', '=', 'works.id_per_student')
+        ->get();
         return view('Calendar.calendarStudent', [
             'sessions' => $sessions
         ]);
@@ -27,7 +30,11 @@ class CalendarController extends BaseController
 
     public function calendarInitiator (): View 
     {
-        $sessions = DB::table('sessions')->get();
+        $sessions = DB::table('sessions')
+        ->select(DB::raw('distinct sessions.id_sessions, date_session'))
+        ->join('works', 'works.id_sessions', '=', 'sessions.id_sessions')
+        ->join('initiators', 'initiators.id_per', '=', 'works.id_per_initiator')
+        ->get();
         return view('Calendar.calendarInitiator', [
             'sessions' => $sessions
         ]);
