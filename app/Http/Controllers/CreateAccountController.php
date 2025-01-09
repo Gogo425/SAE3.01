@@ -54,6 +54,7 @@ class CreateAccountController extends Controller
         $user = User::create([
             'id' => $person->id_per,
             'name' => $person->name,
+
             'email' => $person->email,
             'password' => $person->password,
         ]);
@@ -85,7 +86,7 @@ class CreateAccountController extends Controller
             }
 
             else if ($role === 'Student') {
-                Students::create(['id_per' => Persons::count() , 'id_level' => $lvl , 'id_formation' => 2]);
+                Students::create(['id_per' => Persons::count() , 'id_level' => $lvl , 'id_formation' => 1]);
             }
         }
            
