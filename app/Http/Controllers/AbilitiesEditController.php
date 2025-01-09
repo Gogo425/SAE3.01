@@ -17,7 +17,7 @@ class AbilitiesEditController extends Controller
         ->where('id_level',$level)
         ->get();
 
-        return view('?', [
+        return view('AbilitiesEdit', [
             'skills' => $skills,
             'abilities' => $abilities,
         ]);
