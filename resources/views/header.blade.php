@@ -20,7 +20,7 @@
 
                 <?php
                     $id = Auth::id();
-                    
+                    dd($id);
                     $technicalDirectors = DB::select('select count(*) as count from technical_directors where id_per = :id', ['id' => $id])[0];
                     $trainingManager = DB::select('select count(*) as count from training_managers where id_per = :id', ['id' => $id])[0];
                     $initiator =DB::select('select count(*) as count from initiators where id_per = :id', ['id' => $id])[0];
