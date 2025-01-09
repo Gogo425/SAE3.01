@@ -2,6 +2,8 @@
 
 
 use Illuminate\Support\Facades\Hash;
+use App\Http\Controllers\TableAbilitiesController;
+use App\Http\Controllers\TableStudentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CreateAccountController;
 use App\Http\Controllers\SeanceController;
@@ -67,3 +69,8 @@ Route::get('/calendar/calendarInitiator', [App\Http\Controllers\CalendarControll
 Route::get('/calendar', [App\Http\Controllers\CalendarController::class, 'BaseCalendar']);
 Route::get('/calendar/testdays/{newdate}', [App\Http\Controllers\CalendarController::class, 'AddDate']);
 
+
+//Tablestudent routes
+Route::get('/tableAbilities', [TableAbilitiesController::class,'TableAbilitiesPage']);
+Route::get('/tableStudent', [TableStudentController::class,'TableStudentPage']);
+Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);

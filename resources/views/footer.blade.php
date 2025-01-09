@@ -1,32 +1,28 @@
-<footer class="bg-[#ADD8E6] flex flex-col items-center p-5">
-  
-    
-    <img src="./img/logo.png" alt="logo" class="w-32 h-32 ">
+<footer class="bg-gradient-to-r from-blue-500 to-blue-300 text-white p-6">
+    <div class="container mx-auto flex flex-col md:flex-row md:justify-between md:items-center space-y-6 md:space-y-0">
+        <!-- Logo Section -->
+        <div class="flex flex-col items-center md:items-start">
+            <img src="./img/logo.png" alt="logo" class="w-16 h-16 mb-3">
+            <p class="text-sm text-center md:text-left">© 2025 Your Organization. Tous droits réservés.</p>
+        </div>
 
-    <table class="w-full text-center ">
-        <thead>
-            <tr>
-                <th class="p-2">NOM</th>
-                <th class="p-2">A propos</th>
-            </tr>
-        </thead>
-        <tbody>
-             <tr>
-                <td class="p-2">DEMAIMAY Lucas</td>
-                <td class="p-2" rowspan="10">
-                    Si vous voulez d'autres informations, 
-                    <a href="https://ffessm.fr/" target="_blank" class="text-blue-600 underline">cliquez ici</a>.
-                </td>
-            </tr>
-            <tr><td class="p-2">GAUDRE Soren</td></tr>
-            <tr><td class="p-2">JAUBERT Hugo</td></tr>
-            <tr><td class="p-2">BEUVE Leopold</td></tr>
-            <tr><td class="p-2">RAVIDA Lelyan</td></tr>
-            <tr><td class="p-2">RAMDANE Nassim</td></tr>
-            <tr><td class="p-2">PAVY Clemence</td></tr>
-            <tr><td class="p-2">THEAULT Hugo</td></tr>
-            <tr><td class="p-2">PINSON Felix</td></tr>
-        </tbody>
-    </table>
-   
+        <!-- Names Section -->
+        <div class="flex-1">
+            <h4 class="text-lg font-bold mb-2 text-center md:text-left">Équipe</h4>
+            <p class="text-sm text-center md:text-left">
+                DEMAIMAY Lucas, GAUDRE Soren, JAUBERT Hugo, BEUVE Leopold, RAVIDA Lelyan, RAMDANE Nassim, PAVY Clemence, THEAULT Hugo, PINSON Felix
+            </p>
+        </div>
+
+        <!-- About Section -->
+        <div class="text-center md:text-left">
+            <h4 class="text-lg font-bold mb-2">À propos</h4>
+            <p class="text-sm">
+                Pour plus d'informations, 
+                <a href="https://ffessm.fr/" target="_blank" class="text-yellow-300 underline hover:text-yellow-400">cliquez ici</a>.
+            </p>
+        </div>
+    </div>
 </footer>
+
+
