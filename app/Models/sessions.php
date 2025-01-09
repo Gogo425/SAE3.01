@@ -7,8 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sessions extends Model
 {
+    use HasFactory;
     public $table = 'sessions';
-    public $primary_key = 'id_abilities';
+    
+    protected $fillable = ['id_sessions', 'id_location', 'id_formation', 'date_session'];
+
+    public $primary_key = 'ID_SESSIONS';
     public $incrementing = true;
     public $timestamps = false;
 
@@ -16,14 +20,8 @@ class Sessions extends Model
         $abilities = sessions::all()->sortBy('DATE_SESSION');
         return $abilities;
     }
-
-    function selectByForamtion($formation){
-        $abilities = sessions::where('ID_FORMATION',$formation)->get();
+    function selectAllDate(){
+        $abilities = sessions::all()->sortBy('DATE_SESSION');
         return $abilities;
-    }
-
-    function getByDate($date){
-        $session = sessions::where('DATE_SESSION',$date)->select('ID_SESSIONS')->get();
-        return $session;
     }
 }
