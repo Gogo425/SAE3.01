@@ -15,7 +15,6 @@ class CreateFormController extends Controller
 {
 
     public function create(){
-        //dd(DB::table('formations')->where('id_level',3)->first());
         return view('creationFormation', [
 
             'initsLess' => DB::table('initiators')->join('persons','initiators.id_per','=','persons.id_per')->whereNotIn('initiators.id_per',function ($query){
@@ -32,7 +31,6 @@ class CreateFormController extends Controller
             
             'studs' => DB::table('students')->join('persons','students.id_per','=','persons.id_per')->where('students.id_formation',null)->get(),
 
-            
             'forma1' => DB::table('formations')->where('id_level',2)->first(),
             'forma2' => DB::table('formations')->where('id_level',3)->first(),
             'forma3' => DB::table('formations')->where('id_level',4)->first()

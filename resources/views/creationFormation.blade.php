@@ -9,8 +9,10 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
 <body class="bg-light">
+
     <div class="container py-5">
         <h1 class="text-center mb-4">Créer une formation</h1>
 
@@ -26,7 +28,7 @@
             <!-- Niveau de Formation -->
             <div class="mb-3">
                 <label for="id_level" class="form-label">Niveau de Formation :</label>
-                <select class="form-select" name="id_level">
+                <select class="form-select" id="id_level" name="id_level">
                 @if($forma1 === null)
                     <option value="1">1</option>
                 @endif
@@ -54,15 +56,22 @@
                     <div class="text-danger mt-1">{{ $message }}</div>
                 @enderror
             </div>
-
+            initiators-list
             <!-- Initiateurs -->
             <div class="mb-3">
                 <label for="choice_initiateur" class="form-label">Choix des initiateurs :</label>
-                <div>
+                <div id="initiators-list">
                     @foreach ($inits as $init)
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="{{$init->ID_PER}}" id="init-{{$init->ID_PER}}" name="inits[]">
-                            <label class="form-check-label" for="init-{{$init->ID_PER}}">{{$init->NAME}} {{$init->SURNAME}}</label>
+                            <input type="checkbox"
+                                    class="form-check-input" 
+                                    value="{{$init->ID_PER}}" 
+                                    id="init-{{$init->ID_PER}}" 
+                                    name="inits[]"
+                                    data-level="{{ $init->ID_LEVEL }}">
+                            <label class="form-check-label" for="init-{{$init->ID_PER}}">
+                                {{$init->NAME}} {{$init->SURNAME}}
+                            </label>
                         </div>
                     @endforeach
                 </div>
@@ -71,11 +80,18 @@
             <!-- Élèves -->
             <div class="mb-3">
                 <label for="choice_students" class="form-label">Choix des élèves :</label>
-                <div>
+                <div id="students-list">
                     @foreach ($studs as $stud)
                         <div class="form-check">
-                            <input type="checkbox" class="form-check-input" value="{{$stud->ID_PER}}" id="stud-{{$stud->ID_PER}}" name="studs[]">
-                            <label class="form-check-label" for="stud-{{$stud->ID_PER}}">{{$stud->NAME}} {{$stud->SURNAME}}</label>
+                            <input type="checkbox" 
+                                    class="form-check-input" 
+                                    value="{{$stud->ID_PER}}" 
+                                    id="stud-{{$stud->ID_PER}}" 
+                                    name="studs[]"
+                                    data-level="{{ $stud->ID_LEVEL }}">
+                            <label class="form-check-label" for="stud-{{$stud->ID_PER}}">
+                                {{$stud->NAME}} {{$stud->SURNAME}}
+                            </label>
                         </div>
                     @endforeach
                 </div>
@@ -99,6 +115,7 @@
         </form>
     </div>
 
+    <script src="{{ asset('js/formation.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
