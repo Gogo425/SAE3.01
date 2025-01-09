@@ -1,3 +1,4 @@
+
 <?php
 
 namespace App\Models;
@@ -19,25 +20,22 @@ class Evaluations extends Model
         'id_status',
         'observations'
     ];
-
     public $timestamps = false;
-
 
     function getObservation($session,$abiliti ,$student){
         $evals = Evaluations::where('ID_SESSIONS',$session)->where('ID_PER_STUDENT',$student)->where('ID_ABILITIES', $abiliti)->get();
         return $evals;
     }
-
     function getEvaluationsStudent($idStudent, $abiliti){
-        
+       
         $obeservations = Evaluations::where('ID_PER_STUDENT',$idStudent)->where('ID_ABILITIES',$abiliti)->get();
-        
+       
         $idStatus = [];
         foreach($obeservations as $ob){
             array_push($idStatus, $ob->ID_STATUS);
         }
         $nb = 0;
-        
+       
         foreach($idStatus as $statu){
             if($statu == 3){
                 $nb = $nb+1;
@@ -48,8 +46,8 @@ class Evaluations extends Model
                 return true;
             }
         }
-        
+       
         return false;
     }
-
 }
+
