@@ -107,6 +107,8 @@ Route::prefix('/formation')->name('formation')->controller(FormController::class
 
 Route::get('/formation',[FormController::class,'create'])->name('formation');
 
+Route::get('/votreFormation',[FormController::class,'createUnique'])->name('formationUnique');
+
 Route::delete('/formation/{ID_FORMATION}',[FormController::class, 'deleteFormation'])->name('formation.delete');
 
 Route::get('/detailsSessions/{idSession}',[SeanceController::class, 'getDetails'])->name('detailsSessions');
@@ -117,3 +119,4 @@ Route::get('/StudentsInitiatorsFormations', [FormController::class, 'getStudents
 Route::get('/abilities', [AbilitiesEditController::class, 'index'])->name('abilities.index');
 //Route::get('/abilities/{level}', [AbilitiesEditController::class, 'index'])->name('abilities.index');
 Route::put('/abilities/{id}', [AbilitiesEditController::class, 'update'])->name('abilities.update');
+
