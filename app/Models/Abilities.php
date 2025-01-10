@@ -8,6 +8,7 @@ class Abilities extends Model
     public $primary_key = 'id_abilities';
     public $incrementing = true;
     public $timestamps = false;
+
     function selectAllTable(){
         $abilities = abilities::all()->sortBy('ID_SKILLS');
         return $abilities;

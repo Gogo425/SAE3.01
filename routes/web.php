@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbilitiesEditController;
+
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\TableAbilitiesController;
 use App\Http\Controllers\TableStudentController;
@@ -114,6 +115,7 @@ Route::delete('/formation/{ID_FORMATION}',[FormController::class, 'deleteFormati
 Route::get('/detailsSessions/{idSession}',[SeanceController::class, 'getDetails'])->name('detailsSessions');
 
 Route::get('/StudentsInitiatorsFormations', [FormController::class, 'getStudentsAndInitators'])->name('listStudentsInitiators');
+
 
 //abilities_edit routes
 Route::get('/abilities', [AbilitiesEditController::class, 'index'])->name('abilities.index');

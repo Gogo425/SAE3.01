@@ -16,5 +16,4 @@ class Skills extends Model
         $skills = skills::where('id_level',$levelID)->orderby('id_skills')->get();
         return $skills;
     }
-
 }
