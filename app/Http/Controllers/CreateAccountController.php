@@ -36,7 +36,7 @@ class CreateAccountController extends Controller
             'password' => 'required|min:6|confirmed', // Password is required, min length is 6, must match confirmation
             'licence_number' => [
                 'required',
-                'regex:/^[A-Z]-\d{2}-\d{6}$/', // Licence number must match the specified pattern
+                'regex:/^A-\d{2}-\d{6}$/', // Licence number must match the specified pattern
             ],
             'medical_certificate_date' => 'required|date', // Medical certificate date is required and must be a valid date
             'birth_date' => 'required|date', // Birth date is required and must be a valid date
