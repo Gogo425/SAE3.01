@@ -21,7 +21,7 @@ use App\Http\Controllers\AuthController;
 // Home route
 Route::get('/', function () {
     return view('home');
-})->middleware('auth');
+})->middleware('auth') -> name('home');
 
 Route::prefix('/seance')->name('seance.')->controller(SeanceController::class)->group(function() {
 

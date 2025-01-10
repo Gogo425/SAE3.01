@@ -16,23 +16,36 @@ class AuthController extends Controller
 
     public function doLogin(Request $request){
         
-        if(Auth::attempt([
-            'email' => $request['email'],
-            'password' => $request['password']
-        ])){
+        if (Auth::attempt($request->only('email', 'password'))) {
             session()->regenerate();
+            return  redirect()->route('home')->with('sucess', 'Session ajouté avec succès');        }
+    
 
-            return view('home');
-        }
+     
+            $user = User::where('email', $request->email)->first();
 
-        return view('login');
+            if (!$user) {
+                return redirect()->route('login')->withErrors([
+                    'email' => 'Il n\'y a pas de compte avec cette adresse mail',
+                ]);
+            }
+        
+            
+            if (!Hash::check($request->password, $user->password)) {
+                
+                return redirect()->route('login')->withErrors([
+                    'password' => 'Le mot de passe est incorrect.',
+                ]);
+            }
+
+
     }
 
     public function doLogout(){
 
         Auth::logout();
 
-        return redirect('/login');
+        return view('login');
     }
 
 }
