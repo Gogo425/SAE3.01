@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tailwind.config.js"></script>
+    <script defer src="../js/homePage.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const initiatorRadio = document.getElementById('Initiator');

@@ -2,7 +2,7 @@
     <nav class="max-w-5xl mx-auto p-6 flex items-center justify-between flex-wrap">
        
         <a href="/">
-            <img src="../img/logo.png" alt="logo" class="w-16 h-16">
+            <img style="float" src="../img/logo.png" alt="logo" class="w-16 h-16">
         </a>
 
         

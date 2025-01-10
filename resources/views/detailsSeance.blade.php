@@ -7,6 +7,7 @@
     <!-- Lien CDN Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tailwind.config.js"></script>
+    <script defer src="../js/homePage.js"></script>
 </head>
 <body>
 

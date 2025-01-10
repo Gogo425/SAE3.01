@@ -6,6 +6,7 @@
     <link href="{{ asset('css/calendar.css') }}" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="../js/tailwind.config.js"></script>
+    <script defer src="../js/homePage.js"></script>
     <title>@yield('title')</title>
 </head>
 <body>
