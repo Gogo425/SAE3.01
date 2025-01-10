@@ -6,14 +6,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/sessionStyle.css') }}">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="../js/tailwind.config.js"></script>
 
         <title>Création d'une séance</title>
     </head>
-    <header>
-        <img src="{{ asset('img/logo.png') }}" alt="logo"/>
-        <button>Profil</button>
-        <button>Déconnexion</button>
-    </header>
+    @include('header')
     <body>
         @if(session('success'))
             <p style="color: green;">{{session('success')}}</p>
@@ -39,8 +38,8 @@
             <br>
             <div id="students">
                 @foreach($students as $index => $student)
-                    <div id='student_{{ $index + 1 }}'>
-                        <select name="student{{ $index + 1 }}" id="student{{ $index + 1 }}"> <!--vérifier qu'il n'y est pas 2 fois le même élève-->
+                    <div class="student" id='student_{{ $index + 1 }}'>
+                        <select class="nomStudent" name="student{{ $index + 1 }}" id="student{{ $index + 1 }}"> <!--vérifier qu'il n'y est pas 2 fois le même élève-->
                             <option value="{{ $student->NAME }}">{{ $student->NAME }}</option>
                         </select>
 
@@ -88,13 +87,16 @@
                 @endforeach
             </div>
 
-            <button type="submit">Créer une séance</button>
+            <!-- Button container with both buttons aligned horizontally -->
+            <div class="form-buttons">
+                <button id="studentButton" type="submit">Créer une séance</button>
+                <button type="button" id="cancelButton">Annuler</button> <!-- Cancel button to return to home or previous page -->
+            </div>
         </form>
-        <!--<button onclick="addStudent()">Ajouter un elève</button>-->
-        <button>Annuler</button> <!--revenir à l'accueil-->
 
 
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/bootstrap.js') }}"></script>
+        @include('footer')
     </body>
 </html>

@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\TrainingManagers;
+use App\Models\TechnicalDirectors;
 use Illuminate\Http\Request;
 
-class Training_managersController extends Controller
+class TechnicalDirectorsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class Training_managersController extends Controller
      */
     public function index()
     {
-        return TrainingManagers::all();
+        return TechnicalDirectors::all();
     }
 
     /**
@@ -37,7 +37,7 @@ class Training_managersController extends Controller
      */
     public function show($id)
     {
-        return TrainingManagers::where('ID_PER', $id)->get();
+        return TechnicalDirectors::where('ID_PER', $id)->get();
     }
 
     /**

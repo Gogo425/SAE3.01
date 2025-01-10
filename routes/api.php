@@ -14,8 +14,8 @@ use App\Http\Controllers\Api\SessionsController;
 use App\Http\Controllers\Api\SkillsController;
 use App\Http\Controllers\Api\StatusController;
 use App\Http\Controllers\Api\StudentsController;
-use App\Http\Controllers\Api\Technical_directorsController;
-use App\Http\Controllers\Api\Training_managersController;
+use App\Http\Controllers\Api\TechnicalDirectorsController;
+use App\Http\Controllers\Api\TrainingManagersController;
 use App\Http\Controllers\Api\TrainsController;
 use App\Http\Controllers\Api\WorksController;
 
@@ -45,8 +45,8 @@ Route::apiResource('locations', LocationsController::class);
 Route::apiResource('sessions', SessionsController::class);
 Route::apiResource('skills', SkillsController::class);
 Route::apiResource('status', StatusController::class);
-Route::apiResource('technical_directors', Technical_directorsController::class);
-Route::apiResource('training_managers', Training_managersController::class);
+Route::apiResource('technical_directors', TechnicalDirectorsController::class);
+Route::apiResource('training_managers', TrainingManagersController::class);
 Route::apiResource('trains', TrainsController::class);
 Route::apiResource('works', WorksController::class);
 
