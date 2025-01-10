@@ -2,11 +2,11 @@
     <nav class="max-w-5xl mx-auto p-6 flex items-center justify-between flex-wrap">
        
         <a href="/">
-            <img style="float" src="../img/logo.png" alt="logo" class="w-16 h-16">
+            <img src="../img/logo.png" alt="logo" class="w-16 h-16">
         </a>
 
         
-        <button id="burger" class="block md:hidden focus:outline-none">
+        <button id="burger" class="block  focus:outline-none">
             <span class="hamburger-line bg-gray-800 block w-6 h-0.5 mb-1 gap-6"></span>
             <span class="hamburger-line bg-gray-800 block w-6 h-0.5 mb-1"></span>
             <span class="hamburger-line bg-gray-800 block w-6 h-0.5"></span>
