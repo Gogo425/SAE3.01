@@ -1,16 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+    // Selected level for the formation
     const levelSelect = document.getElementById("id_level");
 
+    // Selected students
     const studentsContainer = document.getElementById("students-list");
     const students = studentsContainer.querySelectorAll(".form-check input");
 
+    // Selected initiators
     const initiatorsContainer = document.getElementById("initiators-list");
     const initiators = initiatorsContainer.querySelectorAll(".form-check input");
 
+    // The selected training manager
     const responsibleSelect = document.querySelector("select[name='name']");
 
-    // Fonction pour filtrer les élèves en fonction du niveau sélectionné
+    /**
+     * Function to filter students by selected level
+     * @author @hugotheault
+     */
     function filterStudentsByLevel() {
         const selectedLevel = parseInt(levelSelect.value);
 
@@ -25,7 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Fonction pour filtrer les initiateurs
+    /**
+     * Function to filter initiators
+     * @author @hugotheault
+     */
     function filterInitiatorsByLevel() {
         const selectedLevel = parseInt(levelSelect.value);
 
@@ -33,15 +43,23 @@ document.addEventListener("DOMContentLoaded", function () {
             const initiatorLevel = parseInt(initiator.getAttribute("data-level"));
             const selectedResponsible = responsibleSelect.value;
 
-            if (initiatorLevel > selectedLevel && initiator.value !== selectedResponsible) {
-                initiator.closest(".form-check").style.display = "block";
+            if(initiatorLevel >= selectedLevel && initiator.value !== selectedResponsible){
+                if (initiatorLevel > selectedLevel + 1) {
+                    initiator.closest(".form-check").style.display = "block";
+                }
+                if(selectedLevel == 2 && initiatorLevel == 3){
+                    initiator.closest(".form-check").style.display = "block";
+                }
             } else {
                 initiator.closest(".form-check").style.display = "none";
             }
         });
     }
 
-    // Fonction pour limiter le nombre d'élèves cochés
+    /**
+     * Function to limit the number of students you can select
+     * @author @hugotheault
+     */
     function limitStudentSelection() {
         const checkedInitiators = Array.from(initiators).filter(init => init.checked).length;
         const maxStudents = checkedInitiators * 2;
@@ -61,7 +79,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Fonction pour filtrer les responsables de formation
+    /**
+     * Function to filter the training managers
+     * @author @hugotheault
+     */
     function filterResponsiblesByLevel() {
         const selectedLevel = parseInt(levelSelect.value);
 
@@ -70,36 +91,50 @@ document.addEventListener("DOMContentLoaded", function () {
         initiators.forEach(initiator => {
             const initiatorLevel = parseInt(initiator.getAttribute("data-level"));
 
-            if (initiatorLevel > selectedLevel + 1) {
-                const option = document.createElement("option");
+            if (initiatorLevel >= selectedLevel ) {
+                if(selectedLevel == 2 && initiatorLevel == 3){
+                    const option = document.createElement("option");
                 option.value = initiator.value;
                 option.textContent = initiator.closest(".form-check").querySelector("label").textContent;
                 responsibleSelect.appendChild(option);
+                }
+                if(initiatorLevel > selectedLevel + 1) {
+                    const option = document.createElement("option");
+                option.value = initiator.value;
+                option.textContent = initiator.closest(".form-check").querySelector("label").textContent;
+                responsibleSelect.appendChild(option);
+                }
             }
         });
 
-        // Appeler la fonction pour synchroniser la liste des initiateurs
+        // Call function to synchronize initiators list
         filterInitiatorsByLevel();
     }
 
-    // Fonction pour synchroniser les initiateurs avec le responsable sélectionné
+    /**
+     * Call function to synchronize initiators with the selectted training manager
+     * @author @hugotheault
+     */
     function syncInitiatorsWithResponsible() {
         filterInitiatorsByLevel();
     }
 
-    // **Nouvelle fonction pour décocher toutes les cases**
+    /**
+     * Function to uncheck all boxes
+     * @author @hugotheault
+     */
     function uncheckAllCheckboxes() {
         students.forEach(student => {
             student.checked = false;
-            student.disabled = false; // Réinitialise le statut désactivé
+            student.disabled = false; 
         });
         initiators.forEach(initiator => {
             initiator.checked = false;
-            initiator.disabled = false; // Réinitialise le statut désactivé
+            initiator.disabled = false;
         });
     }
 
-    // Ajouter des écouteurs pour surveiller les changements
+    // Add listener to monitor changes
     levelSelect.addEventListener("change", () => {
         filterStudentsByLevel();
         filterInitiatorsByLevel();
@@ -109,8 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
     initiators.forEach(initiator => initiator.addEventListener("change", limitStudentSelection));
     students.forEach(student => student.addEventListener("change", limitStudentSelection));
 
-    // Appliquer les filtres et restrictions au chargement initial
-    uncheckAllCheckboxes(); // Décoche toutes les cases au chargement
+    // Apply filters and restrictions to the initial load
+    uncheckAllCheckboxes(); 
     filterStudentsByLevel();
     filterInitiatorsByLevel();
     filterResponsiblesByLevel();
