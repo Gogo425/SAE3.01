@@ -11,7 +11,11 @@
 <body>
 
     @include("header")
-
+    @if(session('popup'))
+        <script type="text/javascript">
+            alert("{{ session('popup') }}");
+        </script>
+    @endif
     <?php
 
 
@@ -121,6 +125,13 @@
                         </button>
                     </form>';
                     }else {
+                        echo '<form method="POST" action="' . route('validate') . '" >
+                        ' . csrf_field() . '
+                         <input type="hidden" name="student_id" value="' . $id . '">
+                        <button type="submit" class="btn btn-valid">
+                            <span class="icon valid"></span> Valider
+                        </button>
+                    </form>';
                         echo '<div class="button-container">
                             <button class="btn btn-in-progress" disabled>
                                 <span class="icon in-progress"></span> En cours
