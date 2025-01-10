@@ -36,4 +36,8 @@ Route::prefix('/formation')->name('formation')->controller(FormController::class
 
 Route::get('/formation',[FormController::class,'create'])->name('formation');
 
+Route::get('/votreFormation',[FormController::class,'createUnique'])->name('formationUnique');
+
 Route::delete('/formation/{ID_FORMATION}',[FormController::class, 'deleteFormation'])->name('formation.delete');
+
+

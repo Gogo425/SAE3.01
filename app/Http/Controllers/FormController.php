@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 // Import of the different models
 use App\Models\Formation;
@@ -27,6 +28,29 @@ class FormController extends Controller
             
             // The list of formations
             'forms' => DB::table('formations')->get(),
+
+            // The list of initiators join with their identification in the table 'persons'
+            'inits' => DB::table('initiators')->join('trains','initiators.id_per','=','trains.id_per_initiator')->join('persons','initiators.id_per','=','persons.id_per')->get(),
+            
+            // The list of persons
+            'pers' => DB::table('persons')->get(),
+
+            // The list of students join with their identification in the table 'persons'
+            'studs' => DB::table('students')->join('persons','students.id_per','=','persons.id_per')->get(),
+
+            // The list of sessions
+            'sessions' => DB::table('sessions'),
+
+            // The number of formations in the database (max = 3)
+            'nbFormations' => DB::table('formations')->count('id_formation')
+        ]);
+    }
+
+    public function createUnique(){
+        return view('formationUnique', [
+
+            // The list of formations
+            'form' => DB::table('formations')->join('students','formations.id_formation','=','students.id_formation')->where('id_per',Auth::id()),
 
             // The list of initiators join with their identification in the table 'persons'
             'inits' => DB::table('initiators')->join('trains','initiators.id_per','=','trains.id_per_initiator')->join('persons','initiators.id_per','=','persons.id_per')->get(),

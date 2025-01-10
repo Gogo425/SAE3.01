@@ -49,7 +49,20 @@
                 <label for="name" class="form-label">Choix du responsable de formation :</label>
                 <select class="form-select" name="name">
                     @foreach ($initsLess as $initLess)
-                        <option value="{{$initLess->NAME}}">{{$initLess->NAME}} {{$initLess->SURNAME}}</option>
+                        <option value="{{$initLess->NAME}}">
+                            {{$initLess->NAME}} 
+                            {{$initLess->SURNAME}}
+                            | Niveau
+                            @if($initLess->ID_LEVEL == 5)
+                                MF1
+                            @elseif($initLess->ID_LEVEL == 6)
+                                MF2
+                            @elseif($initLess->ID_LEVEL == 7)
+                                MF3
+                            @else
+                                {{$initLess->ID_LEVEL-1}}
+                            @endif
+                        </option>
                     @endforeach
                 </select>
                     @error('email')
@@ -70,7 +83,7 @@
                                     name="inits[]"
                                     data-level="{{ $init->ID_LEVEL }}">
                             <label class="form-check-label" for="init-{{$init->ID_PER}}">
-                                {{$init->NAME}} {{$init->SURNAME}}
+                                {{$init->NAME}} {{$init->SURNAME}} | Niveau {{$init->ID_LEVEL-1}}
                             </label>
                         </div>
                     @endforeach
@@ -90,7 +103,7 @@
                                     name="studs[]"
                                     data-level="{{ $stud->ID_LEVEL }}">
                             <label class="form-check-label" for="stud-{{$stud->ID_PER}}">
-                                {{$stud->NAME}} {{$stud->SURNAME}}
+                                {{$stud->NAME}} {{$stud->SURNAME}} | Niveau {{$stud->ID_LEVEL-1}}
                             </label>
                         </div>
                     @endforeach

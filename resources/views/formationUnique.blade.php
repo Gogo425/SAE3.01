@@ -20,7 +20,6 @@
                 </div>
             @endif
 
-            @foreach ($forms as $form)
                 <div class="card mb-4 shadow-sm">
                     <div class="card-body">
 
@@ -48,7 +47,6 @@
                             </strong> 
                                 {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->NAME }} 
                                 {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->SURNAME }}
-                            
                         </p>
 
                         <!-- Initiators -->
@@ -80,28 +78,8 @@
                                 <br>
                             @endforeach
                         </p>
-
-                        <!-- Delete button -->
-                        @if($sessions->where('ID_FORMATION',$form->ID_FORMATION)->count() == 0)
-                        <div class="d-flex">
-                            <form action="{{ route('formation.delete', $form->ID_FORMATION) }}" method="POST" class="me-2">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette formation?')">Supprimer</button>
-                            </form>
-                        </div>
-                        @endif
-
                     </div>
                 </div>
-            @endforeach
-
-        @if($nbFormations < 3)
-        <div class="text-center">
-            <a href="creationFormation" class="btn btn-primary">Ajouter une formation</a>
-        </div>
-        @endif
-
     </div>
 
     <!-- adding the JavaScript -->
