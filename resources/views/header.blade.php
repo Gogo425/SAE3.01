@@ -15,7 +15,9 @@
                         echo "
                             <a href=".route('liste')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste des utilisateurs</button></a>
                             <a href=".route('formation')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Liste des formations</button></a>
-                            <a href=".route('tableStudent')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Bilan des élèves</button></a>";
+                            <a href=".route('tableStudent')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Bilan des élèves</button></a>
+                            <a href=".route('abilities.index')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Gestion des aptitudes</button></a>
+                            ";
                     }
                     if($trainingManager->count == 1){
                         echo "
