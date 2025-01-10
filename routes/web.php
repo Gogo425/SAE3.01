@@ -92,7 +92,6 @@ Route::post('/tableStudent',[TableStudentController::class,'TableStudentPage']);
 Route::post('/validate',[ValidateController::class, 'levelUp'])->name('validate');
 
 
-<<<<<<< HEAD
 Route::prefix('/creationFormation')->name('creationFormation')->controller(ControllersCreateFormController::class)->group(function () {
 
     Route::get('/','create')->name('create');
@@ -115,9 +114,5 @@ Route::get('/detailsSessions/{idSession}',[SeanceController::class, 'getDetails'
 
 Route::get('/StudentsInitiatorsFormations', [FormController::class, 'getStudentsAndInitators'])->name('listStudentsInitiators');
 
-=======
-
-
 //abilities_edit routes
 Route::get('/abilities/{level}', [EvaluationController::class, 'index'])->name('ablities_edit');
->>>>>>> comment_code
