@@ -97,11 +97,11 @@ use Illuminate\Support\Facades\DB;
                         $descStatus = (new status)->getDesc($idStatus);
                         foreach($descStatus as $desc){
                             $case = $case . $desc->DESCRIPTION;
-                            if($case == "Non évalué") {
+                            if($case == "non évaluée") {
                                 $class = "non-evalue"; // Gris
-                            } elseif ($case == "En cours") {
+                            } elseif ($case == "en cours d'acquisition") {
                                 $class = "en-cours"; // Orange
-                            } elseif ($case == "Acquis") {
+                            } elseif ($case == "acquise") {
                                 $class = "acquis"; // Vert
                             }
                         }
