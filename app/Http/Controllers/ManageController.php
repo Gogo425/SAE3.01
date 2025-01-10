@@ -11,9 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class ManageController extends Controller
 {
+     /**
+     * Display lists of students, initiators, training managers, and persons to the link with the type persons.
+     *
+     * @return \Illuminate\View\View Returns the 'manage' view with data for users.
+     */
+
     public function index()
     {
         
+        // Retrieve students with their associated details
         $students = DB::table('students')
         ->join('persons', 'students.id_per', '=', 'persons.id_per')
         ->join('levels','students.id_level', '=', 'levels.id_level')
@@ -22,7 +29,7 @@ class ManageController extends Controller
 
 
       
-        
+        // Retrieve initiators with their associated details
         $initiators = DB::table('initiators')->join('persons', 'initiators.ID_PER', '=', 'persons.ID_PER')
         ->join('levels','initiators.id_level', '=', 'levels.id_level')
         ->leftJoin('training_managers', 'training_managers.ID_PER', '=', 'persons.ID_PER') 
@@ -32,8 +39,10 @@ class ManageController extends Controller
         ->select('initiators.*', 'persons.name', 'persons.surname', 'persons.email','persons.licence_number','persons.medical_certificate_date','persons.birth_date','persons.adress','levels.description', 'levels.id_level')
         ->get();
 
+         // Retrieve all persons
         $persons = DB::table('persons')->get();
 
+        // Retrieve training managers with their associated details
         $training_managers = DB::table('training_managers')
         ->join('initiators', 'initiators.ID_PER', '=', 'training_managers.ID_PER')
         ->join('persons', 'initiators.ID_PER', '=', 'persons.ID_PER')
@@ -50,17 +59,41 @@ class ManageController extends Controller
 
     }
 
+      /**
+     * Delete a student by their ID.
+     *
+     * @param int $ID_PER The student's ID.
+     * @return \Illuminate\Http\RedirectResponse Redirects back with a success message.
+     */
+
     public function manageDeleteStudent($ID_PER) {
         $student = Students::where('ID_PER', $ID_PER)->firstOrFail();
         $student->delete();
         return redirect()->back()->with('success', 'Élève supprimé avec succès.');
     }
 
+
+      /**
+     * Delete an initiator by their ID.
+     *
+     * @param int $ID_PER The initiator's ID.
+     * @return \Illuminate\Http\RedirectResponse Redirects back with a success message.
+     */
+
     public function manageDeleteInitiator($ID_PER) {
         $initiators = Initiators::where('ID_PER', $ID_PER)->firstOrFail();
         $initiators->delete();
         return redirect()->back()->with('success', 'Initiateur supprimé avec succès.');
     }
+
+      /**
+     * Delete a training manager by their ID.
+     *
+     * Handles cascading deletions for associated formations, sessions, and evaluations.
+     *
+     * @param int $ID_PER The training manager's ID.
+     * @return \Illuminate\Http\RedirectResponse Redirects back with a success message.
+     */
 
     public function manageDeleteTrainingManager($ID_PER) {
 
@@ -89,38 +122,47 @@ class ManageController extends Controller
     }
 
 
+    /**
+     * Display the edit form for a user.
+     *
+     * Retrieves user details, their current level (if a student or initiator), and all available levels.
+     *
+     * @param int $ID_PER The user's ID.
+     * @return \Illuminate\View\View Returns the 'edit' view with user data.
+     */
+
     public function editUser($ID_PER)
 {
-    // Récupérer les informations de la personne
+    // Recupe the persons informations
     $user = DB::table('persons')->where('ID_PER', $ID_PER)->first();
 
     if (!$user) {
         return redirect()->back()->with('error', 'Personne introuvable.');
     }
 
-    // Vérifier si c'est un étudiant
+    // check if it's a student
     $studentLevel = DB::table('students')
         ->join('levels', 'students.id_level', '=', 'levels.id_level')
         ->select('levels.description', 'levels.id_level')
         ->where('students.ID_PER', $ID_PER)
         ->first();
 
-    // Vérifier si c'est un initiateur
+    // check if it's a initiator
     $initiatorLevel = DB::table('initiators')
         ->join('levels', 'initiators.id_level', '=', 'levels.id_level')
         ->select('levels.description', 'levels.id_level')
         ->where('initiators.ID_PER', $ID_PER)
         ->first();
 
-    // Récupérer tous les niveaux disponibles
+    // Recup all levels
     $levels = DB::table('levels')->get();
 
-    // Déterminer le niveau à afficher
+    //find the levels of the current person
     $currentLevel = null;
     if ($studentLevel) {
-        $currentLevel = $studentLevel; // Niveau étudiant
+        $currentLevel = $studentLevel; //level student
     } elseif ($initiatorLevel) {
-        $currentLevel = $initiatorLevel; // Niveau initiateur
+        $currentLevel = $initiatorLevel; // level initiator
     }
 
     //dd($currentLevel);
@@ -135,7 +177,7 @@ class ManageController extends Controller
 
 
     public function updateUser(Request $request, $ID_PER){
-    // Validation des données
+    // Validation datas
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
@@ -144,7 +186,7 @@ class ManageController extends Controller
             'medical_certificate_date' => 'required|date',
             'birth_date' => 'required|date',
             'licence_number' => ['required', 
-            'regex:/^[A-Z]-\d{2}-\d{6}$/',
+            'regex:/^A-\d{2}-\d{6}$/',
             ],
             'level_id' => 'required|exists:levels,id_level',
         ]);
@@ -163,13 +205,16 @@ class ManageController extends Controller
                 'licence_number' =>$validatedData['licence_number'],
             ]);
 
+
+            //insert a new level if its a student
             $student = DB::table('students')->where('ID_PER', $ID_PER)->first();
             if ($student != null) {
                 DB::table('students')->where('ID_PER', $ID_PER)->update([
                     'id_level' => $validatedData['level_id'],
                 ]);
             }
-        
+            
+            //insert a new level if its a initiator
             $initiator = DB::table('initiators')->where('ID_PER', $ID_PER)->first();
     
             if ($initiator != null) {
