@@ -9,8 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    
-    public function login(){
+    /**
+     * Show the login page.
+     */
+    public function login()
+    {
+        // Return the login view to the user
         return view('login');
     }
 
@@ -38,14 +42,16 @@ class AuthController extends Controller
                 ]);
             }
 
-
     }
 
-    public function doLogout(){
-
+    /**
+     * Handle user logout.
+     */
+    public function doLogout()
+    {
+        // Log out the currently authenticated user
         Auth::logout();
 
         return view('login');
     }
-
 }
