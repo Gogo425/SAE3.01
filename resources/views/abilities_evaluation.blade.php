@@ -50,37 +50,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Parcourir tous les élèves et leurs compétences -->
-     @foreach($eleves as $eleve)
-    @foreach($abilities as $ability)
-        <tr>
-            <!-- Hidden field for student ID -->
-            <input type="hidden" name="id[{{ $eleve->ID_PER }}]" value="{{ $eleve->ID_PER }}">
+    @foreach($eleves as $eleve)
+        @foreach($eleve->abilities as $ability)
+            <tr>
+                <!-- Hidden field for student ID -->
+                <input type="hidden" name="id[{{ $eleve->id_per }}]" value="{{ $eleve->id_per }}">
 
+                <!-- Ability ID -->
+                <input type="hidden" name="ability[{{ $eleve->id_per }}][{{ $ability->id_abilities }}]" value="{{ $ability->id_abilities }}">
 
-            <!-- Ability ID -->
-            <input type="hidden" name="ability[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" value="{{ $ability->ID_ABILITIES }}">
-
-            <td>{{ $eleve->SURNAME }} {{ $eleve->NAME }}</td>
-            <td>
-                <input type="hidden" name="description[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" value="{{ $ability->DESCRIPTION }}">
-                {{ $ability->DESCRIPTION }}
-            </td>
-            <td>
-                <select name="status[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" class="form-control" required>
-                    @foreach($status as $sta)
-                        <option value="{{ $sta->ID_STATUS }}">{{ $sta->DESCRIPTION }}</option>
-                    @endforeach
-                </select>
-            </td>
-            <td>
-                <input type="text" name="observations[{{ $eleve->ID_PER }}][{{ $ability->ID_ABILITIES }}]" class="form-control" placeholder="Observation (optionnel)">
-            </td>
-        </tr>
+                <td>{{ $eleve->surname }} {{ $eleve->name }}</td>
+                <td>
+                    <input type="hidden" name="description[{{ $eleve->id_per }}][{{ $ability->id_abilities }}]" value="{{ $ability->description }}">
+                    {{ $ability->description }}
+                </td>
+                <td>
+                    <select name="status[{{ $eleve->id_per }}][{{ $ability->id_abilities }}]" class="form-control" required>
+                        @foreach($status as $sta)
+                            <option value="{{ $sta->ID_STATUS }}">{{ $sta->DESCRIPTION }}</option>
+                        @endforeach
+                    </select>
+                </td>
+                <td>
+                    <input type="text" name="observations[{{ $eleve->id_per }}][{{ $ability->id_abilities }}]" class="form-control" placeholder="Observation (optionnel)">
+                </td>
+            </tr>
+        @endforeach
     @endforeach
-@endforeach
-
-                </tbody>
+</tbody>
             </table>
         </div>
 

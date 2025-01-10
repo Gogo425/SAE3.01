@@ -74,11 +74,12 @@
     <!-- Formulaire pour sélectionner le niveau -->
     <form method="POST" action="">
         @csrf
-        <label for="level">Select Level:</label>
+        <label for="level">Choisir niveau:</label>
         <select name="level" id="level" onchange="this.form.submit()">
-            <option value="1" <?= $levelSelected == 1 ? 'selected' : '' ?>>Level 1</option>
-            <option value="2" <?= $levelSelected == 2 ? 'selected' : '' ?>>Level 2</option>
-            <option value="3" <?= $levelSelected == 3 ? 'selected' : '' ?>>Level 3</option>
+            <option value="1" <?= $levelSelected == 1 ? 'selected' : '' ?>>pas de Niveau</option>
+            <option value="2" <?= $levelSelected == 2 ? 'selected' : '' ?>>N1</option>
+            <option value="3" <?= $levelSelected == 3 ? 'selected' : '' ?>>N2</option>
+            <option value="4" <?= $levelSelected == 4 ? 'selected' : '' ?>>N3</option>
         </select>
     </form>
 <table>
