@@ -15,7 +15,7 @@ class FormationsController extends Controller
      */
     public function index()
     {
-        Formations::all();
+        return Formations::all();
     }
 
     /**

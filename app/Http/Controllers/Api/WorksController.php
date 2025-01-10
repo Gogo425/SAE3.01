@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Works;
 use Illuminate\Http\Request;
 
 class WorksController extends Controller
@@ -14,7 +15,7 @@ class WorksController extends Controller
      */
     public function index()
     {
-        //
+        return Works::all();
     }
 
     /**

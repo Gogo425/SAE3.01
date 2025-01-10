@@ -15,7 +15,7 @@ class EvaluationsController extends Controller
      */
     public function index()
     {
-        Evaluations::all();
+        return Evaluations::all();
     }
 
     /**

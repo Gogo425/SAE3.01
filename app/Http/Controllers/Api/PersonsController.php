@@ -7,8 +7,7 @@ use App\Models\Persons;
 use Illuminate\Http\Request;
 
 class PersonsController extends Controller
-{
-    protected $hidden = ['ID_PER'];
+
 
     /**
      * Display a listing of the resource.

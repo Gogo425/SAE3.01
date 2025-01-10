@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\TechnicalDirectors;
 use Illuminate\Http\Request;
 
 class Technical_directorsController extends Controller
@@ -14,7 +15,7 @@ class Technical_directorsController extends Controller
      */
     public function index()
     {
-        //
+        return TechnicalDirectors::all();
     }
 
     /**

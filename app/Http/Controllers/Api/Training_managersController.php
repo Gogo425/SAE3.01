@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\TrainingManagers;
 use Illuminate\Http\Request;
 
 class Training_managersController extends Controller
@@ -14,7 +15,7 @@ class Training_managersController extends Controller
      */
     public function index()
     {
-        //
+        return TrainingManagers::all();
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sessions;
 use Illuminate\Http\Request;
 
 class SessionsController extends Controller
@@ -14,7 +15,7 @@ class SessionsController extends Controller
      */
     public function index()
     {
-        //
+        return Sessions::all();
     }
 
     /**

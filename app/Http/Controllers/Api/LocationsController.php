@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Locations;
 use Illuminate\Http\Request;
 
 class LocationsController extends Controller
@@ -14,7 +15,7 @@ class LocationsController extends Controller
      */
     public function index()
     {
-        //
+        return Locations::all();
     }
 
     /**

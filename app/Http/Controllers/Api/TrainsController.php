@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Trains;
 use Illuminate\Http\Request;
 
 class TrainsController extends Controller
@@ -14,7 +15,7 @@ class TrainsController extends Controller
      */
     public function index()
     {
-        //
+        return Trains::all();
     }
 
     /**

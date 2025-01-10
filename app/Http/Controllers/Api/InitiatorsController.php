@@ -15,7 +15,7 @@ class InitiatorsController extends Controller
      */
     public function index()
     {
-        Initiators::all();
+        return Initiators::all();
     }
 
     /**
