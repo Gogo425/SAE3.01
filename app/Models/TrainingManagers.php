@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Training_managers extends Model
+class TrainingManagers extends Model
 {
 
     use HasFactory;
@@ -15,7 +15,7 @@ class Training_managers extends Model
     protected $fillable = ['id_per'];
 
     public function user(){
-        return $this->belongsTo(Training_managers::class);
+        return $this->belongsTo(TrainingManagers::class);
     }
 
     public $timestamps = false;
