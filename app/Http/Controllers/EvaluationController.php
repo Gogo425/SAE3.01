@@ -38,29 +38,37 @@ class EvaluationController extends Controller
 
             // Retrieve the list of students associated with the session
             $eleves = DB::table('persons')
-                ->join('students', 'students.id_per', '=', 'persons.id_per')
-                ->join('formations', 'students.id_formation', '=', 'formations.id_formation')
-                ->join('sessions', 'sessions.id_formation', '=', 'formations.id_formation')
-                ->where('sessions.id_sessions', '=', $id)
-                ->get();
-
-            // Retrieve the abilities linked to the session
-            $abilities = DB::table('abilities')
+            ->join('students', 'students.id_per', '=', 'persons.id_per')
+            ->join('works', 'students.id_per', '=', 'works.id_per_student')
+            ->where('works.id_sessions', '=', $id)
+            ->where('works.id_per_initiator', '=', Auth::id())
+            ->distinct()
+            ->select('persons.id_per', 'persons.name', 'persons.surname') // Sélectionnez les colonnes nécessaires
+            ->get();
+        
+        // Récupérez les compétences pour chaque élève
+        $elevesWithAbilities = $eleves->map(function ($eleve) use ($id) {
+            $eleve->abilities = DB::table('abilities')
                 ->join('works', 'abilities.id_abilities', '=', 'works.id_abilities')
                 ->where('works.id_sessions', '=', $id)
+                ->where('works.id_per_student', '=', $eleve->id_per)
+                ->where('works.id_per_initiator', '=', Auth::id())
+                ->select('abilities.id_abilities', 'abilities.description')
                 ->get();
-
-            // Retrieve all available statuses
-            $status = DB::table('status')->get();
-            Log::info('go to view');
-
-            // Pass data to the evaluation creation view
-            return view('abilities_evaluation', [
-                'eleves' => $eleves,
-                'abilities' => $abilities,
-                'status' => $status,
-                'idSession' => $idSession
-            ]);
+        
+            return $eleve;
+        });
+        
+        // Récupérez les statuts disponibles
+        $status = DB::table('status')->get();
+        Log::info('go to view');
+        
+        // Passez les données à la vue
+        return view('abilities_evaluation', [
+            'eleves' => $elevesWithAbilities,
+            'status' => $status,
+            'idSession' => $idSession
+        ]);
         }else{
             echo "Vous ne pouvez pas acceder a cette page";
         }
