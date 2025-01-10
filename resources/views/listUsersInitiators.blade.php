@@ -6,6 +6,7 @@
     <title>Formation Plongée - Elèves et Initiateurs</title>
     <!-- Lien CDN Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="../js/homePage.js"></script>
 </head>
 <body class="bg-gray-50">
 

@@ -6,8 +6,11 @@
     <title>Gestion des aptitudes</title>
     <!-- Lien CDN Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
 </head>
 <body class="bg-gray-100 min-h-screen p-8">
+    @include('header')
+
     <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <h1 class="text-2xl font-bold text-gray-800 mb-6">Gestion des aptitudes</h1>
 
@@ -62,5 +65,6 @@
             </div>
         @endforeach
     </div>
+    @include('footer')
 </body>
 </html>

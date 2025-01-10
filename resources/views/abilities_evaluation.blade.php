@@ -5,9 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer une évaluation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
+    <script defer src="../js/homePage.js"></script>
 </head>
 <body>
+
+    @include('header')
+
 <div class="container mt-5">
+
     <h1>Créer une évaluation</h1>
 
     <!-- Affiche les messages de succès -->
@@ -77,5 +85,8 @@
         <button type="submit" class="btn btn-primary mt-3">Enregistrer l'évaluation</button>
     </form>
 </div>
+
+@include('footer')
+
 </body>
 </html>
