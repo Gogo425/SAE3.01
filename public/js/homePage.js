@@ -8,7 +8,5 @@ const menu = document.getElementById('menu');
         }
         else{
             menu.style.display ='none';
-        }
-        
-        
-    });
+        }     
+});
