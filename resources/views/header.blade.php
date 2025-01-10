@@ -19,7 +19,9 @@
                     }
                     if($trainingManager->count == 1){
                         echo "
-                            <a href=".route('calendar.calendarDirector')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Consulter l'emploi du temps de votre formation</button></a>";
+                            <a href=".route('calendar.calendarDirector')."><button class='px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600'>Consulter l'emploi du temps de votre formation</button></a>
+                            <a href=".route('listStudentsInitiators')."><button class='px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600'>Visualiser les initiateurs et élèves de la formation</button></a>
+                            ";
                     }
                     if($initiator->count == 1){
                         echo "

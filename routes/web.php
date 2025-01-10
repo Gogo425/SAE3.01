@@ -112,3 +112,5 @@ Route::delete('/formation/{ID_FORMATION}',[FormController::class, 'deleteFormati
 
 Route::get('/detailsSessions/{idSession}',[SeanceController::class, 'getDetails'])->name('detailsSessions');
 
+Route::get('/StudentsInitiatorsFormations', [FormController::class, 'getStudentsAndInitators'])->name('listStudentsInitiators');
+

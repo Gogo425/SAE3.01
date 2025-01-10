@@ -37,4 +37,18 @@ class FormController extends Controller
         return redirect()->back()->with('success', 'Formation supprimée avec succès');
     }
 
+    public function getStudentsAndInitators() {
+        $idFormation = DB::table('formations')->join('training_managers','formations.id_per_training_manager','=','training_managers.id_per')->get()->first()->ID_FORMATION;
+
+        $students = DB::table('persons')->join('students','persons.id_per','=','students.id_per')->where('students.id_formation',$idFormation)->get();
+
+        $initiators = DB::table('persons')->join('initiators','persons.id_per','=','initiators.id_per')->join('trains','initiators.id_per','=','trains.id_per_initiator')->where('trains.id_formation',$idFormation)->get();
+
+        //dd($idFormation, $students, $initiators);
+        return view('listUsersInitiators', [
+            'students' => $students,
+            'initiators' => $initiators
+        ]);
+    }
+
 }
