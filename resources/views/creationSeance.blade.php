@@ -89,10 +89,10 @@
         </form>
 
         @if(session('success'))
-            <p style="color: green;">{{session('success')}}</p>
+            <p style="color: green; text-align: center;">{{session('success')}}</p>
         @endif
         @if(session('failure'))
-            <p style="color: red;">{{session('failure')}}</p>
+            <p style="color: red; text-align: center;">{{session('failure')}}</p>
         @endif
 
         <script src="{{ asset('js/app.js') }}"></script>
