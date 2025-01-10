@@ -1,8 +1,9 @@
-<header>
-    <menu>
+<header class="z-50 top-0 w-full shadow">
+    <nav class="max-w-5xl mx-auto p-6 flex items-center justify-between">
         <div class="flex flex-wrap items-center justify-between p-4 bg-gray-100">
             <a href="/"><img src="../img/logo.png" alt="logo" class="w-16 h-16 mb-4 md:mb-0"></a>
             <div class="flex flex-wrap justify-center gap-4 md:flex-nowrap">
+                <ul class="w-full absolute top-full left-0 -translate-y-full -z-10 text-gray-800 border-b border-gray-200 flex flex-col items-center md:static md:z-10 md: w-min md:transform-none md:border-none md:"
                 <?php
                     $id = Auth::id();
                     
@@ -41,5 +42,5 @@
                 </a>
             </div>
         </div>
-    </menu>
+    </nav>
 </header>
