@@ -37,7 +37,7 @@ class LevelsController extends Controller
      */
     public function show($id)
     {
-        return Levels::where('ID_LEVEL', $id);
+        return Levels::where('ID_LEVEL', $id)->get();
     }
 
     /**

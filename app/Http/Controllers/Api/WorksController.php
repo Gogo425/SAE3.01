@@ -37,7 +37,9 @@ class WorksController extends Controller
      */
     public function show($id)
     {
-        //
+        if(strlen($id) == 7){
+            return Works::where('ID_SESSIONS', $id[0])->where('ID_ABILITIES', $id[2])->where('ID_PER_STUDENT', $id[4])->where('ID_PER_INITIATOR', $id[6])->get();
+        }
     }
 
     /**

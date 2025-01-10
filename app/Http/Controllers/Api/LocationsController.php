@@ -37,7 +37,7 @@ class LocationsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Locations::where('ID_LOCATION', $id)->get();
     }
 
     /**

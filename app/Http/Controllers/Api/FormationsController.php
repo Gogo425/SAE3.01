@@ -37,7 +37,7 @@ class FormationsController extends Controller
      */
     public function show($id)
     {
-        Formations::find($id);
+        return Formations::where('ID_FORMATION',$id)->get();
     }
 
     /**

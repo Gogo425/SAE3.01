@@ -37,7 +37,9 @@ class EvaluationsController extends Controller
      */
     public function show($id)
     {
-        Evaluations::find($id);
+        if(strlen($id) == 9){
+            return Evaluations::where('ID_SESSIONS', $id[0])->where('ID_ABILITIES', $id[2])->where('ID_PER_INITIATOR', $id[4])->where('ID_PER_STUDENT', $id[6])->where('ID_STATUS', $id[8])->get();
+        }
     }
 
     /**

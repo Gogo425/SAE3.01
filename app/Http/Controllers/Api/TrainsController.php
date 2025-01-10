@@ -37,7 +37,9 @@ class TrainsController extends Controller
      */
     public function show($id)
     {
-        //
+        if(strlen($id) == 3){
+            return Trains::where('ID_PER_INITIATOR', $id[0])->where('ID_FORMATION', $id[2])->get();
+        }    
     }
 
     /**

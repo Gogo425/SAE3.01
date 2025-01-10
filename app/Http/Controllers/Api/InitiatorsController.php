@@ -37,7 +37,7 @@ class InitiatorsController extends Controller
      */
     public function show($id)
     {
-        Initiators::where('ID_PER', $id)->get();
+        return Initiators::where('ID_PER', $id)->get();
     }
 
     /**

@@ -37,7 +37,7 @@ class SkillsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Skills::where('ID_SKILLS', $id)->get();
     }
 
     /**

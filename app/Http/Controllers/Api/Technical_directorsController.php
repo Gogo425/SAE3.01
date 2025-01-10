@@ -37,7 +37,7 @@ class Technical_directorsController extends Controller
      */
     public function show($id)
     {
-        //
+        return TechnicalDirectors::where('ID_PER', $id)->get();
     }
 
     /**

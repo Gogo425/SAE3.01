@@ -37,7 +37,7 @@ class Training_managersController extends Controller
      */
     public function show($id)
     {
-        //
+        return TrainingManagers::where('ID_PER', $id)->get();
     }
 
     /**

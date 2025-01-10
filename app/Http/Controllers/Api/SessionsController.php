@@ -37,7 +37,7 @@ class SessionsController extends Controller
      */
     public function show($id)
     {
-        //
+        return Sessions::where('ID_SESSIONS', $id)->get();
     }
 
     /**

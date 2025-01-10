@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -36,7 +37,7 @@ class StatusController extends Controller
      */
     public function show($id)
     {
-        //
+        return Status::where('ID_STATUS', $id)->get();
     }
 
     /**
