@@ -154,14 +154,14 @@
                                 @if ($idSession)
                                 <button class="custom-button"><a href="/evaluations/{{$idSession}}">Evaluer les aptitudes</a></button>
                                 <?php $initiators = DB::table('persons')
-                                                ->select(DB::raw('distinct name'))
+                                                ->select(DB::raw('distinct name, surname'))
                                                 ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')
                                                 ->join('works', 'works.id_per_initiator', '=', 'initiators.id_per')
                                                 ->where('id_sessions', '=', $idSession)
                                                 ->get() ?? 'Nom introuvable' ?>
                                     @foreach($initiators as $initiator)
                                         <p>Initiateur : 
-                                            {{ $initiator->name }}
+                                        {{ $initiator->name }} {{ $initiator->surname }}
                                         </p>
                                     @endforeach
                                 @endif
