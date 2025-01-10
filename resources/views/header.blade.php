@@ -46,6 +46,7 @@
             <li><a href="/logout"><button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 m-2">Déconnexion</button></a></li>
         </ul>
     </nav>
+    <title>EntreDeuxBulles</title>
 </header>
 
 

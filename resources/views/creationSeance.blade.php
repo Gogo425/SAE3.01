@@ -14,12 +14,6 @@
     </head>
     @include('header')
     <body>
-        @if(session('success'))
-            <p style="color: green;">{{session('success')}}</p>
-        @endif
-        @if(session('failure'))
-            <p style="color: red;">{{session('failure')}}</p>
-        @endif
         <form action="{{ route('seance.save') }}" method="POST" id="formulaire">
             @csrf
             <label>Date : </label>
@@ -94,6 +88,12 @@
             </div>
         </form>
 
+        @if(session('success'))
+            <p style="color: green;">{{session('success')}}</p>
+        @endif
+        @if(session('failure'))
+            <p style="color: red;">{{session('failure')}}</p>
+        @endif
 
         <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('js/bootstrap.js') }}"></script>
