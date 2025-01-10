@@ -15,9 +15,9 @@
          <form action="{{ route('abilities.index') }}" method="GET" class="mb-6">
             <label for="level" class="block text-sm font-medium text-gray-700">Choisissez un niveau :</label>
             <select id="level" name="level" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200">
-                <option value="1" {{ request('level') == 1 ? 'selected' : '' }}>Niveau 1</option>
-                <option value="2" {{ request('level') == 2 ? 'selected' : '' }}>Niveau 2</option>
-                <option value="3" {{ request('level') == 3 ? 'selected' : '' }}>Niveau 3</option>
+                <option value="2" {{ request('level') == 2 ? 'selected' : '' }}>Niveau 1</option>
+                <option value="3" {{ request('level') == 3 ? 'selected' : '' }}>Niveau 2</option>
+                <option value="4" {{ request('level') == 4 ? 'selected' : '' }}>Niveau 3</option>
             </select>
             <button type="submit" class="mt-3 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition">
                 Charger
