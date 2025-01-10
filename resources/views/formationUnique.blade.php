@@ -9,10 +9,13 @@
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="../js/tailwind.config.js"></script>
 </head>
 <body class="bg-light">
+    @include('header')
     <div class="container py-5">
-        <h1 class="text-center mb-4">Liste de formations</h1>
+        <h1 class="text-center mb-4 text-5xl">Liste de formations</h1>
 
             @if (session('success'))
                 <div class="alert alert-success">
@@ -24,29 +27,29 @@
                     <div class="card-body">
 
                         <!-- Formation level -->
-                        <h5 class="card-title">Formation de niveau : {{$form->ID_LEVEL-1}}</h5>
+                        <h5 class="card-title">Formation de niveau : {{$form->first()->ID_LEVEL-1}}</h5>
                         <p class="card-text">
 
                             <!-- Formation starting date -->
                             <strong>
                                 Date de début :
                             </strong> 
-                                {{$form->DATE_BEGINNING}}
+                                {{$form->first()->DATE_BEGINNING}}
                             <br>
 
                             <!-- Formation ending date -->
                             <strong>
                                 Date de fin :
                             </strong> 
-                                {{$form->DATE_ENDING}}
+                                {{$form->first()->DATE_ENDING}}
                             <br>
 
                             <!-- Training manager -->
                             <strong>
                                 Responsable de formation :
                             </strong> 
-                                {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->NAME }} 
-                                {{ $pers->where('ID_PER','=',$form->ID_PER_TRAINING_MANAGER)->first()->SURNAME }}
+                                {{ $pers->where('ID_PER','=',$form->first()->ID_PER_TRAINING_MANAGER)->first()->NAME }} 
+                                {{ $pers->where('ID_PER','=',$form->first()->ID_PER_TRAINING_MANAGER)->first()->SURNAME }}
                         </p>
 
                         <!-- Initiators -->
@@ -55,7 +58,7 @@
                             Initiateurs :
                         </strong>
                         <br>
-                            @foreach ($inits->where('ID_FORMATION','=',$form->ID_FORMATION) as $init)
+                            @foreach ($inits->where('ID_FORMATION','=',$form->first()->ID_FORMATION) as $init)
                                 {{$init->NAME}} {{$init->SURNAME}} | Niveau
                                 @if($init->ID_LEVEL == 5)
                                     MF1
@@ -73,7 +76,7 @@
                         <!-- Students -->
                         <p class="card-text">
                             <strong>Élèves :</strong><br>
-                            @foreach ($studs->where('ID_FORMATION','=',$form->ID_FORMATION) as $stud)
+                            @foreach ($studs->where('ID_FORMATION','=',$form->first()->ID_FORMATION) as $stud)
                                 {{$stud->NAME}} {{$stud->SURNAME}}
                                 <br>
                             @endforeach
@@ -82,6 +85,7 @@
                 </div>
     </div>
 
+    @include('footer')
     <!-- adding the JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 

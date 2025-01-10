@@ -50,7 +50,7 @@ class FormController extends Controller
         return view('formationUnique', [
 
             // The list of formations
-            'form' => DB::table('formations')->join('students','formations.id_formation','=','students.id_formation')->where('id_per',Auth::id()),
+            'form' => DB::table('formations')->where('id_per_training_manager',Auth::id())->get(),
 
             // The list of initiators join with their identification in the table 'persons'
             'inits' => DB::table('initiators')->join('trains','initiators.id_per','=','trains.id_per_initiator')->join('persons','initiators.id_per','=','persons.id_per')->get(),
