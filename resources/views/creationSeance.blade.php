@@ -6,25 +6,20 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/sessionStyle.css') }}">
 
         <title>Création d'une séance</title>
     </head>
     <header>
-        <img src="{{ asset('image/logo.png') }}" alt="logo"/>
+        <img src="{{ asset('img/logo.png') }}" alt="logo"/>
         <button>Profil</button>
         <button>Déconnexion</button>
     </header>
     <body>
-        @if(session('success'))
-            <p style="color: green;">{{session('success')}}</p>
-        @endif
-        @if(session('failure'))
-            <p style="color: red;">{{session('failure')}}</p>
-        @endif
         <form action="{{ route('seance.save') }}" method="POST" id="formulaire">
             @csrf
             <label>Date : </label>
-            <input type="date" id="dateSession" name="dateSession" min="<?php $d= strtotime("+1 day"); echo date("Y-m-d", $d); ?>" required/> 
+            <input type="date" value="{{ $date_session }}" id="dateSession" name="dateSession" min="<?php $d= strtotime("+1 day"); echo date("Y-m-d", $d); ?>" required/> 
 
             <select name="location" id="location" required>
                     <option value="">--choisir un type de location--</option>
@@ -39,8 +34,8 @@
             <br>
             <div id="students">
                 @foreach($students as $index => $student)
-                    <div id='student_{{ $index + 1 }}'>
-                        <select name="student{{ $index + 1 }}" id="student{{ $index + 1 }}"> <!--vérifier qu'il n'y est pas 2 fois le même élève-->
+                    <div class="student" id='student_{{ $index + 1 }}'>
+                        <select class="nomStudent" name="student{{ $index + 1 }}" id="student{{ $index + 1 }}"> <!--vérifier qu'il n'y est pas 2 fois le même élève-->
                             <option value="{{ $student->NAME }}">{{ $student->NAME }}</option>
                         </select>
 
@@ -53,7 +48,7 @@
 
                             @endforeach
                         </select>
-                        
+
                         <select name="abilities2{{ $index + 1 }}" id="abilities2{{ $index + 1 }}">
                             <option value="">--choisir une aptitude--</option>
 
@@ -88,10 +83,19 @@
                 @endforeach
             </div>
 
-            <button type="submit">Créer une séance</button>
+            <!-- Button container with both buttons aligned horizontally -->
+            <div class="form-buttons">
+                <button id="studentButton" type="submit">Créer une séance</button>
+                <button type="button" id="cancelButton">Annuler</button> <!-- Cancel button to return to home or previous page -->
+            </div>
         </form>
-        <!--<button onclick="addStudent()">Ajouter un elève</button>-->
-        <button>Annuler</button> <!--revenir à l'accueil-->
+
+        @if(session('success'))
+            <p style="color: green; text-align: center;">{{session('success')}}</p>
+        @endif
+        @if(session('failure'))
+            <p style="color: red; text-align: center;">{{session('failure')}}</p>
+        @endif
 
 
         <script src="{{ asset('js/app.js') }}"></script>

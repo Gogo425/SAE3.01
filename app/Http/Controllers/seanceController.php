@@ -16,7 +16,7 @@ class seanceController extends Controller
 
     public function creation(/*date $date, int $form*/)
     {
-        $d=mktime(11, 14, 54, 8, 12, 2025); //a supp quand params mit
+        $d=mktime(11, 14, 54, 1, 12, 2025); //a supp quand params mit
         $date = date("Y-m-d", $d); //a supp quand les params mit
         $form = 1; //a supp quand les params mit
 
@@ -66,7 +66,7 @@ class seanceController extends Controller
             'initiators' => $initiators,
             'locations' => $locations,
             'formations' => $formations,
-            'date' => $date
+            'date_session' => $date
         ]);
     }
 

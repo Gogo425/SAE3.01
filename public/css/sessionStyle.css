@@ -1,0 +1,142 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif; /* Sets the font to Arial, with sans-serif as a fallback */
+    background-color: #f9f9f9; /* Light gray background color */
+    color: #333; /* Dark text color for better readability */
+    margin: 0; /* Removes default margin */
+    padding: 0; /* Removes default padding */
+}
+
+/* Form styles */
+form {
+    background-color: white; /* White background color for the form */
+    margin: 20px auto; /* Centers the form horizontally with some margin */
+    padding: 20px; /* Padding inside the form */
+    max-width: 900px; /* Limits the maximum width of the form */
+    border-radius: 8px; /* Rounded corners for the form */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow around the form */
+}
+
+form label {
+    font-weight: bold; /* Makes the labels bold */
+    margin-bottom: 10px; /* Adds space below the label */
+    display: block; /* Ensures labels are displayed on their own line */
+    font-size: 16px; /* Font size of the labels */
+}
+
+form input[type="date"],
+form select {
+    width: calc(100% - 20px); /* Full width minus padding */
+    padding: 10px; /* Padding inside the inputs */
+    margin: 10px 0; /* Adds vertical margin */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners for inputs */
+    font-size: 14px; /* Font size of the text inside the inputs */
+}
+
+form button[type="submit"], form button {
+    background-image: linear-gradient(to bottom right, rgba(212, 2, 114) 5%, rgba(212, 2, 114, 0.3) 60%, rgba(151, 0, 80)); /* Gradient background for buttons */
+    color: white; /* White text color */
+    border: none; /* No border around buttons */
+    padding: 10px; /* Padding inside the button */
+    font-size: 16px; /* Font size of the button text */
+    border-radius: 5px; /* Rounded corners for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    margin: 10px 0; /* Vertical margin */
+    width: 100%; /* Full width of the form */
+    font-weight: bold; /* Makes the text bold */
+}
+
+form button:hover {
+    background-image: linear-gradient(to bottom right, rgba(151, 0, 80) 5%, rgba(151, 0, 80, 0.3) 50%, rgba(212, 2, 114)); /* Reverse gradient on hover */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); /* Darker and bigger shadow on hover */
+}
+
+/* Students container */
+#students {
+    display: flex; /* Uses flexbox for layout */
+    flex-direction: column; /* Stacks students vertically */
+    gap: 20px; /* Adds space between each student */
+    margin: 20px auto; /* Centers the container */
+    max-width: 900px; /* Limits the maximum width of the container */
+}
+
+/* Each student block */
+.student {
+    display: flex; /* Uses flexbox for layout */
+    flex-wrap: wrap; /* Allows the elements to wrap into multiple rows if necessary */
+    gap: 10px; /* Adds space between elements */
+    background-color: #ecf0f1; /* Light gray background for student block */
+    padding: 15px; /* Padding inside the student block */
+    border-radius: 8px; /* Rounded corners for the student block */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow around the student block */
+    overflow-x: auto; /* Allows horizontal scrolling if content overflows */
+}
+
+/* Specific style for the select element with class nomStudent */
+.nomStudent {
+    width: 100%; /* Full width of the container */
+    max-width: none; /* Removes any max-width restrictions */
+    padding: 12px; /* Padding inside the select element */
+    font-size: 14px; /* Font size inside the select element */
+    border: 2px solid #01325a; /* Dark blue border */
+    border-radius: 5px; /* Rounded corners */
+    background-image: linear-gradient(to bottom right, rgba(8, 101, 157) 5%, rgba(8, 101, 157, 0.3) 60%, rgba(1, 50, 90)); /* Gradient background */
+    color: white; /* White text color */
+    text-transform: uppercase; /* Makes the text uppercase */
+    font-weight: bold; /* Makes the text bold */
+    transition: 0.5s; /* Smooth transition for changes */
+}
+
+/* Style for all other select elements (not nomStudent) */
+.student select:not(.nomStudent) {
+    width: 100%; /* Full width */
+    max-width: none; /* Removes any max-width restrictions */
+    padding: 10px; /* Padding inside the select element */
+    font-size: 14px; /* Font size inside the select element */
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    transition: all 0.3s ease-in-out; /* Smooth transition for hover and focus */
+}
+
+/* Hover effect for nomStudent select element */
+.nomStudent:hover {
+    background-image: linear-gradient(to bottom right, rgba(1, 50, 90) 5%, rgba(1, 50, 90, 0.3) 50%, rgba(8, 101, 157)); /* Reverse gradient on hover */
+    border: 2px solid #fff; /* White border on hover */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .student select {
+        width: 100%; /* Makes all select elements take full width on small screens */
+    }
+}
+
+/* Success message styles */
+form p {
+    font-size: 14px; /* Font size of success message */
+    padding: 10px; /* Padding inside the success message */
+    background-color: #d4edda; /* Light green background */
+    color: #155724; /* Dark green text */
+    border: 1px solid #c3e6cb; /* Green border */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 20px; /* Adds space below the success message */
+}
+
+/* Container for buttons */
+.form-buttons {
+    display: flex; /* Flex container for the buttons */
+    justify-content: space-between; /* Distribute space between the buttons */
+    gap: 10px; /* Add some space between the buttons */
+}
+
+/* Cancel button styles */
+#cancelButton {
+    background-image: linear-gradient(to bottom right, rgba(223, 0, 36) 5%, rgba(223, 0, 36, 0.3) 60%, rgba(87, 0, 15)); /* Gradient background for buttons */
+}
+
+#cancelButton:hover {
+    background-image: linear-gradient(to bottom right, rgba(87, 0, 15) 5%, rgba(87, 0, 15, 0.3) 50%, rgba(223, 0, 36)); /* Reverse gradient on hover */
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3); /* Darker and bigger shadow on hover */
+}
