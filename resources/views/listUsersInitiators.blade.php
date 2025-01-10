@@ -13,7 +13,7 @@
     <!-- Texte de bienvenue ou d'introduction -->
     <section class="bg-blue-600 text-white text-center py-12">
         <h1 class="text-3xl font-semibold">Formation Plongée - Elèves et Initiateurs</h1>
-        <p class="text-lg mt-4">Liste des élèves et des initiateurs de la formation en plongée.</p>
+        <p class="text-lg mt-4">Liste des élèves et des initiateurs de la formation</p>
     </section>
 
     <!-- Contenu principal -->
