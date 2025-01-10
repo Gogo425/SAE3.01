@@ -5,6 +5,7 @@
             <img src="../img/logo.png" alt="logo" class="w-16 h-16">
         </a>
 
+        <h1 class="text-3xl">EntreDeuxBulles</h1>
         
         <button id="burger" class="block  focus:outline-none">
             <span class="hamburger-line bg-gray-800 block w-6 h-0.5 mb-1 gap-6"></span>
@@ -46,7 +47,6 @@
             <li><a href="/logout"><button class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 m-2">Déconnexion</button></a></li>
         </ul>
     </nav>
-    <title>EntreDeuxBulles</title>
 </header>
 
 
