@@ -9,7 +9,14 @@
     <title>Document</title>
 </head>
 <body>
-    @include("header");
+
+    @include("header")
+    @if(session('popup'))
+        <script type="text/javascript">
+            alert("{{ session('popup') }}");
+        </script>
+    @endif
+
     <?php
     // Exemple de fonction PHP
     function myFunction($parameter)

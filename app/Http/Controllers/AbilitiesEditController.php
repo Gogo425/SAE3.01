@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class AbilitiesEditController extends Controller
 {
+
     // Retrieves abilities and their related skills for a given level
     public function index( Request $request)
     {
