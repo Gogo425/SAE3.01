@@ -43,8 +43,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const initiatorLevel = parseInt(initiator.getAttribute("data-level"));
             const selectedResponsible = responsibleSelect.value;
 
-            if (initiatorLevel > selectedLevel && initiator.value !== selectedResponsible) {
-                initiator.closest(".form-check").style.display = "block";
+            if(initiatorLevel >= selectedLevel && initiator.value !== selectedResponsible){
+                if (initiatorLevel > selectedLevel + 1) {
+                    initiator.closest(".form-check").style.display = "block";
+                }
+                if(selectedLevel == 2 && initiatorLevel == 3){
+                    initiator.closest(".form-check").style.display = "block";
+                }
             } else {
                 initiator.closest(".form-check").style.display = "none";
             }
@@ -86,11 +91,19 @@ document.addEventListener("DOMContentLoaded", function () {
         initiators.forEach(initiator => {
             const initiatorLevel = parseInt(initiator.getAttribute("data-level"));
 
-            if (initiatorLevel > selectedLevel + 1) {
-                const option = document.createElement("option");
+            if (initiatorLevel >= selectedLevel ) {
+                if(selectedLevel == 2 && initiatorLevel == 3){
+                    const option = document.createElement("option");
                 option.value = initiator.value;
                 option.textContent = initiator.closest(".form-check").querySelector("label").textContent;
                 responsibleSelect.appendChild(option);
+                }
+                if(initiatorLevel > selectedLevel + 1) {
+                    const option = document.createElement("option");
+                option.value = initiator.value;
+                option.textContent = initiator.closest(".form-check").querySelector("label").textContent;
+                responsibleSelect.appendChild(option);
+                }
             }
         });
 

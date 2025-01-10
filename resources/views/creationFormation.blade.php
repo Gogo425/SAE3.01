@@ -49,7 +49,7 @@
                 <label for="name" class="form-label">Choix du responsable de formation :</label>
                 <select class="form-select" name="name">
                     @foreach ($initsLess as $initLess)
-                        <option value="{{$initLess->NAME}}">
+                        <option value="{{$initLess->ID_PER}}">
                             {{$initLess->NAME}} 
                             {{$initLess->SURNAME}}
                             | Niveau

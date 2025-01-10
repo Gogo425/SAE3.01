@@ -71,7 +71,7 @@ class CreateFormController extends Controller
         ]);
 
         // Create the new training manager with an initiator
-        $other = Persons::where('name', $request->name)->first();
+        $other = Persons::where('ID_PER', $request->name)->first();
         $person = Initiator::where('id_per',$other->ID_PER)->first();
         $manager = new TrainingManager();
         $manager->id_per = $person->ID_PER;
