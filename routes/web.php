@@ -110,3 +110,5 @@ Route::get('/formation',[FormController::class,'create'])->name('formation');
 
 Route::delete('/formation/{ID_FORMATION}',[FormController::class, 'deleteFormation'])->name('formation.delete');
 
+Route::get('/detailsSessions/{idSession}',[SeanceController::class, 'getDetails'])->name('detailsSessions');
+

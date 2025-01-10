@@ -8,9 +8,9 @@ use App\Models\Evaluations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-use Laravel\Nova\Fields\Date;
-use Laravel\Nova\Fields\DateTime;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class SeanceController extends Controller
 {
@@ -174,6 +174,39 @@ class SeanceController extends Controller
 
         return redirect()->route('calendar.calendarDirector')->with('success', 'Session ajoutée avec succès');
 
+    }
+
+    public function getDetails(int $idSession) {
+        $abilities = DB::table('abilities')
+                    ->select(DB::raw('description'))
+                    ->join('works', 'abilities.id_abilities', '=', 'works.id_abilities')
+                    ->where('id_sessions', $idSession)
+                    ->where('id_per_student', Auth::id())->get();
+        
+        $initiator = DB::table('persons')
+                    ->select(DB::raw('distinct name, surname'))
+                    ->join('works', 'persons.id_per', '=', 'works.id_per_initiator')
+                    ->where('id_sessions', $idSession)
+                    ->where('id_per_student', Auth::id())->get()->first();
+
+        $dateSession = DB::table('sessions')->where('id_sessions', $idSession)->get()->collect()->get('0')->DATE_SESSION;
+
+        // Créer une instance Carbon à partir de la date
+        $dateObj = Carbon::createFromFormat('Y-m-d', $dateSession);
+
+        // Formater la date en utilisant isoFormat pour le jour et l'année
+        $formattedDate = $dateObj->locale('fr')->isoFormat('D MMMM YYYY');
+    
+        // Formater la date au format "10 Janvier 2025"
+        $formattedDate = preg_replace_callback('/\b\w/', function ($matches) {
+            return strtoupper($matches[0]);
+        }, $formattedDate);
+        
+        return view('detailsSeance', [
+            'abilities' => $abilities,
+            'initiator' => $initiator,
+            'dateSession' => $formattedDate
+        ]);
     }
 
 }

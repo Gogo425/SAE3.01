@@ -152,7 +152,7 @@
                             @endphp
 
                             @if ($idSession)
-                                <a href=""><button></button>Voir ma séance</a>
+                                <a href="/detailsSessions/{{ $idSession }}"><button class="custom-buttonnav">Voir ma séance</button></a>
                                 <p>Initiateur : 
                                     {{ DB::table('persons') 
                                             ->join('initiators', 'persons.id_per', '=', 'initiators.id_per')
